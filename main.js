@@ -1,43 +1,66 @@
-// Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
-const path = require('node:path')
+const express = require('express');
+const path = require('path');
+const { app, BrowserWindow } = require('electron');
+const { sequelize, Person } = require('./server/sequelize'); // Импорт Sequelize и настройки
+const personsRouter = require('./server/routes/persons');
+const zvaniyaRouter = require('./server/routes/zvaniya');
 
-function createWindow () {
-  // Create the browser window.
+const appExpress = express();
+appExpress.use(express.json());
+
+appExpress.use('/persons', personsRouter);
+appExpress.use('/zvaniya', zvaniyaRouter);
+
+// appExpress.use(crud('/persons', sequelizeCrud(Person)))
+
+
+// Устанавливаем middleware и маршруты Express.js здесь
+// appExpress.use(express.static(path.join(__dirname, 'public')));
+
+appExpress.get('/', (req, res) => {
+  res.send('Hello Express!');
+});
+
+// Синхронизация с базой данных и запуск сервера
+sequelize.sync().then(() => {
+  appExpress.listen(3333, () => {
+    console.log('Сервер запущен на порту 3333');
+  });
+}).catch(() => {
+  console.log("Сервер не запущен")
+});
+
+function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  });
 
-  // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.loadFile(path.join(__dirname, 'client/dist', 'index.html'));
+  mainWindow.webContents.openDevTools();
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
+});
 
-  app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-})
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+});
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
-})
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+// Обработчик закрытия Electron-приложения
+app.on('before-quit', () => {
+  // Закрываем Express.js сервер при закрытии Electron-приложения
+  server.close();
+});
