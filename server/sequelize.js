@@ -12,6 +12,10 @@ const Zvanie = sequelize.define("Zvanie", {
   name: DataTypes.STRING,
 });
 
+const Podrazdelenie = sequelize.define("Podrazdelenie", {
+  name: DataTypes.STRING,
+});
+
 // Определение модели "Person"
 const Person = sequelize.define("Person", {
   uprajnenia: DataTypes.JSON,
@@ -21,6 +25,7 @@ const Person = sequelize.define("Person", {
   sName: DataTypes.STRING,
   dob: DataTypes.DATE,
   zvanieId: Zvanie,
+  podrazdelenieId: Podrazdelenie,
   comment: DataTypes.STRING,
   num: DataTypes.STRING,
   isMale: DataTypes.BOOLEAN,
@@ -31,14 +36,11 @@ const Person = sequelize.define("Person", {
   otpuskTo: DataTypes.DATE,
 });
 
-const Podrazdelenie = sequelize.define("Podrazdelenie", {
-  name: DataTypes.STRING,
-});
 
 const Category = sequelize.define("Category", {
   name: DataTypes.STRING,
-  from: DataTypes.INTEGER,
-  to: DataTypes.INTEGER,
+  from: DataTypes.DATE,
+  to: DataTypes.DATE,
   isMale: DataTypes.BOOLEAN,
   isV: DataTypes.BOOLEAN,
 });

@@ -4,10 +4,22 @@ const { app, BrowserWindow } = require('electron');
 const { sequelize, Person } = require('./server/sequelize'); // Импорт Sequelize и настройки
 const personsRouter = require('./server/routes/persons');
 const zvaniyaRouter = require('./server/routes/zvaniya');
+const podrazdeleniyaRouter = require('./server/routes/podrazdeleniya');
+const cors = require("cors");
+
+const corsOptions = {
+  origin: "http://localhost:5173",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  allowedHeaders: ['Content-Type', 'Authorization', 'Content-Range', 'Range'],
+  exposedHeaders: ['Content-Type', 'Authorization', 'Content-Range', 'Range']
+}
+
 
 const appExpress = express();
+appExpress.use(cors(corsOptions));
 appExpress.use(express.json());
 
+appExpress.use('/podrazdeleniya', podrazdeleniyaRouter);
 appExpress.use('/persons', personsRouter);
 appExpress.use('/zvaniya', zvaniyaRouter);
 

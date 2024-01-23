@@ -1,4 +1,5 @@
 import { TranslationMessages } from "react-admin";
+import { PodrazdelenieEdit } from "../resources/podrazdeleniya";
 
 const russianMessages: TranslationMessages = {
     ra: {
@@ -207,7 +208,8 @@ export const ru = {
                 lName: 'Фамилия',
                 sName: 'Отчество',
                 dob: 'Дата рождения',
-                zvanie: 'Звание',
+                zvanieId: 'Звание',
+                podrazdelenieId: 'Подразделение',
                 comment: 'Комментарий',
                 isMale: 'Мужчина',
                 isV: 'Статус военнослужащего',
@@ -216,6 +218,20 @@ export const ru = {
                 otpuskFrom: 'Отпуск с',
                 otpuskTo: 'Отпуск по',
 
+            },
+        },
+        zvaniya: {
+            name: 'Звание |||| Звания',
+            fields: {
+                id: '№',
+                name: 'Наименование',
+            },
+        },
+        podrazdeleniya: {
+            name: 'Подразделение |||| Подразделения',
+            fields: {
+                id: '№',
+                name: 'Наименование',
             },
         },
         customer: {

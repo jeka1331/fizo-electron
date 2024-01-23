@@ -15,9 +15,9 @@ import {
   ReferenceArrayField,
 } from "react-admin";
 import BookIcon from "@mui/icons-material/Book";
-export const ZvanieIcon = BookIcon;
+export const PodrazdelenieIcon = BookIcon;
 
-export const ZvanieList = () => (
+export const PodrazdelenieList = () => (
   <List>
     <Datagrid>
       <TextField source="id" />
@@ -28,13 +28,13 @@ export const ZvanieList = () => (
   </List>
 );
 
-const ZvanieTitle = () => {
+const PodrazdelenieTitle = () => {
   const record = useRecordContext();
-  return <span>Звание {record ? `"${record.name}"` : ""}</span>;
+  return <span>Podrazdelenie {record ? `"${record.title}"` : ""}</span>;
 };
 
-export const ZvanieEdit = () => (
-  <Edit title={<ZvanieTitle />}>
+export const PodrazdelenieEdit = () => (
+  <Edit title={<PodrazdelenieTitle />}>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
@@ -42,8 +42,8 @@ export const ZvanieEdit = () => (
   </Edit>
 );
 
-export const ZvanieCreate = () => (
-  <Create>
+export const PodrazdelenieCreate = () => (
+  <Create title="Создание подразделения">
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />
