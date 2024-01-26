@@ -39,14 +39,16 @@ const Person = sequelize.define("Person", {
 
 const Category = sequelize.define("Category", {
   name: DataTypes.STRING,
-  from: DataTypes.DATE,
-  to: DataTypes.DATE,
+  from: DataTypes.INTEGER,
+  to: DataTypes.INTEGER,
   isMale: DataTypes.BOOLEAN,
   isV: DataTypes.BOOLEAN,
 });
 
 const UprazhnenieType = sequelize.define("UprazhnenieType", {
   name: DataTypes.STRING,
+  shortName: DataTypes.STRING,
+  ballOver: DataTypes.INTEGER
 });
 
 const Uprazhnenie = sequelize.define("Uprazhnenie", {
@@ -56,6 +58,8 @@ const Uprazhnenie = sequelize.define("Uprazhnenie", {
   UprazhnenieTypeId: UprazhnenieType,
   isV: DataTypes.BOOLEAN,
 });
+
+
 
 module.exports = {
   sequelize,

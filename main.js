@@ -4,9 +4,11 @@ const { app, BrowserWindow } = require('electron');
 const { sequelize, Person } = require('./server/sequelize'); // Импорт Sequelize и настройки
 const personsRouter = require('./server/routes/persons');
 const zvaniyaRouter = require('./server/routes/zvaniya');
+const uprazhnenieTypesRouter = require('./server/routes/uprazhnenieTypes');
 const podrazdeleniyaRouter = require('./server/routes/podrazdeleniya');
+const categoriesRouter = require('./server/routes/categories');
 const cors = require("cors");
-
+if (require('electron-squirrel-startup')) app.quit();
 const corsOptions = {
   origin: "http://localhost:5173",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -19,7 +21,9 @@ const appExpress = express();
 appExpress.use(cors(corsOptions));
 appExpress.use(express.json());
 
+appExpress.use('/categories', categoriesRouter);
 appExpress.use('/podrazdeleniya', podrazdeleniyaRouter);
+appExpress.use('/uprazhnenieTypes', uprazhnenieTypesRouter);
 appExpress.use('/persons', personsRouter);
 appExpress.use('/zvaniya', zvaniyaRouter);
 

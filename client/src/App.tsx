@@ -8,6 +8,8 @@ import {
 } from "react-admin";
 import { PersonList, PersonEdit, PersonCreate } from "./resources/persons";
 import { ZvanieList, ZvanieEdit, ZvanieCreate } from "./resources/zvaniya";
+import { UprazhnenieTypeCreate, UprazhnenieTypeEdit, UprazhnenieTypeList } from "./resources/uprazhneniya-types";
+import { CategoryCreate, CategoryList, CategoryEdit } from "./resources/categories";
 import { dataProvider } from "./dataProvider";
 import russianMessages from "./i18n/ru";
 import { ru } from "./i18n/ru";
@@ -42,6 +44,16 @@ export const App = () => (
       // show={ShowGuesser}
     />
     <Resource
+      name="uprazhnenieTypes"
+      list={UprazhnenieTypeList}
+      edit={UprazhnenieTypeEdit}
+      create={UprazhnenieTypeCreate}
+
+
+      // icon={bookI}
+      // show={ShowGuesser}
+    />
+    <Resource
       name="podrazdeleniya"
       list={PodrazdelenieList}
       edit={PodrazdelenieEdit}
@@ -62,9 +74,9 @@ export const App = () => (
     />
     <Resource
       name="categories"
-      // list={PersonList}
-      // edit={PersonEdit}
-      // show={ShowGuesser}
+      list={CategoryList}
+      edit={CategoryEdit}
+      create={CategoryCreate}
     />
   </Admin>
 );

@@ -234,6 +234,17 @@ export const ru = {
                 name: 'Наименование',
             },
         },
+        categories: {
+            name: 'Категория военнослужащего |||| Категории военнослужащих',
+            fields: {
+                id: '№',
+                name: 'Наименование',
+                from: 'От',
+                to: 'До',
+                isMale: 'Мужчина',
+                isV: 'Статус военнослужащего',
+            },
+        },
         customer: {
             name: 'Customer |||| Customers',
             fields: {

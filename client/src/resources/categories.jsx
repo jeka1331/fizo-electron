@@ -13,17 +13,22 @@ import {
   useRecordContext,
   BooleanField,
   ReferenceArrayField,
+  BooleanInput,
+  NumberInput,
+  NumberField
 } from "react-admin";
 import BookIcon from "@mui/icons-material/Book";
-export const PodrazdelenieIcon = BookIcon;
+import FemaleIcon from '@mui/icons-material/Female';
+import MaleIcon from '@mui/icons-material/Male';
+export const CategoryIcon = BookIcon;
 
-export const PodrazdelenieList = () => (
+export const CategoryList = () => (
   <List>
     <Datagrid>
       <TextField source="id" />
       <TextField source="name" />
-      <DateField source="from" />
-      <DateField source="to" />
+      <NumberField source="from" step={1}/>
+      <NumberField source="to" step={1}/>
       <BooleanField source="isMale" />
       <BooleanField source="isV" />
 
@@ -32,29 +37,33 @@ export const PodrazdelenieList = () => (
   </List>
 );
 
-const PodrazdelenieTitle = () => {
+const CategoryTitle = () => {
   const record = useRecordContext();
-  return <span>Podrazdelenie {record ? `"${record.title}"` : ""}</span>;
+  return <span>Category {record ? `"${record.title}"` : ""}</span>;
 };
 
-export const PodrazdelenieEdit = () => (
-  <Edit title={<PodrazdelenieTitle />}>
+export const CategoryEdit = () => (
+  <Edit title={<CategoryTitle />}>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
-      <TextInput source="from" />
-      <TextInput source="to" />
-      <TextInput source="isMale" />
-      <TextInput source="isV" />
+      <NumberInput source="from" step={1}/>
+      <NumberInput source="to" step={1}/>
+      <BooleanInput source="isMale" valueLabelTrue={MaleIcon} valueLabelFalse={FemaleIcon}  defaultValue={true} />
+      <BooleanInput source="isV" label="Военнослужащий"/>
     </SimpleForm>
   </Edit>
 );
 
-export const PodrazdelenieCreate = () => (
+export const CategoryCreate = () => (
   <Create>
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />
+      <NumberInput source="from" step={1}/>
+      <NumberInput source="to" step={1}/>
+      <BooleanInput source="isMale" valueLabelTrue={MaleIcon} valueLabelFalse={FemaleIcon}  defaultValue={true} />
+      <BooleanInput source="isV" label="Военнослужащий"/>
     </SimpleForm>
   </Create>
 );
