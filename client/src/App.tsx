@@ -1,17 +1,12 @@
 import {
   Admin,
   Resource,
-  ListGuesser,
-  EditGuesser,
-  ShowGuesser,
-  nanoDarkTheme,
 } from "react-admin";
 import { PersonList, PersonEdit, PersonCreate } from "./resources/persons";
 import { ZvanieList, ZvanieEdit, ZvanieCreate } from "./resources/zvaniya";
 import { UprazhnenieTypeCreate, UprazhnenieTypeEdit, UprazhnenieTypeList } from "./resources/uprazhneniya-types";
 import { CategoryCreate, CategoryList, CategoryEdit } from "./resources/categories";
 import { dataProvider } from "./dataProvider";
-import russianMessages from "./i18n/ru";
 import { ru } from "./i18n/ru";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import {
@@ -24,7 +19,7 @@ import StarIcon from '@mui/icons-material/Star';
 import GroupsIcon from '@mui/icons-material/Groups';// import { authProvider } from "./authProvider";
 
 const i18nProvider = polyglotI18nProvider(
-  (locale) => ru,
+  () => ru,
   "ru" // Default locale
 );
 
