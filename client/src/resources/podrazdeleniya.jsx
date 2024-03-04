@@ -1,20 +1,21 @@
-import * as React from "react";
+// import * as React from "react";
 import {
   List,
   Datagrid,
   Edit,
   Create,
   SimpleForm,
-  DateField,
+  // DateField,
   TextField,
   EditButton,
   TextInput,
-  DateInput,
+  // DateInput,
   useRecordContext,
-  BooleanField,
-  ReferenceArrayField,
+  // BooleanField,
+  // ReferenceArrayField,
 } from "react-admin";
 import BookIcon from "@mui/icons-material/Book";
+import { PodrazdelenieExportPostButton } from "../components/PodrazdelenieExportPostButton";
 export const PodrazdelenieIcon = BookIcon;
 
 export const PodrazdelenieList = () => (
@@ -24,6 +25,8 @@ export const PodrazdelenieList = () => (
       <TextField source="name" />
 
       <EditButton />
+      <PodrazdelenieExportPostButton label='Ведомость' />
+
     </Datagrid>
   </List>
 );

@@ -16,6 +16,15 @@ const Podrazdelenie = sequelize.define("Podrazdelenie", {
   name: DataTypes.STRING,
 });
 
+const Category = sequelize.define("Category", {
+  name: DataTypes.STRING,
+  shortName: DataTypes.STRING,
+});
+const UprazhnenieRealValuesType = sequelize.define("UprazhnenieRealValuesType", {
+  name: DataTypes.STRING,
+  shortName: DataTypes.STRING,
+});
+
 // Определение модели "Person"
 const Person = sequelize.define("Person", {
   uprajnenia: DataTypes.JSON,
@@ -26,6 +35,7 @@ const Person = sequelize.define("Person", {
   dob: DataTypes.DATE,
   zvanieId: Zvanie,
   podrazdelenieId: Podrazdelenie,
+  categoryId: Category,
   comment: DataTypes.STRING,
   num: DataTypes.STRING,
   isMale: DataTypes.BOOLEAN,
@@ -36,37 +46,34 @@ const Person = sequelize.define("Person", {
   otpuskTo: DataTypes.DATE,
 });
 
-
-const Category = sequelize.define("Category", {
-  name: DataTypes.STRING,
-  from: DataTypes.INTEGER,
-  to: DataTypes.INTEGER,
-  isMale: DataTypes.BOOLEAN,
-  isV: DataTypes.BOOLEAN,
-});
-
-const UprazhnenieType = sequelize.define("UprazhnenieType", {
-  name: DataTypes.STRING,
-  shortName: DataTypes.STRING,
-  ballOver: DataTypes.INTEGER
-});
-
 const Uprazhnenie = sequelize.define("Uprazhnenie", {
   name: DataTypes.STRING,
-  ballList: DataTypes.INTEGER,
-  povtList: DataTypes.INTEGER,
-  UprazhnenieTypeId: UprazhnenieType,
-  isV: DataTypes.BOOLEAN,
+  uprazhnenieRealValuesTypeId: UprazhnenieRealValuesType,
 });
 
 
+
+const UprazhnenieStandard = sequelize.define("UprazhnenieStandard", {
+  uprazhnenieId: Uprazhnenie,
+  categoryId: Category,
+  valueInt: DataTypes.INTEGER,
+  result: DataTypes.INTEGER
+});
+
+const UprazhnenieSchedule = sequelize.define("UprazhnenieSchedule", {
+  uprazhnenieId: Uprazhnenie,
+  name: Category,
+  personId: Person,
+  result: DataTypes.INTEGER
+});
 
 module.exports = {
   sequelize,
+  UprazhnenieStandard,
   Person,
   Zvanie,
   Podrazdelenie,
   Category,
   Uprazhnenie,
-  UprazhnenieType,
+  UprazhnenieRealValuesType,
 };

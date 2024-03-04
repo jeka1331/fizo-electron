@@ -95,7 +95,7 @@ app.on("before-quit", () => {
 // Функция-обработчик для события 'print-person-report'
 const printPersonReportHandler = (data) => {
   let win = new BrowserWindow({
-    show: false,
+    show: true,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -116,7 +116,28 @@ const printPersonReportHandler = (data) => {
   };
   const encodedHtmlContent = Buffer.from(data).toString("base64");
   win.loadURL(`data:text/html;charset=utf-8;base64,${encodedHtmlContent}`);
-  win.webContents.print({});
+  win.webContents.print({
+    silent: false,
+    printBackground: false,
+    pageSize: 'A4',
+    marginsType: 0,
+    landscape: false,
+    scaleFactor: 1,
+    pagesPerSheet: 1,
+    collate: false,
+    copies: 1,
+    header: 'Header',
+    footer: {
+      height: '1cm',
+      margin: {
+        top: '1cm',
+        bottom: '1cm'
+      },
+      contents: {
+        default: '<div style="text-align:center">{#pageNum}</div>',
+      }
+    }
+  });
 };
 
 // Регистрация обработчика события 'print-person-report'

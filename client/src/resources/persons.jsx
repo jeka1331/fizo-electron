@@ -15,10 +15,11 @@ import {
   ReferenceInput,
   SelectInput,
   BooleanInput,
-  Button,
+  // Button,
 } from "react-admin";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
+import { PersonExportPostButton } from "../components/PersonExportPostButton";
 
 export const PersonList = () => (
   <List>
@@ -39,6 +40,9 @@ export const PersonList = () => (
       <ReferenceField source="podrazdelenieId" reference="podrazdeleniya">
         <TextField source="name" />
       </ReferenceField>
+      <ReferenceField source="categoryId" reference="categories">
+        <TextField source="name" />
+      </ReferenceField>
       <BooleanField
         source="isMale"
         valueLabelTrue="Мужчина"
@@ -54,7 +58,7 @@ export const PersonList = () => (
       <DateField source="otpuskTo" />
       <TextField source="comment" />
       <EditButton />
-      <Button
+      {/* <Button
         label="Ведомость"
         onClick={() => {
           fetch("http://localhost:3333/reports/person")
@@ -71,32 +75,8 @@ export const PersonList = () => (
               console.error("Error fetching data:", error);
             });
         }}
-      />
-      <Button
-        label="Ведомость POST"
-        onClick={async (data) => {
-          try {
-            const response = await fetch('http://localhost:3333/reports/person', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-            });
-        
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-        
-            const responseData = await response.json();
-            console.log('Response data:', responseData);
-            return responseData;
-          } catch (error) {
-            console.error('Error:', error);
-            throw error;
-          }
-        }}
-      />
+      /> */}
+      <PersonExportPostButton label='Ведомость' />
     </Datagrid>
   </List>
 );
@@ -131,6 +111,9 @@ export const PersonEdit = () => (
       <ReferenceInput source="podrazdelenieId" reference="podrazdeleniya">
         <SelectInput optionText="name" />
       </ReferenceInput>
+      <ReferenceInput source="categoryId" reference="categories">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
       <BooleanInput
         source="isMale"
         valueLabelTrue={MaleIcon}
@@ -158,6 +141,9 @@ export const PersonCreate = () => (
         <SelectInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="podrazdelenieId" reference="podrazdeleniya">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+      <ReferenceInput source="categoryId" reference="categories">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <BooleanInput
