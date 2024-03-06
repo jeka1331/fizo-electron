@@ -11,26 +11,17 @@ import {
   TextInput,
   // DateInput,
   useRecordContext,
-  BooleanField,
   // ReferenceArrayField,
-  BooleanInput,
-  NumberInput,
-  NumberField
 } from "react-admin";
-import BookIcon from "@mui/icons-material/Book";
-import FemaleIcon from '@mui/icons-material/Female';
-import MaleIcon from '@mui/icons-material/Male';
-export const CategoryIcon = BookIcon;
+import _CategoryIcon from '@mui/icons-material/Category';
+export const CategoryIcon = _CategoryIcon;
 
 export const CategoryList = () => (
   <List>
     <Datagrid>
       <TextField source="id" />
       <TextField source="name" />
-      <NumberField source="from" step={1}/>
-      <NumberField source="to" step={1}/>
-      <BooleanField source="isMale" />
-      <BooleanField source="isV" />
+      <TextField source="shortName" />
 
       <EditButton />
     </Datagrid>
@@ -47,10 +38,8 @@ export const CategoryEdit = () => (
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
-      <NumberInput source="from" step={1}/>
-      <NumberInput source="to" step={1}/>
-      <BooleanInput source="isMale" valueLabelTrue={MaleIcon} valueLabelFalse={FemaleIcon}  defaultValue={true} />
-      <BooleanInput source="isV" label="Военнослужащий"/>
+      <TextInput source="shortName" />
+
     </SimpleForm>
   </Edit>
 );
@@ -60,10 +49,8 @@ export const CategoryCreate = () => (
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />
-      <NumberInput source="from" step={1}/>
-      <NumberInput source="to" step={1}/>
-      <BooleanInput source="isMale" valueLabelTrue={MaleIcon} valueLabelFalse={FemaleIcon}  defaultValue={true} />
-      <BooleanInput source="isV" label="Военнослужащий"/>
+      <TextInput source="shortName" />
+
     </SimpleForm>
   </Create>
 );

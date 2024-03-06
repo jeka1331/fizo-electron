@@ -4,7 +4,7 @@ import {
   Edit,
   Create,
   SimpleForm,
-  DateField,
+  // DateField,
   TextField,
   EditButton,
   TextInput,
@@ -28,7 +28,7 @@ export const PersonList = () => (
       <TextField source="lName" />
       <TextField source="fName" />
       <TextField source="sName" />
-      <DateField source="dob" />
+      {/* <DateField source="dob" /> */}
       {/* <ReferenceField source="zvanieId"  reference="zvaniya"/> */}
       <ReferenceField
         source="zvanieId"
@@ -52,11 +52,11 @@ export const PersonList = () => (
         label="Пол"
       />
       <BooleanField source="isV" />
-      <TextField source="rating" />
+      {/* <TextField source="rating" /> */}
       <BooleanField source="isFree" />
-      <DateField source="otpuskFrom" />
-      <DateField source="otpuskTo" />
-      <TextField source="comment" />
+      {/* <DateField source="otpuskFrom" /> */}
+      {/* <DateField source="otpuskTo" /> */}
+      {/* <TextField source="comment" /> */}
       <EditButton />
       {/* <Button
         label="Ведомость"

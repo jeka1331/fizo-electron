@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { UprazhnenieRealValuesType } = require('../sequelize'); // Импорт модели Person
+const { UprazhnenieResult } = require('../sequelize'); // Импорт модели Person
 
 // Создание записи (Create)
 router.post('/', async (req, res) => {
   try {
     
-    const newUprazhnenieType = req.body;
-    console.log(newUprazhnenieType)
-    const createdUprazhnenieType = await UprazhnenieRealValuesType.create(newUprazhnenieType);
-    res.status(201).json(createdUprazhnenieType);
+    const newUprazhnenieResult = req.body;
+    console.log(newUprazhnenieResult)
+    const createdUprazhnenieResult = await UprazhnenieResult.create(newUprazhnenieResult);
+    res.status(201).json(createdUprazhnenieResult);
   } catch (error) {
     res.status(500).json({ error: 'Ошибка при создании записи' });
   }
@@ -36,10 +36,10 @@ router.get('/', async (req, res) => {
           options.where = JSON.parse(filter);
         }
     
-        const zvaniya = await UprazhnenieRealValuesType.findAll(options);
+        const zvaniya = await UprazhnenieResult.findAll(options);
     
         if (range) {
-          const total = await UprazhnenieRealValuesType.count();
+          const total = await UprazhnenieResult.count();
           // Устанавливаем заголовок Content-Range
           res.header('Content-Range', `zvaniya ${options.offset}-${options.offset + zvaniya.length - 1}/${total}`);
         }
@@ -53,12 +53,12 @@ router.get('/', async (req, res) => {
 // Чтение одной записи по ID (Read)
 router.get('/:id', async (req, res) => {
   try {
-    const uprazhnenieTypeId = req.params.id;
-    console.log(uprazhnenieTypeId.toString());
-    const uprazhnenieRealValuesType = await UprazhnenieRealValuesType.findByPk(parseInt(uprazhnenieTypeId));
-    console.log(uprazhnenieRealValuesType)
-    if (uprazhnenieRealValuesType) {
-      res.status(200).json(uprazhnenieRealValuesType);
+    const uprazhnenieResultId = req.params.id;
+    console.log(UprazhnenieResult.toString());
+    const uprazhnenieResult = await UprazhnenieResult.findByPk(parseInt(uprazhnenieResultId));
+    console.log(uprazhnenieResult)
+    if (uprazhnenieResult) {
+      res.status(200).json(uprazhnenieResult);
     } else {
       res.status(404).json({ error: 'Запись не найдена' });
     }
@@ -71,10 +71,10 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     console.log(req.params.id)
-    const uprazhnenieTypeId = req.params.id;
-    const updatedUprazhnenieType = req.body;
-    const result = await UprazhnenieRealValuesType.update(updatedUprazhnenieType, {
-      where: { id: uprazhnenieTypeId },
+    const uprazhnenieResultId = req.params.id;
+    const updatedUprazhnenieResult = req.body;
+    const result = await UprazhnenieResult.update(updatedUprazhnenieResult, {
+      where: { id: uprazhnenieResultId },
     });
     if (result[0] === 1) {
       res.status(200).json({ message: 'Запись успешно обновлена' });
@@ -89,9 +89,9 @@ router.put('/:id', async (req, res) => {
 // Удаление записи (Delete)
 router.delete('/:id', async (req, res) => {
   try {
-    const uprazhnenieTypeId = req.params.id;
-    const result = await UprazhnenieRealValuesType.destroy({
-      where: { id: uprazhnenieTypeId },
+    const uprazhnenieResultId = req.params.id;
+    const result = await UprazhnenieResult.destroy({
+      where: { id: uprazhnenieResultId },
     });
     if (result === 1) {
       res.status(204).send();

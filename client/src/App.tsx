@@ -5,7 +5,7 @@ import {
 import { PersonList, PersonEdit, PersonCreate } from "./resources/persons";
 import { ZvanieList, ZvanieEdit, ZvanieCreate } from "./resources/zvaniya";
 import { UprazhnenieTypeCreate, UprazhnenieTypeEdit, UprazhnenieTypeList } from "./resources/uprazhneniya-types";
-import { CategoryCreate, CategoryList, CategoryEdit } from "./resources/categories";
+import { CategoryCreate, CategoryList, CategoryEdit, CategoryIcon } from "./resources/categories";
 import { dataProvider } from "./dataProvider";
 import { ru } from "./i18n/ru";
 import polyglotI18nProvider from "ra-i18n-polyglot";
@@ -17,6 +17,9 @@ import {
 import PersonIcon from '@mui/icons-material/Person';
 import StarIcon from '@mui/icons-material/Star';
 import GroupsIcon from '@mui/icons-material/Groups';// import { authProvider } from "./authProvider";
+import { UprazhnenieCreate, UprazhnenieEdit, UprazhnenieIcon, UprazhnenieList } from "./resources/uprazhneniya";
+import { UprazhnenieStandardCreate, UprazhnenieStandardEdit, UprazhnenieStandardIcon, UprazhnenieStandardList } from "./resources/uprazhneniya-standards";
+import { UprazhnenieResultCreate, UprazhnenieResultEdit, UprazhnenieResultIcon, UprazhnenieResultList } from "./resources/uprazhneniya-results";
 
 const i18nProvider = polyglotI18nProvider(
   () => ru,
@@ -39,7 +42,7 @@ export const App = () => (
       // show={ShowGuesser}
     />
     <Resource
-      name="uprazhnenieTypes"
+      name="uprazhnenieRealValuesTypes"
       list={UprazhnenieTypeList}
       edit={UprazhnenieTypeEdit}
       create={UprazhnenieTypeCreate}
@@ -72,6 +75,32 @@ export const App = () => (
       list={CategoryList}
       edit={CategoryEdit}
       create={CategoryCreate}
+      icon={CategoryIcon}
+
+    />
+    <Resource
+      name="uprazhneniya"
+      list={UprazhnenieList}
+      edit={UprazhnenieEdit}
+      create={UprazhnenieCreate}
+      icon={UprazhnenieIcon}
+
+    />
+    <Resource
+      name="uprazhnenieStandards"
+      list={UprazhnenieStandardList}
+      edit={UprazhnenieStandardEdit}
+      create={UprazhnenieStandardCreate}
+      icon={UprazhnenieStandardIcon}
+
+    />
+    <Resource
+      name="uprazhnenieResults"
+      list={UprazhnenieResultList}
+      edit={UprazhnenieResultEdit}
+      create={UprazhnenieResultCreate}
+      icon={UprazhnenieResultIcon}
+
     />
   </Admin>
 );

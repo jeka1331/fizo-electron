@@ -8,6 +8,9 @@ const zvaniyaRouter = require("./server/routes/zvaniya");
 const uprazhnenieTypesRouter = require("./server/routes/uprazhnenieTypes");
 const podrazdeleniyaRouter = require("./server/routes/podrazdeleniya");
 const categoriesRouter = require("./server/routes/categories");
+const upraznenieRouter = require("./server/routes/uprazhneniya");
+const uprazhnenieStandardsRouter = require("./server/routes/uprazhneniyaStandards");
+const uprazhnenieResultsRouter = require("./server/routes/uprazhneniyaResults");
 const cors = require("cors");
 if (require("electron-squirrel-startup")) app.quit();
 const corsOptions = {
@@ -24,9 +27,12 @@ appExpress.use(express.json());
 appExpress.use("/categories", categoriesRouter);
 appExpress.use("/reports", reportsRouter);
 appExpress.use("/podrazdeleniya", podrazdeleniyaRouter);
-appExpress.use("/uprazhnenieTypes", uprazhnenieTypesRouter);
+appExpress.use("/uprazhnenieRealValuesTypes", uprazhnenieTypesRouter);
 appExpress.use("/persons", personsRouter);
 appExpress.use("/zvaniya", zvaniyaRouter);
+appExpress.use("/uprazhneniya", upraznenieRouter);
+appExpress.use("/uprazhnenieStandards", uprazhnenieStandardsRouter);
+appExpress.use("/uprazhnenieResults", uprazhnenieResultsRouter);
 
 // appExpress.use(crud('/persons', sequelizeCrud(Person)))
 

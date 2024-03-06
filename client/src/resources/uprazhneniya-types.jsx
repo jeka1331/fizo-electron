@@ -13,8 +13,6 @@ import {
   useRecordContext,
   // BooleanField,
   // ReferenceArrayField,
-  NumberField,
-  NumberInput,
 } from "react-admin";
 import BookIcon from "@mui/icons-material/Book";
 export const UprazhneniieTypeIcon = BookIcon;
@@ -25,7 +23,6 @@ export const UprazhnenieTypeList = () => (
       <TextField source="id" />
       <TextField source="name" />
       <TextField source="shortName" />
-      <NumberField source="ballOver"/>
 
       <EditButton />
     </Datagrid>
@@ -43,7 +40,7 @@ export const UprazhnenieTypeEdit = () => (
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
       <TextInput source="shortName" />
-      <NumberInput source="ballOver"/>
+
     </SimpleForm>
   </Edit>
 );
@@ -54,7 +51,6 @@ export const UprazhnenieTypeCreate = () => (
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />
       <TextInput source="shortName" />
-      <NumberInput source="ballOver"/>
     </SimpleForm>
   </Create>
 );

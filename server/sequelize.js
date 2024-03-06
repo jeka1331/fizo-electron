@@ -27,8 +27,6 @@ const UprazhnenieRealValuesType = sequelize.define("UprazhnenieRealValuesType", 
 
 // Определение модели "Person"
 const Person = sequelize.define("Person", {
-  uprajnenia: DataTypes.JSON,
-  uprajneniaDate: DataTypes.JSON,
   fName: DataTypes.STRING,
   lName: DataTypes.STRING,
   sName: DataTypes.STRING,
@@ -49,6 +47,7 @@ const Person = sequelize.define("Person", {
 const Uprazhnenie = sequelize.define("Uprazhnenie", {
   name: DataTypes.STRING,
   uprazhnenieRealValuesTypeId: UprazhnenieRealValuesType,
+  maxResult: DataTypes.INTEGER
 });
 
 
@@ -64,10 +63,21 @@ const UprazhnenieSchedule = sequelize.define("UprazhnenieSchedule", {
   uprazhnenieId: Uprazhnenie,
   name: Category,
   personId: Person,
-  result: DataTypes.INTEGER
+  date: DataTypes.DATE
+});
+
+
+const UprazhnenieResult = sequelize.define("UprazhnenieResult", {
+  uprazhnenieId: Uprazhnenie,
+  personId: Person,
+  categoryId: Category,
+  result: DataTypes.INTEGER,
+  date: DataTypes.DATE
 });
 
 module.exports = {
+  UprazhnenieResult,
+  UprazhnenieSchedule,
   sequelize,
   UprazhnenieStandard,
   Person,
