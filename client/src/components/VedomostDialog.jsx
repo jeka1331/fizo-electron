@@ -18,22 +18,30 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit }) => {
     handleSubmit({ year, month });
     handleClose(); // Закрываем модальное окно после отправки формы
   };
-  const exportFunction = (data) => {
+  const exportFunction = async (data) => {
     try {
       if (!data.year && !data.month) {
-        throw new Error("Неправильные параметры")
+        throw new Error("Неправильные параметры");
       }
-      const response = fetch(
-        `http://localhost:3333/uprazhnenieResults/vedomost?year=${data.year}&month=${data.month}`,
+      const response = await fetch(
+        `http://localhost:3333/uprazhnenieResults/vedomost?year=${data.year}&month=${data.month}`
       );
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      if (response.ok) {
+        // console.log(await response.json());
+        let rjson = await response.json()
+        rjson = JSON.stringify(rjson)
+        const repResponce = await fetch(
+          "http://localhost:3333/reports/podrtest",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: rjson,
+          }
+        );
       }
-
-      const responseData = response.json();
-      console.log("Response data:", responseData);
-      return responseData;
     } catch (error) {
       console.error("Error:", error);
       throw error;
@@ -66,7 +74,9 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit }) => {
           Cancel
         </Button>
         <Button
-          onClick={() => {exportFunction({ year: year, month: month })}}
+          onClick={() => {
+            exportFunction({ year: year, month: month });
+          }}
           color="primary"
         >
           Generate

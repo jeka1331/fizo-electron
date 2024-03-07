@@ -26,6 +26,7 @@ import ReportModal from "../components/VedomostDialog";
 
 export const PodrazdelenieList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const record = useRecordContext();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);

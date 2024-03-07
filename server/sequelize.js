@@ -20,10 +20,13 @@ const Category = sequelize.define("Category", {
   name: DataTypes.STRING,
   shortName: DataTypes.STRING,
 });
-const UprazhnenieRealValuesType = sequelize.define("UprazhnenieRealValuesType", {
-  name: DataTypes.STRING,
-  shortName: DataTypes.STRING,
-});
+const UprazhnenieRealValuesType = sequelize.define(
+  "UprazhnenieRealValuesType",
+  {
+    name: DataTypes.STRING,
+    shortName: DataTypes.STRING,
+  }
+);
 
 // Определение модели "Person"
 const Person = sequelize.define("Person", {
@@ -46,34 +49,41 @@ const Person = sequelize.define("Person", {
 
 const Uprazhnenie = sequelize.define("Uprazhnenie", {
   name: DataTypes.STRING,
+  shortName: DataTypes.STRING,
   uprazhnenieRealValuesTypeId: UprazhnenieRealValuesType,
-  maxResult: DataTypes.INTEGER
+  maxResult: DataTypes.INTEGER,
+  valueToAddAfterMaxResult: DataTypes.INTEGER,
 });
-
-
 
 const UprazhnenieStandard = sequelize.define("UprazhnenieStandard", {
   uprazhnenieId: Uprazhnenie,
   categoryId: Category,
   valueInt: DataTypes.INTEGER,
-  result: DataTypes.INTEGER
+  result: DataTypes.INTEGER,
 });
 
 const UprazhnenieSchedule = sequelize.define("UprazhnenieSchedule", {
   uprazhnenieId: Uprazhnenie,
   name: Category,
   personId: Person,
-  date: DataTypes.DATE
+  date: DataTypes.DATE,
 });
-
 
 const UprazhnenieResult = sequelize.define("UprazhnenieResult", {
-  uprazhnenieId: Uprazhnenie,
-  personId: Person,
-  categoryId: Category,
   result: DataTypes.INTEGER,
-  date: DataTypes.DATE
+  date: DataTypes.DATE,
+  uuid: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    allowNull: false,
+  },
 });
+Person.hasMany(UprazhnenieResult);
+UprazhnenieResult.belongsTo(Person);
+Category.hasMany(UprazhnenieResult);
+UprazhnenieResult.belongsTo(Category);
+Uprazhnenie.hasMany(UprazhnenieResult);
+UprazhnenieResult.belongsTo(Uprazhnenie);
 
 module.exports = {
   UprazhnenieResult,

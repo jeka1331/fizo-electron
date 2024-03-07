@@ -392,4 +392,77 @@ router.post("/podrazdelenie", async (req, res) => {
   
 });
 
+
+router.post("/podrtest", async (req, res) => {
+  try {
+      const compiledFunction = pug.compile(podrazdelenieTemplate);
+      // ----- Request body: -----
+      // {
+      //   id: 2,
+      //   uprajnenia: null,
+      //   uprajneniaDate: null,
+      //   fName: 'Евгений',
+      //   lName: 'Ольхин',
+      //   sName: 'Александрович',
+      //   dob: '2001-03-12T00:00:00.000Z',
+      //   zvanieId: 1,
+      //   podrazdelenieId: 1,
+      //   comment: 'Солдат',
+      //   num: null,
+      //   isMale: true,
+      //   isV: true,
+      //   rating: null,
+      //   isFree: false,
+      //   otpuskFrom: null,
+      //   otpuskTo: null,
+      //   createdAt: '2024-03-01T05:22:58.741Z',
+      //   updatedAt: '2024-03-01T05:22:58.741Z'
+      // }
+      console.log(req.body)
+      const podrazdelenieId = req.body['id'];
+      const persons = await Person.findAll({
+        where: {
+          id: podrazdelenieId,
+
+        },
+        raw: true,
+        nest: true,
+      })
+      // console.log(persons)
+      for (const element of persons) {
+        const zvanie = await Zvanie.findByPk(element['zvanieId'])
+        element['zvanie'] = zvanie.name ? zvanie.name : ""
+        const podrazdelenie = await Podrazdelenie.findByPk(element['podrazdelenieId'])
+        element['podrazdelenie'] = podrazdelenie.name ? podrazdelenie.name : ""
+        const category = await Category.findByPk(element['categoryId'])
+        element['category'] = category.name ? category.name : ""
+        element.fioWithInitials = `${element.lName} ${element.fName[0]}.${element.sName[0]}.`
+      };
+
+      // console.log(persons)
+      // const zvanie = await Zvanie.findByPk(person['zvanieId'])
+      // person['zvanie'] = zvanie.name ? zvanie.name : ""
+      // const podrazdelenie = await Podrazdelenie.findByPk(person['podrazdelenieId'])
+      // person['podrazdelenie'] = podrazdelenie.name ? podrazdelenie.name : ""
+      // const category = await Category.findByPk(person['categoryId'])
+      // person['category'] = category.name ? category.name : ""
+      // person.fioWithInitials = `${person.lName} ${person.fName[0]}.${person.sName[0]}.`
+
+
+
+      // console.log(person)
+      const testPersons = persons[0] ? Array(50).fill(persons[0]) : [];
+      const html = compiledFunction({"data" : testPersons});
+      ipcMain.emit('print-person-report', html)
+      res.status(200).json({"message" : "Added document to schedule"});
+  } catch (error) {
+      res.status(500).json({ error: 'Ошибка при отправке на печать' });
+      
+  }
+  // const compiledFunction = pug.compileFile('./server/templates/person.pug');
+  // const html = compiledFunction();
+  // ipcMain.emit('print-person-report', html)
+  
+});
+
 module.exports = router;

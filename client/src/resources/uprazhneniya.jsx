@@ -29,10 +29,14 @@ export const UprazhnenieList = () => (
     <Datagrid>
       <TextField source="id" />
       <TextField source="name" />
+      <TextField source="shortName" />
+
       <ReferenceField source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <TextField source="name" />
       </ReferenceField>
       <NumberField source="maxResult" />
+      <NumberField source="valueToAddAfterMaxResult" />
+      
       <EditButton />
 
     </Datagrid>
@@ -49,10 +53,12 @@ export const UprazhnenieEdit = () => (
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
+      <TextInput source="shortName" />
       <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <NumberInput source="maxResult" validate={[required()]} />
+      <NumberInput source="valueToAddAfterMaxResult" validate={[required()]} />
     </SimpleForm>
   </Edit>
 );
@@ -62,10 +68,12 @@ export const UprazhnenieCreate = () => (
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />
+      <TextInput source="shortName" />
       <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <NumberInput source="maxResult" validate={[required()]} />
+      <NumberInput source="valueToAddAfterMaxResult" validate={[required()]} />
     </SimpleForm>
   </Create>
 );

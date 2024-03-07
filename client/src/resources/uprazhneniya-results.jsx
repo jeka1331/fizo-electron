@@ -31,13 +31,13 @@ export const UprazhnenieResultList = () => (
     <Datagrid>
       <TextField source="id" />
       
-      <ReferenceField source="uprazhnenieId" reference="uprazhneniya">
+      <ReferenceField source="UprazhnenieId" reference="uprazhneniya">
         <TextField source="name" />
       </ReferenceField>
-      <ReferenceField source="personId" reference="persons">
+      <ReferenceField source="PersonId" reference="persons">
         <TextField source="lName" />
       </ReferenceField>
-      <ReferenceField source="categoryId" reference="categories">
+      <ReferenceField source="CategoryId" reference="categories">
         <TextField source="name" />
       </ReferenceField>
       <NumberField source="result" />
@@ -59,13 +59,13 @@ export const UprazhnenieResultEdit = () => (
   <Edit title={<UprazhnenieResultTitle />}>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
-      <ReferenceInput source="uprazhnenieId" reference="uprazhneniya" validate={[required()]}>
+      <ReferenceInput source="UprazhnenieId" reference="uprazhneniya" validate={[required()]}>
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="personId" reference="persons" validate={[required()]}>
+      <ReferenceInput source="PersonId" reference="persons" validate={[required()]}>
         <SelectInput optionText="lName" />
       </ReferenceInput>
-      <ReferenceInput source="categoryId" reference="categories" validate={[required()]}>
+      <ReferenceInput source="CategoryId" reference="categories" validate={[required()]}>
         <SelectInput optionText="name" />
       </ReferenceInput>
       
@@ -79,13 +79,13 @@ export const UprazhnenieResultEdit = () => (
 export const UprazhnenieResultCreate = () => (
   <Create title="Добавление результата">
     <SimpleForm>
-    <ReferenceInput source="uprazhnenieId" reference="uprazhneniya" validate={[required()]}>
+    <ReferenceInput source="UprazhnenieId" reference="uprazhneniya" validate={[required()]}>
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="personId" reference="persons" validate={[required()]}>
+      <ReferenceInput source="PersonId" reference="persons" validate={[required()]}>
         <SelectInput optionText="lName" />
       </ReferenceInput>
-      <ReferenceInput source="categoryId" reference="categories" validate={[required()]}>
+      <ReferenceInput source="CategoryId" reference="categories" validate={[required()]}>
         <SelectInput optionText="name" />
       </ReferenceInput>
       <NumberInput source="result" validate={[required()]} />
