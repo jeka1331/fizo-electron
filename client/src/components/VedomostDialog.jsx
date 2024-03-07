@@ -10,21 +10,18 @@ import {
 } from "@mui/material";
 import { SelectInput } from "react-admin";
 
-const ReportModal = ({ isOpen, handleClose, handleSubmit }) => {
+const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
-
-  const handleGenerateReport = () => {
-    handleSubmit({ year, month });
-    handleClose(); // Закрываем модальное окно после отправки формы
-  };
+  // console.log(podr)
   const exportFunction = async (data) => {
     try {
-      if (!data.year && !data.month) {
+      // console.log(data)
+      if (!data.year || !data.month || !podr.id) {
         throw new Error("Неправильные параметры");
       }
       const response = await fetch(
-        `http://localhost:3333/uprazhnenieResults/vedomost?year=${data.year}&month=${data.month}`
+        `http://localhost:3333/uprazhnenieResults/vedomost?year=${data.year}&month=${data.month}&podrId=${podr.id}`
       );
 
       if (response.ok) {
@@ -75,7 +72,7 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit }) => {
         </Button>
         <Button
           onClick={() => {
-            exportFunction({ year: year, month: month });
+            exportFunction({ year: year, month: month, ...podr});
           }}
           color="primary"
         >

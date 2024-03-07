@@ -67,7 +67,9 @@ router.get("/", async (req, res) => {
 // Чтение всех записей (Read)
 router.get("/vedomost", async (req, res) => {
   try {
-    if (!req.query.year || !req.query.month) {
+    console.log(req.query)
+
+    if (!req.query.year || !req.query.month || !req.query.podrId) {
       throw new Error("Неверные параметры в get запросе");
     }
     const range = req.query.range;
@@ -122,7 +124,7 @@ router.get("/vedomost", async (req, res) => {
           model: Person,
           attributes: ["id", "fName", "lName", "zvanieId"], // Выбираем только необходимые атрибуты из модели Person
           where: {
-            podrazdelenieId: ,
+            podrazdelenieId: req.query.podrId,
           },
         },
         {
@@ -210,6 +212,9 @@ router.get("/vedomost", async (req, res) => {
       }
       if (sumOfBalls >= sumOfBallsFor5) {
         personalResultsP[key].totalOcenka = 5
+      }
+      if (!personalResultsP[key].totalOcenka) {
+        personalResultsP[key].totalOcenka = 2
       }
 
     }

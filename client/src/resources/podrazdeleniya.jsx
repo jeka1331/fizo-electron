@@ -20,27 +20,13 @@ import BookIcon from "@mui/icons-material/Book";
 import { PodrazdelenieExportPostButton } from "../components/PodrazdelenieExportPostButton";
 export const PodrazdelenieIcon = BookIcon;
 import ReportModal from "../components/VedomostDialog";
+import { GeneratePodrReportButton } from "../components/GeneratePodrReportButton";
 
 
 
 
 export const PodrazdelenieList = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const record = useRecordContext();
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleSubmit = async ({ startDate, endDate }) => {
-    // Здесь можно отправить данные на сервер для генерации отчета
-    // Или выполнить другие действия по вашему усмотрению
-    console.log('Generating report for dates:', startDate, endDate);
-  };
   return (
   <List>
     <Datagrid>
@@ -48,8 +34,7 @@ export const PodrazdelenieList = () => {
       <TextField source="name" />
 
       <EditButton />
-      <Button onClick={handleOpenModal} label="Generate Report" />
-      <ReportModal isOpen={isModalOpen} handleClose={handleCloseModal} handleSubmit={handleSubmit} />
+      <GeneratePodrReportButton />
       <PodrazdelenieExportPostButton label='Ведомость' />
 
     </Datagrid>

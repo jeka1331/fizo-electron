@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
   try {
     
     const newPodrazdelenie = req.body;
-    console.log(newPodrazdelenie)
+    // console.log(newPodrazdelenie)
     const createdPodrazdelenie = await Podrazdelenie.create(newPodrazdelenie);
     res.status(201).json(createdPodrazdelenie);
   } catch (error) {
@@ -70,7 +70,7 @@ router.get('/:id', async (req, res) => {
 // Обновление записи (Update)
 router.put('/:id', async (req, res) => {
   try {
-    console.log(req.params.id)
+    // console.log(req.params.id)
     const podrazdelenieId = req.params.id;
     const updatedPodrazdelenie = req.body;
     const result = await Podrazdelenie.update(updatedPodrazdelenie, {
