@@ -186,7 +186,13 @@ router.get("/vedomost", async (req, res) => {
         });
       }
     }
-
+    let maxResults = 0
+    for (const key in personalResultsP) {
+      if (personalResultsP[key].results.length > maxResults) {
+        maxResults = personalResultsP[key].results.length
+      }
+    }
+    
     uprNamesP = [...new Set(uprNamesP)];
     const sumOfBallsFor5 = uprNamesP.length * 60
     const sumOfBallsFor4 = uprNamesP.length * 40
@@ -218,6 +224,17 @@ router.get("/vedomost", async (req, res) => {
       }
 
     }
+    for (const key in personalResultsP) {
+      const remainingLength = maxResults - personalResultsP[key].results.length
+      for (let i = 0; i < remainingLength; i++) {
+        personalResultsP[key].results.push({
+          uprName: null,
+          score: null,
+          ball: null,
+        }); // Здесь можно использовать любые значения, в зависимости от ваших потребностей
+    }
+    }
+    console.log(personalResultsP['2'].results)
 
     // console.log(personalResultsP['1']);
     // console.log(uprNamesP.length);
