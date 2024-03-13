@@ -10,7 +10,6 @@ import {
   EditButton,
   TextInput,
   // DateInput,
-  useRecordContext,
   // BooleanField,
   // ReferenceArrayField,
 } from "react-admin";
@@ -29,13 +28,9 @@ export const UprazhnenieTypeList = () => (
   </List>
 );
 
-const UprazhnenieTypeTitle = () => {
-  const record = useRecordContext();
-  return <span>Тип упражнения {record ? `"${record.title}"` : ""}</span>;
-};
 
 export const UprazhnenieTypeEdit = () => (
-  <Edit title={<UprazhnenieTypeTitle />}>
+  <Edit>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
@@ -46,7 +41,7 @@ export const UprazhnenieTypeEdit = () => (
 );
 
 export const UprazhnenieTypeCreate = () => (
-  <Create title="Создание типа упражнения">
+  <Create>
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />

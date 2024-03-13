@@ -19,7 +19,7 @@ import {
 } from "react-admin";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
-import { PersonExportPostButton } from "../components/PersonExportPostButton";
+// import { PersonExportPostButton } from "../components/PersonExportPostButton";
 
 export const PersonList = () => (
   <List>
@@ -76,7 +76,7 @@ export const PersonList = () => (
             });
         }}
       /> */}
-      <PersonExportPostButton label='Ведомость' />
+      {/* <PersonExportPostButton label='Ведомость' /> */}
     </Datagrid>
   </List>
 );
@@ -130,7 +130,7 @@ export const PersonEdit = () => (
 );
 
 export const PersonCreate = () => (
-  <Create title="Create a Person">
+  <Create>
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="lName" required={true} />

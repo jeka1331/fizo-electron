@@ -10,7 +10,6 @@ import {
   EditButton,
   TextInput,
   // DateInput,
-  useRecordContext,
   ReferenceField,
   ReferenceInput,
   SelectInput,
@@ -26,6 +25,7 @@ import {
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 export const UprazhnenieResultIcon = DoneAllIcon;
 
+
 export const UprazhnenieResultList = () => (
   <List>
     <Datagrid>
@@ -36,6 +36,9 @@ export const UprazhnenieResultList = () => (
       </ReferenceField>
       <ReferenceField source="PersonId" reference="persons">
         <TextField source="lName" />
+        
+        <TextField source="fName" />
+        <TextField source="sName" />
       </ReferenceField>
       <ReferenceField source="CategoryId" reference="categories">
         <TextField source="name" />
@@ -48,15 +51,9 @@ export const UprazhnenieResultList = () => (
   </List>
 );
 
-const UprazhnenieResultTitle = () => {
-  const record = useRecordContext();
-  return <span>UprazhnenieResult {record ? `"${record.title}"` : ""}</span>;
-};
-
-
 
 export const UprazhnenieResultEdit = () => (
-  <Edit title={<UprazhnenieResultTitle />}>
+  <Edit>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <ReferenceInput source="UprazhnenieId" reference="uprazhneniya" validate={[required()]}>

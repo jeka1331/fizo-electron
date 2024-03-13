@@ -10,7 +10,6 @@ import {
   EditButton,
   TextInput,
   // DateInput,
-  useRecordContext,
   ReferenceField,
   ReferenceInput,
   SelectInput,
@@ -35,7 +34,7 @@ export const UprazhnenieStandardList = () => (
       <ReferenceField source="categoryId" reference="categories">
         <TextField source="name" />
       </ReferenceField>
-      <NumberField source="valueInt" />
+      <NumberField source="value" />
       <NumberField source="result" />
       <EditButton />
 
@@ -43,13 +42,10 @@ export const UprazhnenieStandardList = () => (
   </List>
 );
 
-const UprazhnenieStandardTitle = () => {
-  const record = useRecordContext();
-  return <span>UprazhnenieStandard {record ? `"${record.title}"` : ""}</span>;
-};
+
 
 export const UprazhnenieStandardEdit = () => (
-  <Edit title={<UprazhnenieStandardTitle />}>
+  <Edit>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <ReferenceInput source="uprazhnenieId" reference="uprazhneniya">
@@ -58,14 +54,14 @@ export const UprazhnenieStandardEdit = () => (
       <ReferenceInput source="categoryId" reference="categories">
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <NumberInput source="valueInt" validate={[required()]} />
+      <NumberInput source="value" validate={[required()]} />
       <NumberInput source="result" validate={[required()]} />
     </SimpleForm>
   </Edit>
 );
 
 export const UprazhnenieStandardCreate = () => (
-  <Create title="Добавление стандарта">
+  <Create>
     <SimpleForm>
       <ReferenceInput source="uprazhnenieId" reference="uprazhneniya">
         <SelectInput optionText="name" />
@@ -73,7 +69,7 @@ export const UprazhnenieStandardCreate = () => (
       <ReferenceInput source="categoryId" reference="categories">
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <NumberInput source="valueInt" validate={[required()]} />
+      <NumberInput source="value" validate={[required()]} />
       <NumberInput source="result" validate={[required()]} />
     </SimpleForm>
   </Create>

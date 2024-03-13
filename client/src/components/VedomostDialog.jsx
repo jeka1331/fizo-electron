@@ -8,11 +8,13 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { SelectInput } from "react-admin";
+import { SelectInput ,useTranslate} from "react-admin";
 
 const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
+  const translate = useTranslate(); // returns the i18nProvider.translate() method
+
   // console.log(podr)
   const exportFunction = async (data) => {
     try {
@@ -47,10 +49,10 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
 
   return (
     <Dialog open={isOpen} onClose={handleClose}>
-      <DialogTitle>Generate Report</DialogTitle>
+      <DialogTitle>{translate('dialogs.exportPodrazdelenie.title')}</DialogTitle>
       <DialogContent>
         <TextField
-          label="Year"
+          label={translate('dialogs.exportPodrazdelenie.year')}
           value={year}
           onChange={(e) => setYear(e.target.value)}
           type="number"
@@ -58,7 +60,7 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
           margin="normal"
         />
         <TextField
-          label="Month"
+          label={translate('dialogs.exportPodrazdelenie.month')}
           value={month}
           onChange={(e) => setMonth(e.target.value)}
           type="number"
@@ -68,7 +70,7 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="secondary">
-          Cancel
+        {translate('ra.action.cancel')}
         </Button>
         <Button
           onClick={() => {
@@ -76,7 +78,7 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
           }}
           color="primary"
         >
-          Generate
+          {translate('ra.action.confirm')}
         </Button>
       </DialogActions>
     </Dialog>

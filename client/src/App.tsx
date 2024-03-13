@@ -8,7 +8,9 @@ import { UprazhnenieTypeCreate, UprazhnenieTypeEdit, UprazhnenieTypeList } from 
 import { CategoryCreate, CategoryList, CategoryEdit, CategoryIcon } from "./resources/categories";
 import { dataProvider } from "./dataProvider";
 import { ru } from "./i18n/ru";
+import { kz } from "./i18n/kz";
 import polyglotI18nProvider from "ra-i18n-polyglot";
+
 import {
   PodrazdelenieCreate,
   PodrazdelenieEdit,
@@ -21,10 +23,15 @@ import { UprazhnenieCreate, UprazhnenieEdit, UprazhnenieIcon, UprazhnenieList } 
 import { UprazhnenieStandardCreate, UprazhnenieStandardEdit, UprazhnenieStandardIcon, UprazhnenieStandardList } from "./resources/uprazhneniya-standards";
 import { UprazhnenieResultCreate, UprazhnenieResultEdit, UprazhnenieResultIcon, UprazhnenieResultList } from "./resources/uprazhneniya-results";
 
+
+const translations = { ru, kz };
+
+
 const i18nProvider = polyglotI18nProvider(
-  () => ru,
-  "ru" // Default locale
-);
+  (locale) => translations[locale],
+  'kz',
+  [{ locale: 'ru', name: 'Русский' }, { locale: 'kz', name: 'Қазақша' }]
+)
 
 export const App = () => (
   <Admin
@@ -102,5 +109,6 @@ export const App = () => (
       icon={UprazhnenieResultIcon}
 
     />
+    {/* <LanguagePicker /> */}
   </Admin>
 );

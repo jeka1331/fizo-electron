@@ -10,7 +10,6 @@ import {
   EditButton,
   TextInput,
   // DateInput,
-  useRecordContext,
   // ReferenceArrayField,
 } from "react-admin";
 import _CategoryIcon from '@mui/icons-material/Category';
@@ -28,13 +27,9 @@ export const CategoryList = () => (
   </List>
 );
 
-const CategoryTitle = () => {
-  const record = useRecordContext();
-  return <span>Category {record ? `"${record.title}"` : ""}</span>;
-};
 
 export const CategoryEdit = () => (
-  <Edit title={<CategoryTitle />}>
+  <Edit>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />

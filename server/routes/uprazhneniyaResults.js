@@ -134,7 +134,7 @@ router.get("/vedomost", async (req, res) => {
           attributes: [
             "id",
             "name",
-            "maxResult",
+            "step",
             "valueToAddAfterMaxResult",
             "shortName",
           ], // Выбираем только необходимые атрибуты из модели Person
@@ -151,7 +151,7 @@ router.get("/vedomost", async (req, res) => {
 
       const maxResult = await UprazhnenieStandard.findOne({
         attributes: [
-          [sequelize.fn("MAX", sequelize.col("valueInt")), "maxValueInt"],
+          [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
           "id",
           "uprazhnenieId",
           "categoryId",
@@ -163,23 +163,23 @@ router.get("/vedomost", async (req, res) => {
         },
         limit: 1,
       });
-      const maxValueInt = maxResult.dataValues.maxValueInt;
+      const maxValue = maxResult.dataValues.maxValue;
 
 
       let ball;
-      if (!(uprResult.result > maxValueInt)) {
+      if (!(uprResult.result > maxValue)) {
         ball = await UprazhnenieStandard.findOne({
           where: {
             uprazhnenieId: uprResult.Uprazhnenie.id,
             categoryId: uprResult.Category.id,
-            valueInt: uprResult.result,
+            value: uprResult.result,
           },
         });
       } else {
-        const additionalResultCount = uprResult.result - maxValueInt;
+        const additionalResultCount = uprResult.result - maxValue;
         ball = {
           result:
-            maxResult.result + uprResult.Uprazhnenie.valueToAddAfterMaxResult * additionalResultCount,
+            maxResult.result + uprResult.Uprazhnenie.valueToAddAfterMaxResult * (additionalResultCount / uprResult.Uprazhnenie.step),
         };
       }
 

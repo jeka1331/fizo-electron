@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Button, useRecordContext } from "react-admin";
+import { Button, useRecordContext, useTranslate } from "react-admin";
 import ReportModal from "./VedomostDialog";
 
 export const GeneratePodrReportButton = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const translate = useTranslate(); // returns the i18nProvider.translate() method
+
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -22,7 +25,7 @@ export const GeneratePodrReportButton = (props) => {
 
   return (
     <>
-    <Button onClick={handleOpenModal} label="Generate Report" />
+    <Button onClick={handleOpenModal} label={translate('resources.podrazdeleniya.export.vedomost')} />
     <ReportModal isOpen={isModalOpen} handleClose={handleCloseModal} handleSubmit={handleSubmit} podr={record} />
     </>
   )

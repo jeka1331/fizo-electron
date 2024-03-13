@@ -1,5 +1,4 @@
 // import * as React from "react";
-import { useState } from "react";
 import {
   List,
   Datagrid,
@@ -10,16 +9,13 @@ import {
   TextField,
   EditButton,
   TextInput,
-  Button,
   // DateInput,
-  useRecordContext,
   // BooleanField,
   // ReferenceArrayField,
 } from "react-admin";
 import BookIcon from "@mui/icons-material/Book";
 import { PodrazdelenieExportPostButton } from "../components/PodrazdelenieExportPostButton";
 export const PodrazdelenieIcon = BookIcon;
-import ReportModal from "../components/VedomostDialog";
 import { GeneratePodrReportButton } from "../components/GeneratePodrReportButton";
 
 
@@ -35,19 +31,14 @@ export const PodrazdelenieList = () => {
 
       <EditButton />
       <GeneratePodrReportButton />
-      <PodrazdelenieExportPostButton label='Ведомость' />
+      {/* <PodrazdelenieExportPostButton label='Ведомость' /> */}
 
     </Datagrid>
   </List>
 )};
 
-const PodrazdelenieTitle = () => {
-  const record = useRecordContext();
-  return <span>Podrazdelenie {record ? `"${record.title}"` : ""}</span>;
-};
-
 export const PodrazdelenieEdit = () => (
-  <Edit title={<PodrazdelenieTitle />}>
+  <Edit>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
@@ -56,7 +47,7 @@ export const PodrazdelenieEdit = () => (
 );
 
 export const PodrazdelenieCreate = () => (
-  <Create title="Создание подразделения">
+  <Create>
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />

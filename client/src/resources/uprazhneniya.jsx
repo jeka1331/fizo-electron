@@ -10,7 +10,6 @@ import {
   EditButton,
   TextInput,
   // DateInput,
-  useRecordContext,
   ReferenceField,
   ReferenceInput,
   SelectInput,
@@ -34,7 +33,7 @@ export const UprazhnenieList = () => (
       <ReferenceField source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <TextField source="name" />
       </ReferenceField>
-      <NumberField source="maxResult" />
+      <NumberField source="step" />
       <NumberField source="valueToAddAfterMaxResult" />
       
       <EditButton />
@@ -43,13 +42,9 @@ export const UprazhnenieList = () => (
   </List>
 );
 
-const UprazhnenieTitle = () => {
-  const record = useRecordContext();
-  return <span>Упражнение {record.name ? `"${record.name}"` : ""}</span>;
-};
 
 export const UprazhnenieEdit = () => (
-  <Edit title={<UprazhnenieTitle />}>
+  <Edit>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
@@ -57,14 +52,14 @@ export const UprazhnenieEdit = () => (
       <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <NumberInput source="maxResult" validate={[required()]} />
+      <NumberInput source="step" validate={[required()]} />
       <NumberInput source="valueToAddAfterMaxResult" validate={[required()]} />
     </SimpleForm>
   </Edit>
 );
 
 export const UprazhnenieCreate = () => (
-  <Create title="Создание упражнений">
+  <Create>
     <SimpleForm>
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />
@@ -72,7 +67,7 @@ export const UprazhnenieCreate = () => (
       <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <NumberInput source="maxResult" validate={[required()]} />
+      <NumberInput source="step" validate={[required()]} />
       <NumberInput source="valueToAddAfterMaxResult" validate={[required()]} />
     </SimpleForm>
   </Create>

@@ -1,5 +1,4 @@
 import { TranslationMessages } from "react-admin";
-import { PodrazdelenieEdit } from "../resources/podrazdeleniya";
 
 const russianMessages: TranslationMessages = {
     ra: {
@@ -14,7 +13,7 @@ const russianMessages: TranslationMessages = {
             clone: 'Клонировать',
             confirm: 'Подтвердить',
             create: 'Создать',
-            create_item: 'Создать %{item}',
+            create_item: 'Создать сущность "%{item}"',
             delete: 'Удалить',
             edit: 'Редактировать',
             export: 'Экспортировать',
@@ -202,6 +201,7 @@ export const ru = {
         persons: {
             name: 'Сотрудник |||| Сотрудники',
             fields: {
+                id: '№',
                 uprajnenia: 'Упражнения',
                 uprajneniaDate: 'Дата приема',
                 fName: 'Имя',
@@ -209,6 +209,7 @@ export const ru = {
                 sName: 'Отчество',
                 dob: 'Дата рождения',
                 zvanieId: 'Звание',
+                categoryId: 'Категория военнослужащего',
                 podrazdelenieId: 'Подразделение',
                 comment: 'Комментарий',
                 isMale: 'Мужчина',
@@ -227,33 +228,77 @@ export const ru = {
                 name: 'Наименование',
             },
         },
+        uprazhnenieRealValuesTypes: {
+            name: "Единица измерения |||| Единицы измерений",
+            fields: {
+                id: '№',
+                name: 'Наименование',
+                shortName: 'Краткое наименование',
+
+            }
+        },
         podrazdeleniya: {
             name: 'Подразделение |||| Подразделения',
             fields: {
                 id: '№',
                 name: 'Наименование',
             },
+            export: {
+                vedomost: "Ведомость"
+            }
         },
         categories: {
             name: 'Категория военнослужащего |||| Категории военнослужащих',
             fields: {
                 id: '№',
                 name: 'Наименование',
-                from: 'От',
-                to: 'До',
-                isMale: 'Мужчина',
-                isV: 'Статус военнослужащего',
+                shortName: 'Краткое наименование',
+
             },
         },
-        customer: {
-            name: 'Customer |||| Customers',
+        uprazhneniya: {
+            name: 'Упражнение |||| Упражнения',
             fields: {
-                first_name: 'First name',
-                last_name: 'Last name',
+                id: '№',
+                name: 'Наименование',
+                shortName: 'Краткое наименование',
                 dob: 'Date of birth',
+                uprazhnenieRealValuesTypeId: 'Единица измерения',
+                step: 'Шаг после макс. результата',
+                valueToAddAfterMaxResult: 'Баллы после макс. результата'
+            }
+        },
+        uprazhnenieStandards: {
+            name: 'Норматив |||| Нормативы',
+            fields: {
+                id: '№',
+                uprazhnenieId: 'Упражнение',
+                categoryId: 'Категория военнослужащего',
+                value: 'Уложился в',
+                result: 'Количество баллов',
+
+            }
+        },
+        uprazhnenieResults: {
+            name: 'Результат |||| Результаты',
+            fields: {
+                id: '№',
+                UprazhnenieId: 'Упражнение',
+                PersonId: 'Сдающий',
+                CategoryId: 'Категория',
+                date: 'Дата',
+                result: 'Результат',
+
             }
         }
     },
+    dialogs: {
+        exportPodrazdelenie: {
+            title: "Генерация ведомости",
+            year: "Год",
+            month: "Месяц"
+        }
+    }
 };
 
 export default russianMessages;

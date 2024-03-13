@@ -51,14 +51,14 @@ const Uprazhnenie = sequelize.define("Uprazhnenie", {
   name: DataTypes.STRING,
   shortName: DataTypes.STRING,
   uprazhnenieRealValuesTypeId: UprazhnenieRealValuesType,
-  maxResult: DataTypes.INTEGER,
+  step: DataTypes.DOUBLE,
   valueToAddAfterMaxResult: DataTypes.INTEGER,
 });
 
 const UprazhnenieStandard = sequelize.define("UprazhnenieStandard", {
   uprazhnenieId: Uprazhnenie,
   categoryId: Category,
-  valueInt: DataTypes.INTEGER,
+  value: DataTypes.DOUBLE,
   result: DataTypes.INTEGER,
 });
 
@@ -72,11 +72,6 @@ const UprazhnenieSchedule = sequelize.define("UprazhnenieSchedule", {
 const UprazhnenieResult = sequelize.define("UprazhnenieResult", {
   result: DataTypes.INTEGER,
   date: DataTypes.DATE,
-  uuid: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    allowNull: false,
-  },
 });
 Person.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Person);

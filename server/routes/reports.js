@@ -524,7 +524,7 @@ router.post("/podrtest", async (req, res) => {
     //   createdAt: '2024-03-01T05:22:58.741Z',
     //   updatedAt: '2024-03-01T05:22:58.741Z'
     // }
-    console.log(req.body);
+    // console.log(req.body);
     // const podrazdelenieId = req.body['id'];
 
     // person.fioWithInitials = `${person.lName} ${person.fName[0]}.${person.sName[0]}.`
