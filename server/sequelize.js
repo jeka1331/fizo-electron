@@ -4,7 +4,7 @@ const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "mydatabase.db", // Путь к файлу базы данных SQLite
   define: {
-    timestamps: true, // Отключить создание полей createdAt и updatedAt
+    timestamps: false, // Отключить создание полей createdAt и updatedAt
   },
 });
 // Определение модели "Person"

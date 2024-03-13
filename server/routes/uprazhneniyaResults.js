@@ -15,7 +15,6 @@ const { Op } = require("sequelize");
 router.post("/", async (req, res) => {
   try {
     const newUprazhnenieResult = req.body;
-    // console.log(newUprazhnenieResult);
     const createdUprazhnenieResult = await UprazhnenieResult.create(
       newUprazhnenieResult
     );
@@ -67,7 +66,6 @@ router.get("/", async (req, res) => {
 // Чтение всех записей (Read)
 router.get("/vedomost", async (req, res) => {
   try {
-    console.log(req.query)
 
     if (!req.query.year || !req.query.month || !req.query.podrId) {
       throw new Error("Неверные параметры в get запросе");
@@ -133,28 +131,58 @@ router.get("/vedomost", async (req, res) => {
         },
         {
           model: Uprazhnenie,
-          attributes: ["id", "name", "maxResult", "valueToAddAfterMaxResult", "shortName"], // Выбираем только необходимые атрибуты из модели Person
+          attributes: [
+            "id",
+            "name",
+            "maxResult",
+            "valueToAddAfterMaxResult",
+            "shortName",
+          ], // Выбираем только необходимые атрибуты из модели Person
         },
       ],
 
       ...options,
     });
-    // console.log(JSON.stringify(uprResults));
 
     let personalResultsP = {};
     let uprNamesP = [];
-
     for (const uprResult of uprResults) {
       uprNamesP.push(uprResult.Uprazhnenie.shortName);
 
-      const ball = await UprazhnenieStandard.findOne({
+      const maxResult = await UprazhnenieStandard.findOne({
+        attributes: [
+          [sequelize.fn("MAX", sequelize.col("valueInt")), "maxValueInt"],
+          "id",
+          "uprazhnenieId",
+          "categoryId",
+          "result",
+        ],
         where: {
           uprazhnenieId: uprResult.Uprazhnenie.id,
           categoryId: uprResult.Category.id,
-          valueInt: uprResult.result,
         },
+        limit: 1,
       });
-      // console.log(uprResult.Person.zvanieId);
+      const maxValueInt = maxResult.dataValues.maxValueInt;
+
+
+      let ball;
+      if (!(uprResult.result > maxValueInt)) {
+        ball = await UprazhnenieStandard.findOne({
+          where: {
+            uprazhnenieId: uprResult.Uprazhnenie.id,
+            categoryId: uprResult.Category.id,
+            valueInt: uprResult.result,
+          },
+        });
+      } else {
+        const additionalResultCount = uprResult.result - maxValueInt;
+        ball = {
+          result:
+            maxResult.result + uprResult.Uprazhnenie.valueToAddAfterMaxResult * additionalResultCount,
+        };
+      }
+
       const zvanie = await Zvanie.findOne({
         where: {
           id: uprResult.Person.zvanieId,
@@ -186,59 +214,52 @@ router.get("/vedomost", async (req, res) => {
         });
       }
     }
-    let maxResults = 0
+    let maxResults = 0;
     for (const key in personalResultsP) {
       if (personalResultsP[key].results.length > maxResults) {
-        maxResults = personalResultsP[key].results.length
+        maxResults = personalResultsP[key].results.length;
       }
     }
-    
+
     uprNamesP = [...new Set(uprNamesP)];
-    const sumOfBallsFor5 = uprNamesP.length * 60
-    const sumOfBallsFor4 = uprNamesP.length * 40
-    const sumOfBallsFor3 = uprNamesP.length * 20
+    const sumOfBallsFor5 = uprNamesP.length * 60;
+    const sumOfBallsFor4 = uprNamesP.length * 40;
+    const sumOfBallsFor3 = uprNamesP.length * 20;
 
     for (const key in personalResultsP) {
-      let sumOfBalls = 0
+      let sumOfBalls = 0;
       const element = personalResultsP[key];
       for (const result of element.results) {
         if (!result.ball || result.ball == 0) {
-          sumOfBalls = 0
-          break
+          sumOfBalls = 0;
+          break;
         }
-        sumOfBalls = sumOfBalls + result.ball
+        sumOfBalls = sumOfBalls + result.ball;
       }
-      personalResultsP[key].sumOfBalls = sumOfBalls
+      personalResultsP[key].sumOfBalls = sumOfBalls;
       if (sumOfBalls >= sumOfBallsFor3) {
-        personalResultsP[key].totalOcenka = 3
+        personalResultsP[key].totalOcenka = 3;
       }
       if (sumOfBalls >= sumOfBallsFor4) {
-        personalResultsP[key].totalOcenka = 4
-        
+        personalResultsP[key].totalOcenka = 4;
       }
       if (sumOfBalls >= sumOfBallsFor5) {
-        personalResultsP[key].totalOcenka = 5
+        personalResultsP[key].totalOcenka = 5;
       }
       if (!personalResultsP[key].totalOcenka) {
-        personalResultsP[key].totalOcenka = 2
+        personalResultsP[key].totalOcenka = 2;
       }
-
     }
     for (const key in personalResultsP) {
-      const remainingLength = maxResults - personalResultsP[key].results.length
+      const remainingLength = maxResults - personalResultsP[key].results.length;
       for (let i = 0; i < remainingLength; i++) {
         personalResultsP[key].results.push({
           uprName: null,
           score: null,
           ball: null,
         }); // Здесь можно использовать любые значения, в зависимости от ваших потребностей
+      }
     }
-    }
-    console.log(personalResultsP['2'].results)
-
-    // console.log(personalResultsP['1']);
-    // console.log(uprNamesP.length);
-
 
 
     // if (range) {
@@ -252,10 +273,8 @@ router.get("/vedomost", async (req, res) => {
     //   );
     // }
 
-    res.status(200).json({data: personalResultsP, uprColums: uprNamesP});
+    res.status(200).json({ data: personalResultsP, uprColums: uprNamesP });
 
-    // console.log(req.query);
-    // res.status(200).json({ message: "Данные на печать отправлены" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Ошибка при чтении записей" });
@@ -266,11 +285,9 @@ router.get("/vedomost", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const uprazhnenieResultId = req.params.id;
-    // console.log(UprazhnenieResult.toString());
     const uprazhnenieResult = await UprazhnenieResult.findByPk(
       parseInt(uprazhnenieResultId)
     );
-    // console.log(uprazhnenieResult);
     if (uprazhnenieResult) {
       res.status(200).json(uprazhnenieResult);
     } else {
@@ -284,7 +301,6 @@ router.get("/:id", async (req, res) => {
 // Обновление записи (Update)
 router.put("/:id", async (req, res) => {
   try {
-    // console.log(req.params.id);
     const uprazhnenieResultId = req.params.id;
     const updatedUprazhnenieResult = req.body;
     const result = await UprazhnenieResult.update(updatedUprazhnenieResult, {

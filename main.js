@@ -101,7 +101,7 @@ app.on("before-quit", () => {
 // Функция-обработчик для события 'print-person-report'
 const printPersonReportHandler = (data) => {
   let win = new BrowserWindow({
-    show: true,
+    show: false,
     webPreferences: {
       nodeIntegration: true,
     },
