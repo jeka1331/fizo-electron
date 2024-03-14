@@ -28,8 +28,8 @@
     ]
   },
   "build": {
-    "appId": "com.example.myapp",
-    "productName": "MyApp",
+    "appId": "kz.vnv.gizo",
+    "productName": "Fiz Podgotovka",
     "directories": {
       "output": "dist"
     },
