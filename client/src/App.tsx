@@ -16,6 +16,11 @@ import {
   PodrazdelenieEdit,
   PodrazdelenieList,
 } from "./resources/podrazdeleniya";
+
+import {
+  DocumentsList,
+  DocumentsIcon
+} from "./resources/documents";
 import PersonIcon from '@mui/icons-material/Person';
 import StarIcon from '@mui/icons-material/Star';
 import GroupsIcon from '@mui/icons-material/Groups';// import { authProvider } from "./authProvider";
@@ -107,6 +112,13 @@ export const App = () => (
       edit={UprazhnenieResultEdit}
       create={UprazhnenieResultCreate}
       icon={UprazhnenieResultIcon}
+
+    />
+
+    <Resource
+      name="Documents"
+      list={DocumentsList}
+      icon={DocumentsIcon}
 
     />
     {/* <LanguagePicker /> */}

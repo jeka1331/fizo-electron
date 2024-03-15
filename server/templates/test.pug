@@ -1,7 +1,303 @@
+-
+  const data = {
+  allChecked: 40,
+  allGreat: 4,
+  allGood: 9,
+  allSatisfactory: 12,
+  allUnsatisfactory: 16,
+  allGrade: 2,
+  allTableData: {
+    personLenght: 40,
+    allPersonsChecked: 40,
+    tpt: 0,
+    totalGrade: 2,
+    resultsData: 
+      {officers: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      },
+      contracts: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      },
+      conscripts: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      },
+      women: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      }}
+    },
+  tableData: [{
+    id: 1,
+    podrazdelenie: "ВНВ",
+    personLenght: 40,
+    allPersonsChecked: 40,
+    tpt: 0,
+    totalGrade: 2,
+    resultsData: {
+      officers: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      },
+      contracts: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      },
+      conscripts: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      },
+      women: {
+        checked: 10,
+        great: 1,
+        good: 2,
+        satisfactory: 3,
+        unsatisfactory: 4,
+        grade: 2        
+      }
+    }
+
+  }]}
+
 doctype html
-html
+html(lang="en")
   head
-    title= title
+    title Ведомость за подразделение
+    style.
+      @media print {
+        .page-break { page-break-after: always; }
+      }
+      body {
+        font-family: Serif;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th, td {
+        border: 1px solid #333;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+
   body
-    h1= title
-    p= content
+    //- Ваш контент страницы
+    //- div(style="text-align: right;")
+    //-   p(style="text-align: center;display: inline-block;") 
+    //-     | Қазақстан Республикасының
+    //-     br
+    //-     | Қарулы Күштеріндегі дене шынықтыру
+    //-     br
+    //-     | дайындығы қағидаларына
+    //-     br
+    //-     | 9-қосымша
+
+    // Заголовок таблицы (по центру)
+    p(style="text-align: center; margin-top: 100px") 
+      | ___________________ үшін "Оңтүстік" ӨңҚ дене шынықтыру дайндығы бойынша нәтижелерінің
+      br
+      | (наурыз, 2024)
+      br
+      | <strong>жиынтық ведомосты</strong>
+
+
+
+    // Таблица    
+    table
+      thead
+        tr
+          th(colspan='1' rowspan='2' style='text-align: center;') 
+            | Р/c
+            br
+            | №
+
+          th(colspan='1' rowspan='2' style='text-align: center;')
+            | Әскери
+            br
+            | бөлім
+          th(colspan='1' rowspan='2' style='text-align: center;') Тізім бойынша
+          //- th(colspan='1' rowspan='2' style='text-align: center;') 
+          //-   div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Жас ерекшелігі тобы
+          th(colspan=`1`  rowspan='2' style='text-align: center;') Текстерілгені барлығы
+          th(colspan='6' style='text-align: center;') Офицерлер
+          th(colspan='6' style='text-align: center;') Келісімшарт бойынша әскери қызметшілер
+          th(colspan='6' style='text-align: center;') Мерзімді қызмет әскери қызметшілері
+          th(colspan='6' style='text-align: center;') Әскери қызметші әйелдер
+          th(colspan='1' rowspan='4' style='text-align: center;') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') ЕДШ
+          th(colspan='1' rowspan='4' style='text-align: center;') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Жалпы баға
+
+        tr
+
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Текстерілді
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') өте Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттарлық
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттанарлықсыз
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Баға
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Текстерілді
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') өте Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттарлық
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттанарлықсыз
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Баға
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Текстерілді
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') өте Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттарлық
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттанарлықсыз
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Баға
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Текстерілді
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') өте Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Жақсы
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттарлық
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Қанағаттанарлықсыз
+          th(colspan='1') 
+            div(style='writing-mode: vertical-lr;transform: scaleY(-1) scaleX(-1);margin-left: auto; margin-right: auto;') Баға
+
+      tbody
+        each row, key in data.tableData
+          tr
+            td=row.id
+            td=row.podrazdelenie
+            td=row.personLenght
+            td=row.allPersonsChecked
+
+            td=row.resultsData.officers.checked
+            td=row.resultsData.officers.great
+            td=row.resultsData.officers.good
+            td=row.resultsData.officers.satisfactory
+            td=row.resultsData.officers.unsatisfactory
+            td=row.resultsData.officers.grade
+
+            td=row.resultsData.contracts.checked
+            td=row.resultsData.contracts.great
+            td=row.resultsData.contracts.good
+            td=row.resultsData.contracts.satisfactory
+            td=row.resultsData.contracts.unsatisfactory
+            td=row.resultsData.contracts.grade
+
+            td=row.resultsData.conscripts.checked
+            td=row.resultsData.conscripts.great
+            td=row.resultsData.conscripts.good
+            td=row.resultsData.conscripts.satisfactory
+            td=row.resultsData.conscripts.unsatisfactory
+            td=row.resultsData.conscripts.grade
+
+            td=row.resultsData.women.checked
+            td=row.resultsData.women.great
+            td=row.resultsData.women.good
+            td=row.resultsData.women.satisfactory
+            td=row.resultsData.women.unsatisfactory
+            td=row.resultsData.women.grade
+
+            td=row.tpt
+            td=row.totalGrade
+          
+
+
+        tr
+          td 
+          td <b>Жиыны</b>
+          td=data.allTableData.personLenght
+          td=data.allTableData.allPersonsChecked
+
+          td=data.allTableData.resultsData.officers.checked
+          td=data.allTableData.resultsData.officers.great
+          td=data.allTableData.resultsData.officers.good
+          td=data.allTableData.resultsData.officers.satisfactory
+          td=data.allTableData.resultsData.officers.unsatisfactory
+          td=data.allTableData.resultsData.officers.grade
+
+          td=data.allTableData.resultsData.contracts.checked
+          td=data.allTableData.resultsData.contracts.great
+          td=data.allTableData.resultsData.contracts.good
+          td=data.allTableData.resultsData.contracts.satisfactory
+          td=data.allTableData.resultsData.contracts.unsatisfactory
+          td=data.allTableData.resultsData.contracts.grade
+
+          td=data.allTableData.resultsData.conscripts.checked
+          td=data.allTableData.resultsData.conscripts.great
+          td=data.allTableData.resultsData.conscripts.good
+          td=data.allTableData.resultsData.conscripts.satisfactory
+          td=data.allTableData.resultsData.conscripts.unsatisfactory
+          td=data.allTableData.resultsData.conscripts.grade
+
+          td=data.allTableData.resultsData.women.checked
+          td=data.allTableData.resultsData.women.great
+          td=data.allTableData.resultsData.women.good
+          td=data.allTableData.resultsData.women.satisfactory
+          td=data.allTableData.resultsData.women.unsatisfactory
+          td=data.allTableData.resultsData.women.grade
+
+          td=data.allTableData.tpt
+          td=data.allTableData.totalGrade
+
+
+    p(style="text-align: left; margin-bottom: 0; margin-top: 0") <u><b>#{data.allChecked}</b></u> әскери бөлім текстерілді
+    p(style="text-align: left; margin-bottom: 0; margin-top: 0") "өте жақсы" <u><b>#{data.allGreat}</b></u> әскери бөлім
+    p(style="text-align: left; margin-bottom: 0; margin-top: 0") "жақсы" <u><b>#{data.allGood}</b></u> әскери бөлім
+    p(style="text-align: left; margin-bottom: 0; margin-top: 0") "қанағаттанарлық" <u><b>#{data.allSatisfactory}</b></u> әскери бөлім
+    p(style="text-align: left; margin-bottom: 0; margin-top: 0") "қанағаттанарлықсыз" <u><b>#{data.allUnsatisfactory}</b></u> әскери бөлім
+    p(style="text-align: left; margin-bottom: 0; margin-top: 0") Жалпы баға <u><b>#{data.allGrade}</b></u>
+      
+
+

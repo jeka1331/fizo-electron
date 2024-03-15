@@ -18,6 +18,9 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
   // console.log(podr)
   const exportFunction = async (data) => {
     try {
+      if (!podr) {
+        throw new Error("Отстутствует подразделение в пропсах")
+      }
       // console.log(data)
       if (!data.year || !data.month || !podr.id) {
         throw new Error("Неправильные параметры");
@@ -84,5 +87,83 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
     </Dialog>
   );
 };
+
+const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit}) => {
+  const [year, setYear] = useState(((new Date()).getFullYear()));
+  const [month, setMonth] = useState(((new Date()).getMonth() + 1));
+  const translate = useTranslate(); // returns the i18nProvider.translate() method
+
+  // console.log(podr)
+  const exportFunction = async (data) => {
+    try {
+
+      // console.log(data)
+      if (!data.year || !data.month) {
+        throw new Error("Неправильные параметры");
+      }
+      const response = await fetch(
+        `http://localhost:3333/uprazhnenieResults/allVedomost?year=${data.year}&month=${data.month}`
+      );
+
+      if (response.ok) {
+        // console.log(await response.json());
+        let rjson = await response.json()
+        rjson = JSON.stringify(rjson)
+        const repResponce = await fetch(
+          "http://localhost:3333/reports/allVedomost",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: rjson,
+          }
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  return (
+    <Dialog open={isOpen} onClose={handleClose}>
+      <DialogTitle>{translate('dialogs.exportPodrazdelenie.title')}</DialogTitle>
+      <DialogContent>
+        <TextField
+          label={translate('dialogs.exportPodrazdelenie.year')}
+          value={year ? year : null}
+          onChange={(e) => setYear(e.target.value)}
+          type="number"
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label={translate('dialogs.exportPodrazdelenie.month')}
+          value={month ? month : null}
+          onChange={(e) => setMonth(e.target.value)}
+          type="number"
+          fullWidth
+          margin="normal"
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="secondary">
+        {translate('ra.action.cancel')}
+        </Button>
+        <Button
+          onClick={() => {
+            exportFunction({ year: year, month: month});
+          }}
+          color="primary"
+        >
+          {translate('ra.action.confirm')}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+export {AllVedomostReportModal}
 
 export default ReportModal;

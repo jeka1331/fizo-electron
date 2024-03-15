@@ -240,7 +240,7 @@ html(lang="en")
 
 `;
 
-const allVedomost = `
+const allVedomostTemplate = `
 -
   const data = {
   allChecked: 40,
@@ -831,6 +831,50 @@ router.post("/podrtest", async (req, res) => {
     // const testPersons = persons[0] ? Array(50).fill(persons[0]) : [];
     const html = compiledFunction({ data: req.body });
     ipcMain.emit("print-person-report", html);
+    res.status(200).json({ message: "Added document to schedule" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Ошибка при отправке на печать" });
+  }
+  // const compiledFunction = pug.compileFile('./server/templates/person.pug');
+  // const html = compiledFunction();
+  // ipcMain.emit('print-person-report', html)
+});
+
+router.post("/allVedomost", async (req, res) => {
+  try {
+    const compiledFunction = pug.compile(allVedomostTemplate);
+    // ----- Request body: -----
+    // {
+    //   id: 2,
+    //   uprajnenia: null,
+    //   uprajneniaDate: null,
+    //   fName: 'Евгений',
+    //   lName: 'Ольхин',
+    //   sName: 'Александрович',
+    //   dob: '2001-03-12T00:00:00.000Z',
+    //   zvanieId: 1,
+    //   podrazdelenieId: 1,
+    //   comment: 'Солдат',
+    //   num: null,
+    //   isMale: true,
+    //   isV: true,
+    //   rating: null,
+    //   isFree: false,
+    //   otpuskFrom: null,
+    //   otpuskTo: null,
+    //   createdAt: '2024-03-01T05:22:58.741Z',
+    //   updatedAt: '2024-03-01T05:22:58.741Z'
+    // }
+    // console.log(req.body);
+    // const podrazdelenieId = req.body['id'];
+
+    // person.fioWithInitials = `${person.lName} ${person.fName[0]}.${person.sName[0]}.`
+
+    // console.log(person)
+    // const testPersons = persons[0] ? Array(50).fill(persons[0]) : [];
+    const html = compiledFunction({ data: req.body });
+    ipcMain.emit("print-all-vedomost", html);
     res.status(200).json({ message: "Added document to schedule" });
   } catch (error) {
     console.log(error);
