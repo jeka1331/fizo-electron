@@ -59,6 +59,7 @@ sequelize
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
+    show:false,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -106,20 +107,6 @@ const printPersonReportHandler = (data) => {
       nodeIntegration: true,
     },
   });
-  var options = {
-    silent: false,
-    printBackground: true,
-    color: false,
-    margin: {
-      marginType: "printableArea",
-    },
-    landscape: false,
-    pagesPerSheet: 1,
-    collate: false,
-    copies: 1,
-    header: "Header of the Page",
-    footer: "Footer of the Page",
-  };
   const encodedHtmlContent = Buffer.from(data).toString("base64");
   win.loadURL(`data:text/html;charset=utf-8;base64,${encodedHtmlContent}`);
   win.webContents.print({
@@ -148,4 +135,30 @@ const printPersonReportHandler = (data) => {
 
 // Регистрация обработчика события 'print-person-report'
 ipcMain.on("print-person-report", printPersonReportHandler);
+
+
+
+// Функция-обработчик для события 'print-person-report'
+const printAllVedomostHandler = (data) => {
+  let win = new BrowserWindow({
+    show: false,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+  const encodedHtmlContent = Buffer.from(data).toString("base64");
+  win.loadURL(`data:text/html;charset=utf-8;base64,${encodedHtmlContent}`);
+  win.webContents.print({
+    silent: false,
+    printBackground: false,
+    pageSize: 'A4',
+    marginsType: 0,
+    landscape: true,
+    pagesPerSheet: 1,
+    copies: 1,
+  });
+};
+
+// Регистрация обработчика события 'print-person-report'
+ipcMain.on("print-all-vedomost", printAllVedomostHandler);
 

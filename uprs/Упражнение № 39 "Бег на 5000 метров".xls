@@ -1,0 +1,1349 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>test</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table><tbody><tr><td colspan="2" rowspan="2"><p>
+Баллы свыше 60 –1 секунда 2 балла</p>
+</td><td colspan="13"><p>
+Военнослужащие-мужчины</p>
+</td></tr><tr><td colspan="2"><p>
+1-я возрастная группа, курсанты 3-го курса и старше</p>
+</td><td colspan="3"><p>
+2-я возрастная группа, курсанты и кадеты 2-го курса</p>
+</td><td colspan="2"><p>
+3возрастная группа</p>
+</td><td colspan="2"><p>
+4возрастная группа</p>
+</td><td colspan="2"><p>
+5возрастная группа</p>
+</td><td colspan="2"><p>
+Курсанты, кадеты и военнослужащие, проходящие воинскую службу по призыву после 6 месяцев службы</p>
+</td></tr><tr><td colspan="2"><p>
+60</p>
+</td><td colspan="2"><p>
+22.00</p>
+</td><td colspan="3"><p>
+23.00</p>
+</td><td colspan="2"><p>
+26.00</p>
+</td><td colspan="2"><p>
+27.00</p>
+</td><td colspan="2"><p>
+28.00</p>
+</td><td colspan="2"><p>
+26.00</p>
+</td></tr><tr><td colspan="2"><p>
+59</p>
+</td><td colspan="2"><p>
+22.03</p>
+</td><td colspan="3"><p>
+23.03</p>
+</td><td colspan="2"><p>
+26.03</p>
+</td><td colspan="2"><p>
+27.03</p>
+</td><td colspan="2"><p>
+28.03</p>
+</td><td colspan="2"><p>
+26.03</p>
+</td></tr><tr><td colspan="2"><p>
+58</p>
+</td><td colspan="2"><p>
+22.06</p>
+</td><td colspan="3"><p>
+23.06</p>
+</td><td colspan="2"><p>
+26.06</p>
+</td><td colspan="2"><p>
+27.06</p>
+</td><td colspan="2"><p>
+28.06</p>
+</td><td colspan="2"><p>
+26.06</p>
+</td></tr><tr><td colspan="2"><p>
+57</p>
+</td><td colspan="2"><p>
+22.09</p>
+</td><td colspan="3"><p>
+23.09</p>
+</td><td colspan="2"><p>
+26.09</p>
+</td><td colspan="2"><p>
+27.09</p>
+</td><td colspan="2"><p>
+28.09</p>
+</td><td colspan="2"><p>
+26.09</p>
+</td></tr><tr><td colspan="2"><p>
+56</p>
+</td><td colspan="2"><p>
+22.12</p>
+</td><td colspan="3"><p>
+23.12</p>
+</td><td colspan="2"><p>
+26.12</p>
+</td><td colspan="2"><p>
+27.12</p>
+</td><td colspan="2"><p>
+28.12</p>
+</td><td colspan="2"><p>
+26.12</p>
+</td></tr><tr><td colspan="2"><p>
+55</p>
+</td><td colspan="2"><p>
+22.15</p>
+</td><td colspan="3"><p>
+23.15</p>
+</td><td colspan="2"><p>
+26.15</p>
+</td><td colspan="2"><p>
+27.15</p>
+</td><td colspan="2"><p>
+28.15</p>
+</td><td colspan="2"><p>
+26.15</p>
+</td></tr><tr><td colspan="2"><p>
+54</p>
+</td><td colspan="2"><p>
+22.18</p>
+</td><td colspan="3"><p>
+23.18</p>
+</td><td colspan="2"><p>
+26.18</p>
+</td><td colspan="2"><p>
+27.18</p>
+</td><td colspan="2"><p>
+28.18</p>
+</td><td colspan="2"><p>
+26.18</p>
+</td></tr><tr><td colspan="2"><p>
+53</p>
+</td><td colspan="2"><p>
+22.21</p>
+</td><td colspan="3"><p>
+23.21</p>
+</td><td colspan="2"><p>
+26.21</p>
+</td><td colspan="2"><p>
+27.21</p>
+</td><td colspan="2"><p>
+28.21</p>
+</td><td colspan="2"><p>
+26.21</p>
+</td></tr><tr><td colspan="2"><p>
+52</p>
+</td><td colspan="2"><p>
+22.24</p>
+</td><td colspan="3"><p>
+23.24</p>
+</td><td colspan="2"><p>
+26.24</p>
+</td><td colspan="2"><p>
+27.24</p>
+</td><td colspan="2"><p>
+28.24</p>
+</td><td colspan="2"><p>
+26.24</p>
+</td></tr><tr><td colspan="2"><p>
+51</p>
+</td><td colspan="2"><p>
+22.27</p>
+</td><td colspan="3"><p>
+23.27</p>
+</td><td colspan="2"><p>
+26.27</p>
+</td><td colspan="2"><p>
+27.27</p>
+</td><td colspan="2"><p>
+28.27</p>
+</td><td colspan="2"><p>
+26.27</p>
+</td></tr><tr><td colspan="2"><p>
+50</p>
+</td><td colspan="2"><p>
+22.30</p>
+</td><td colspan="3"><p>
+23.30</p>
+</td><td colspan="2"><p>
+26.30</p>
+</td><td colspan="2"><p>
+27.30</p>
+</td><td colspan="2"><p>
+28.30</p>
+</td><td colspan="2"><p>
+26.30</p>
+</td></tr><tr><td colspan="2"><p>
+49</p>
+</td><td colspan="2"><p>
+22.33</p>
+</td><td colspan="3"><p>
+23.33</p>
+</td><td colspan="2"><p>
+26.33</p>
+</td><td colspan="2"><p>
+27.33</p>
+</td><td colspan="2"><p>
+28.33</p>
+</td><td colspan="2"><p>
+26.33</p>
+</td></tr><tr><td colspan="2"><p>
+48</p>
+</td><td colspan="2"><p>
+22.36</p>
+</td><td colspan="3"><p>
+23.36</p>
+</td><td colspan="2"><p>
+26.36</p>
+</td><td colspan="2"><p>
+27.36</p>
+</td><td colspan="2"><p>
+28.36</p>
+</td><td colspan="2"><p>
+26.36</p>
+</td></tr><tr><td colspan="2"><p>
+47</p>
+</td><td colspan="2"><p>
+22.39</p>
+</td><td colspan="3"><p>
+23.39</p>
+</td><td colspan="2"><p>
+26.39</p>
+</td><td colspan="2"><p>
+27.39</p>
+</td><td colspan="2"><p>
+28.39</p>
+</td><td colspan="2"><p>
+26.39</p>
+</td></tr><tr><td colspan="2"><p>
+46</p>
+</td><td colspan="2"><p>
+22.42</p>
+</td><td colspan="3"><p>
+23.42</p>
+</td><td colspan="2"><p>
+26.42</p>
+</td><td colspan="2"><p>
+27.42</p>
+</td><td colspan="2"><p>
+28.42</p>
+</td><td colspan="2"><p>
+26.42</p>
+</td></tr><tr><td colspan="2"><p>
+45</p>
+</td><td colspan="2"><p>
+22.45</p>
+</td><td colspan="3"><p>
+23.45</p>
+</td><td colspan="2"><p>
+26.45</p>
+</td><td colspan="2"><p>
+27.45</p>
+</td><td colspan="2"><p>
+28.45</p>
+</td><td colspan="2"><p>
+26.45</p>
+</td></tr><tr><td colspan="2"><p>
+44</p>
+</td><td colspan="2"><p>
+22.48</p>
+</td><td colspan="3"><p>
+23.48</p>
+</td><td colspan="2"><p>
+26.48</p>
+</td><td colspan="2"><p>
+27.48</p>
+</td><td colspan="2"><p>
+28.48</p>
+</td><td colspan="2"><p>
+26.48</p>
+</td></tr><tr><td colspan="2"><p>
+43</p>
+</td><td colspan="2"><p>
+22.51</p>
+</td><td colspan="3"><p>
+23.51</p>
+</td><td colspan="2"><p>
+26.51</p>
+</td><td colspan="2"><p>
+27.51</p>
+</td><td colspan="2"><p>
+28.51</p>
+</td><td colspan="2"><p>
+26.51</p>
+</td></tr><tr><td colspan="2"><p>
+42</p>
+</td><td colspan="2"><p>
+22.54</p>
+</td><td colspan="3"><p>
+23.54</p>
+</td><td colspan="2"><p>
+26.54</p>
+</td><td colspan="2"><p>
+27.54</p>
+</td><td colspan="2"><p>
+28.54</p>
+</td><td colspan="2"><p>
+26.54</p>
+</td></tr><tr><td colspan="2"><p>
+41</p>
+</td><td colspan="2"><p>
+22.57</p>
+</td><td colspan="3"><p>
+23.57</p>
+</td><td colspan="2"><p>
+26.57</p>
+</td><td colspan="2"><p>
+27.57</p>
+</td><td colspan="2"><p>
+28.57</p>
+</td><td colspan="2"><p>
+26.57</p>
+</td></tr><tr><td colspan="2"><p>
+40</p>
+</td><td colspan="2"><p>
+23.00</p>
+</td><td colspan="3"><p>
+24.00</p>
+</td><td colspan="2"><p>
+27.00</p>
+</td><td colspan="2"><p>
+28.00</p>
+</td><td colspan="2"><p>
+29.00</p>
+</td><td colspan="2"><p>
+27.00</p>
+</td></tr><tr><td colspan="2"><p>
+39</p>
+</td><td colspan="2"><p>
+23.03</p>
+</td><td colspan="3"><p>
+24.03</p>
+</td><td colspan="2"><p>
+27.03</p>
+</td><td colspan="2"><p>
+28.03</p>
+</td><td colspan="2"><p>
+29.03</p>
+</td><td colspan="2"><p>
+27.03</p>
+</td></tr><tr><td colspan="2"><p>
+38</p>
+</td><td colspan="2"><p>
+23.06</p>
+</td><td colspan="3"><p>
+24.06</p>
+</td><td colspan="2"><p>
+27.06</p>
+</td><td colspan="2"><p>
+28.06</p>
+</td><td colspan="2"><p>
+29.06</p>
+</td><td colspan="2"><p>
+27.06</p>
+</td></tr><tr><td colspan="2"><p>
+37</p>
+</td><td colspan="2"><p>
+23.09</p>
+</td><td colspan="3"><p>
+24.09</p>
+</td><td colspan="2"><p>
+27.09</p>
+</td><td colspan="2"><p>
+28.09</p>
+</td><td colspan="2"><p>
+29.09</p>
+</td><td colspan="2"><p>
+27.09</p>
+</td></tr><tr><td colspan="2"><p>
+36</p>
+</td><td colspan="2"><p>
+23.12</p>
+</td><td colspan="3"><p>
+24.12</p>
+</td><td colspan="2"><p>
+27.12</p>
+</td><td colspan="2"><p>
+28.12</p>
+</td><td colspan="2"><p>
+29.12</p>
+</td><td colspan="2"><p>
+27.12</p>
+</td></tr><tr><td colspan="2"><p>
+35</p>
+</td><td colspan="2"><p>
+23.15</p>
+</td><td colspan="3"><p>
+24.15</p>
+</td><td colspan="2"><p>
+27.15</p>
+</td><td colspan="2"><p>
+28.15</p>
+</td><td colspan="2"><p>
+29.15</p>
+</td><td colspan="2"><p>
+27.15</p>
+</td></tr><tr><td colspan="2"><p>
+34</p>
+</td><td colspan="2"><p>
+23.18</p>
+</td><td colspan="3"><p>
+24.18</p>
+</td><td colspan="2"><p>
+27.18</p>
+</td><td colspan="2"><p>
+28.18</p>
+</td><td colspan="2"><p>
+29.18</p>
+</td><td colspan="2"><p>
+27.18</p>
+</td></tr><tr><td colspan="2"><p>
+33</p>
+</td><td colspan="2"><p>
+23.21</p>
+</td><td colspan="3"><p>
+24.21</p>
+</td><td colspan="2"><p>
+27.21</p>
+</td><td colspan="2"><p>
+28.21</p>
+</td><td colspan="2"><p>
+29.21</p>
+</td><td colspan="2"><p>
+27.21</p>
+</td></tr><tr><td colspan="2"><p>
+32</p>
+</td><td colspan="2"><p>
+23.24</p>
+</td><td colspan="3"><p>
+24.24</p>
+</td><td colspan="2"><p>
+27.24</p>
+</td><td colspan="2"><p>
+28.24</p>
+</td><td colspan="2"><p>
+29.24</p>
+</td><td colspan="2"><p>
+27.24</p>
+</td></tr><tr><td colspan="2"><p>
+31</p>
+</td><td colspan="2"><p>
+23.27</p>
+</td><td colspan="3"><p>
+24.27</p>
+</td><td colspan="2"><p>
+27.27</p>
+</td><td colspan="2"><p>
+28.27</p>
+</td><td colspan="2"><p>
+29.27</p>
+</td><td colspan="2"><p>
+27.27</p>
+</td></tr><tr><td colspan="2"><p>
+30</p>
+</td><td colspan="2"><p>
+23.30</p>
+</td><td colspan="3"><p>
+24.30</p>
+</td><td colspan="2"><p>
+27.30</p>
+</td><td colspan="2"><p>
+28.30</p>
+</td><td colspan="2"><p>
+29.30</p>
+</td><td colspan="2"><p>
+27.30</p>
+</td></tr><tr><td colspan="2"><p>
+29</p>
+</td><td colspan="2"><p>
+23.33</p>
+</td><td colspan="3"><p>
+24.33</p>
+</td><td colspan="2"><p>
+27.33</p>
+</td><td colspan="2"><p>
+28.33</p>
+</td><td colspan="2"><p>
+29.33</p>
+</td><td colspan="2"><p>
+27.33</p>
+</td></tr><tr><td colspan="2"><p>
+28</p>
+</td><td colspan="2"><p>
+23.36</p>
+</td><td colspan="3"><p>
+24.36</p>
+</td><td colspan="2"><p>
+27.36</p>
+</td><td colspan="2"><p>
+28.36</p>
+</td><td colspan="2"><p>
+29.36</p>
+</td><td colspan="2"><p>
+27.36</p>
+</td></tr><tr><td colspan="2"><p>
+27</p>
+</td><td colspan="2"><p>
+23.39</p>
+</td><td colspan="3"><p>
+24.39</p>
+</td><td colspan="2"><p>
+27.39</p>
+</td><td colspan="2"><p>
+28.39</p>
+</td><td colspan="2"><p>
+29.39</p>
+</td><td colspan="2"><p>
+27.39</p>
+</td></tr><tr><td colspan="2"><p>
+26</p>
+</td><td colspan="2"><p>
+23.42</p>
+</td><td colspan="3"><p>
+24.42</p>
+</td><td colspan="2"><p>
+27.42</p>
+</td><td colspan="2"><p>
+28.42</p>
+</td><td colspan="2"><p>
+29.42</p>
+</td><td colspan="2"><p>
+27.42</p>
+</td></tr><tr><td colspan="2"><p>
+25</p>
+</td><td colspan="2"><p>
+23.45</p>
+</td><td colspan="3"><p>
+24.45</p>
+</td><td colspan="2"><p>
+27.45</p>
+</td><td colspan="2"><p>
+28.45</p>
+</td><td colspan="2"><p>
+29.45</p>
+</td><td colspan="2"><p>
+27.45</p>
+</td></tr><tr><td colspan="2"><p>
+24</p>
+</td><td colspan="2"><p>
+23.48</p>
+</td><td colspan="3"><p>
+24.48</p>
+</td><td colspan="2"><p>
+27.48</p>
+</td><td colspan="2"><p>
+28.48</p>
+</td><td colspan="2"><p>
+29.48</p>
+</td><td colspan="2"><p>
+27.48</p>
+</td></tr><tr><td colspan="2"><p>
+23</p>
+</td><td colspan="2"><p>
+23.51</p>
+</td><td colspan="3"><p>
+24.51</p>
+</td><td colspan="2"><p>
+27.51</p>
+</td><td colspan="2"><p>
+28.51</p>
+</td><td colspan="2"><p>
+29.51</p>
+</td><td colspan="2"><p>
+27.51</p>
+</td></tr><tr><td colspan="2"><p>
+22</p>
+</td><td colspan="2"><p>
+23.54</p>
+</td><td colspan="3"><p>
+24.54</p>
+</td><td colspan="2"><p>
+27.54</p>
+</td><td colspan="2"><p>
+28.54</p>
+</td><td colspan="2"><p>
+29.54</p>
+</td><td colspan="2"><p>
+27.54</p>
+</td></tr><tr><td colspan="2"><p>
+21</p>
+</td><td colspan="2"><p>
+23.57</p>
+</td><td colspan="3"><p>
+24.57</p>
+</td><td colspan="2"><p>
+27.57</p>
+</td><td colspan="2"><p>
+28.57</p>
+</td><td colspan="2"><p>
+29.57</p>
+</td><td colspan="2"><p>
+27.57</p>
+</td></tr><tr><td colspan="2"><p>
+20</p>
+</td><td colspan="2"><p>
+24.00</p>
+</td><td colspan="3"><p>
+25.00</p>
+</td><td colspan="2"><p>
+28.00</p>
+</td><td colspan="2"><p>
+29.00</p>
+</td><td colspan="2"><p>
+30.00</p>
+</td><td colspan="2"><p>
+28.00</p>
+</td></tr><tr><td rowspan="2"><p>
+Баллы свыше 60 –1 секунда 2 балла</p>
+</td><td colspan="14"><p>
+Военнослужащие - специалисты физической подготовки и спорта</p>
+</td></tr><tr><td colspan="2"><p>
+1-я возрастная группа</p>
+</td><td colspan="2"><p>
+2-я возрастная группа</p>
+</td><td><p>
+3-я возрастная группа</p>
+</td><td colspan="2"><p>
+4- я возрастная группа</p>
+</td><td colspan="2"><p>
+5- я возрастная группа</p>
+</td><td colspan="2"><p>
+6- я возрастная группа</p>
+</td><td colspan="2"><p>
+7- я возрастная группа</p>
+</td><td><p>
+8- я возрастная группа</p>
+</td></tr><tr><td><p>
+60</p>
+</td><td colspan="2"><p>
+21.30</p>
+</td><td colspan="2"><p>
+22.30</p>
+</td><td><p>
+23.30</p>
+</td><td colspan="2"><p>
+24.30</p>
+</td><td colspan="2"><p>
+25.30</p>
+</td><td colspan="2"><p>
+26.30</p>
+</td><td colspan="2"><p>
+27.30</p>
+</td><td><p>
+28.30</p>
+</td></tr><tr><td><p>
+59</p>
+</td><td colspan="2"><p>
+21.33</p>
+</td><td colspan="2"><p>
+22.33</p>
+</td><td><p>
+23.33</p>
+</td><td colspan="2"><p>
+24.33</p>
+</td><td colspan="2"><p>
+25.33</p>
+</td><td colspan="2"><p>
+26.33</p>
+</td><td colspan="2"><p>
+27.33</p>
+</td><td><p>
+28.33</p>
+</td></tr><tr><td><p>
+58</p>
+</td><td colspan="2"><p>
+21.36</p>
+</td><td colspan="2"><p>
+22.36</p>
+</td><td><p>
+23.36</p>
+</td><td colspan="2"><p>
+24.36</p>
+</td><td colspan="2"><p>
+25.36</p>
+</td><td colspan="2"><p>
+26.36</p>
+</td><td colspan="2"><p>
+27.36</p>
+</td><td><p>
+28.36</p>
+</td></tr><tr><td><p>
+57</p>
+</td><td colspan="2"><p>
+21.39</p>
+</td><td colspan="2"><p>
+22.39</p>
+</td><td><p>
+23.39</p>
+</td><td colspan="2"><p>
+24.39</p>
+</td><td colspan="2"><p>
+25.39</p>
+</td><td colspan="2"><p>
+26.39</p>
+</td><td colspan="2"><p>
+27.39</p>
+</td><td><p>
+28.39</p>
+</td></tr><tr><td><p>
+56</p>
+</td><td colspan="2"><p>
+21.42</p>
+</td><td colspan="2"><p>
+22.42</p>
+</td><td><p>
+23.42</p>
+</td><td colspan="2"><p>
+24.42</p>
+</td><td colspan="2"><p>
+25.42</p>
+</td><td colspan="2"><p>
+26.42</p>
+</td><td colspan="2"><p>
+27.42</p>
+</td><td><p>
+28.42</p>
+</td></tr><tr><td><p>
+55</p>
+</td><td colspan="2"><p>
+21.45</p>
+</td><td colspan="2"><p>
+22.45</p>
+</td><td><p>
+23.45</p>
+</td><td colspan="2"><p>
+24.45</p>
+</td><td colspan="2"><p>
+25.45</p>
+</td><td colspan="2"><p>
+26.45</p>
+</td><td colspan="2"><p>
+27.45</p>
+</td><td><p>
+28.45</p>
+</td></tr><tr><td><p>
+54</p>
+</td><td colspan="2"><p>
+21.48</p>
+</td><td colspan="2"><p>
+22.48</p>
+</td><td><p>
+23.48</p>
+</td><td colspan="2"><p>
+24.48</p>
+</td><td colspan="2"><p>
+25.48</p>
+</td><td colspan="2"><p>
+26.48</p>
+</td><td colspan="2"><p>
+27.48</p>
+</td><td><p>
+28.48</p>
+</td></tr><tr><td><p>
+53</p>
+</td><td colspan="2"><p>
+21.51</p>
+</td><td colspan="2"><p>
+22.51</p>
+</td><td><p>
+23.51</p>
+</td><td colspan="2"><p>
+24.51</p>
+</td><td colspan="2"><p>
+25.51</p>
+</td><td colspan="2"><p>
+26.51</p>
+</td><td colspan="2"><p>
+27.51</p>
+</td><td><p>
+28.51</p>
+</td></tr><tr><td><p>
+52</p>
+</td><td colspan="2"><p>
+21.54</p>
+</td><td colspan="2"><p>
+22.54</p>
+</td><td><p>
+23.54</p>
+</td><td colspan="2"><p>
+24.54</p>
+</td><td colspan="2"><p>
+25.54</p>
+</td><td colspan="2"><p>
+26.54</p>
+</td><td colspan="2"><p>
+27.54</p>
+</td><td><p>
+28.54</p>
+</td></tr><tr><td><p>
+51</p>
+</td><td colspan="2"><p>
+21.57</p>
+</td><td colspan="2"><p>
+22.57</p>
+</td><td><p>
+23.57</p>
+</td><td colspan="2"><p>
+24.57</p>
+</td><td colspan="2"><p>
+25.57</p>
+</td><td colspan="2"><p>
+26.57</p>
+</td><td colspan="2"><p>
+27.57</p>
+</td><td><p>
+28.57</p>
+</td></tr><tr><td><p>
+50</p>
+</td><td colspan="2"><p>
+22.00</p>
+</td><td colspan="2"><p>
+23.00</p>
+</td><td><p>
+24.00</p>
+</td><td colspan="2"><p>
+25.00</p>
+</td><td colspan="2"><p>
+26.00</p>
+</td><td colspan="2"><p>
+27.00</p>
+</td><td colspan="2"><p>
+28.00</p>
+</td><td><p>
+29.00</p>
+</td></tr><tr><td><p>
+49</p>
+</td><td colspan="2"><p>
+22.03</p>
+</td><td colspan="2"><p>
+23.03</p>
+</td><td><p>
+24.03</p>
+</td><td colspan="2"><p>
+25.03</p>
+</td><td colspan="2"><p>
+26.03</p>
+</td><td colspan="2"><p>
+27.03</p>
+</td><td colspan="2"><p>
+28.03</p>
+</td><td><p>
+29.03</p>
+</td></tr><tr><td><p>
+48</p>
+</td><td colspan="2"><p>
+22.06</p>
+</td><td colspan="2"><p>
+23.06</p>
+</td><td><p>
+24.06</p>
+</td><td colspan="2"><p>
+25.06</p>
+</td><td colspan="2"><p>
+26.06</p>
+</td><td colspan="2"><p>
+27.06</p>
+</td><td colspan="2"><p>
+28.06</p>
+</td><td><p>
+29.06</p>
+</td></tr><tr><td><p>
+47</p>
+</td><td colspan="2"><p>
+22.09</p>
+</td><td colspan="2"><p>
+23.09</p>
+</td><td><p>
+24.09</p>
+</td><td colspan="2"><p>
+25.09</p>
+</td><td colspan="2"><p>
+26.09</p>
+</td><td colspan="2"><p>
+27.09</p>
+</td><td colspan="2"><p>
+28.09</p>
+</td><td><p>
+29.09</p>
+</td></tr><tr><td><p>
+46</p>
+</td><td colspan="2"><p>
+22.12</p>
+</td><td colspan="2"><p>
+23.12</p>
+</td><td><p>
+24.12</p>
+</td><td colspan="2"><p>
+25.12</p>
+</td><td colspan="2"><p>
+26.12</p>
+</td><td colspan="2"><p>
+27.12</p>
+</td><td colspan="2"><p>
+28.12</p>
+</td><td><p>
+29.12</p>
+</td></tr><tr><td><p>
+45</p>
+</td><td colspan="2"><p>
+22.15</p>
+</td><td colspan="2"><p>
+23.15</p>
+</td><td><p>
+24.15</p>
+</td><td colspan="2"><p>
+25.15</p>
+</td><td colspan="2"><p>
+26.15</p>
+</td><td colspan="2"><p>
+27.15</p>
+</td><td colspan="2"><p>
+28.15</p>
+</td><td><p>
+29.15</p>
+</td></tr><tr><td><p>
+44</p>
+</td><td colspan="2"><p>
+22.18</p>
+</td><td colspan="2"><p>
+23.18</p>
+</td><td><p>
+24.18</p>
+</td><td colspan="2"><p>
+25.18</p>
+</td><td colspan="2"><p>
+26.18</p>
+</td><td colspan="2"><p>
+27.18</p>
+</td><td colspan="2"><p>
+28.18</p>
+</td><td><p>
+29.18</p>
+</td></tr><tr><td><p>
+43</p>
+</td><td colspan="2"><p>
+22.21</p>
+</td><td colspan="2"><p>
+23.21</p>
+</td><td><p>
+24.21</p>
+</td><td colspan="2"><p>
+25.21</p>
+</td><td colspan="2"><p>
+26.21</p>
+</td><td colspan="2"><p>
+27.21</p>
+</td><td colspan="2"><p>
+28.21</p>
+</td><td><p>
+29.21</p>
+</td></tr><tr><td><p>
+42</p>
+</td><td colspan="2"><p>
+22.24</p>
+</td><td colspan="2"><p>
+23.24</p>
+</td><td><p>
+24.24</p>
+</td><td colspan="2"><p>
+25.24</p>
+</td><td colspan="2"><p>
+26.24</p>
+</td><td colspan="2"><p>
+27.24</p>
+</td><td colspan="2"><p>
+28.24</p>
+</td><td><p>
+29.24</p>
+</td></tr><tr><td><p>
+41</p>
+</td><td colspan="2"><p>
+22.27</p>
+</td><td colspan="2"><p>
+23.27</p>
+</td><td><p>
+24.27</p>
+</td><td colspan="2"><p>
+25.27</p>
+</td><td colspan="2"><p>
+26.27</p>
+</td><td colspan="2"><p>
+27.27</p>
+</td><td colspan="2"><p>
+28.27</p>
+</td><td><p>
+29.27</p>
+</td></tr><tr><td><p>
+40</p>
+</td><td colspan="2"><p>
+22.30</p>
+</td><td colspan="2"><p>
+23.30</p>
+</td><td><p>
+24.30</p>
+</td><td colspan="2"><p>
+25.30</p>
+</td><td colspan="2"><p>
+26.30</p>
+</td><td colspan="2"><p>
+27.30</p>
+</td><td colspan="2"><p>
+28.30</p>
+</td><td><p>
+29.30</p>
+</td></tr><tr><td><p>
+39</p>
+</td><td colspan="2"><p>
+22.33</p>
+</td><td colspan="2"><p>
+23.33</p>
+</td><td><p>
+24.33</p>
+</td><td colspan="2"><p>
+25.33</p>
+</td><td colspan="2"><p>
+26.33</p>
+</td><td colspan="2"><p>
+27.33</p>
+</td><td colspan="2"><p>
+28.33</p>
+</td><td><p>
+29.33</p>
+</td></tr><tr><td><p>
+38</p>
+</td><td colspan="2"><p>
+22.36</p>
+</td><td colspan="2"><p>
+23.36</p>
+</td><td><p>
+24.36</p>
+</td><td colspan="2"><p>
+25.36</p>
+</td><td colspan="2"><p>
+26.36</p>
+</td><td colspan="2"><p>
+27.36</p>
+</td><td colspan="2"><p>
+28.36</p>
+</td><td><p>
+29.36</p>
+</td></tr><tr><td><p>
+37</p>
+</td><td colspan="2"><p>
+22.39</p>
+</td><td colspan="2"><p>
+23.39</p>
+</td><td><p>
+24.39</p>
+</td><td colspan="2"><p>
+25.39</p>
+</td><td colspan="2"><p>
+26.39</p>
+</td><td colspan="2"><p>
+27.39</p>
+</td><td colspan="2"><p>
+28.39</p>
+</td><td><p>
+29.39</p>
+</td></tr><tr><td><p>
+36</p>
+</td><td colspan="2"><p>
+22.42</p>
+</td><td colspan="2"><p>
+23.42</p>
+</td><td><p>
+24.42</p>
+</td><td colspan="2"><p>
+25.42</p>
+</td><td colspan="2"><p>
+26.42</p>
+</td><td colspan="2"><p>
+27.42</p>
+</td><td colspan="2"><p>
+28.42</p>
+</td><td><p>
+29.42</p>
+</td></tr><tr><td><p>
+35</p>
+</td><td colspan="2"><p>
+22.45</p>
+</td><td colspan="2"><p>
+23.45</p>
+</td><td><p>
+24.45</p>
+</td><td colspan="2"><p>
+25.45</p>
+</td><td colspan="2"><p>
+26.45</p>
+</td><td colspan="2"><p>
+27.45</p>
+</td><td colspan="2"><p>
+28.45</p>
+</td><td><p>
+29.45</p>
+</td></tr><tr><td><p>
+34</p>
+</td><td colspan="2"><p>
+22.48</p>
+</td><td colspan="2"><p>
+23.48</p>
+</td><td><p>
+24.48</p>
+</td><td colspan="2"><p>
+25.48</p>
+</td><td colspan="2"><p>
+26.48</p>
+</td><td colspan="2"><p>
+27.48</p>
+</td><td colspan="2"><p>
+28.48</p>
+</td><td><p>
+29.48</p>
+</td></tr><tr><td><p>
+33</p>
+</td><td colspan="2"><p>
+22.51</p>
+</td><td colspan="2"><p>
+23.51</p>
+</td><td><p>
+24.51</p>
+</td><td colspan="2"><p>
+25.51</p>
+</td><td colspan="2"><p>
+26.51</p>
+</td><td colspan="2"><p>
+27.51</p>
+</td><td colspan="2"><p>
+28.51</p>
+</td><td><p>
+29.51</p>
+</td></tr><tr><td><p>
+32</p>
+</td><td colspan="2"><p>
+22.54</p>
+</td><td colspan="2"><p>
+23.54</p>
+</td><td><p>
+24.54</p>
+</td><td colspan="2"><p>
+25.54</p>
+</td><td colspan="2"><p>
+26.54</p>
+</td><td colspan="2"><p>
+27.54</p>
+</td><td colspan="2"><p>
+28.54</p>
+</td><td><p>
+29.54</p>
+</td></tr><tr><td><p>
+31</p>
+</td><td colspan="2"><p>
+22.57</p>
+</td><td colspan="2"><p>
+23.57</p>
+</td><td><p>
+24.57</p>
+</td><td colspan="2"><p>
+25.57</p>
+</td><td colspan="2"><p>
+26.57</p>
+</td><td colspan="2"><p>
+27.57</p>
+</td><td colspan="2"><p>
+28.57</p>
+</td><td><p>
+29.57</p>
+</td></tr><tr><td><p>
+30</p>
+</td><td colspan="2"><p>
+23.00</p>
+</td><td colspan="2"><p>
+24.00</p>
+</td><td><p>
+25.00</p>
+</td><td colspan="2"><p>
+26.00</p>
+</td><td colspan="2"><p>
+27.00</p>
+</td><td colspan="2"><p>
+28.00</p>
+</td><td colspan="2"><p>
+29.00</p>
+</td><td><p>
+30.00</p>
+</td></tr><tr><td><p>
+29</p>
+</td><td colspan="2"><p>
+23.03</p>
+</td><td colspan="2"><p>
+24.03</p>
+</td><td><p>
+25.03</p>
+</td><td colspan="2"><p>
+26.03</p>
+</td><td colspan="2"><p>
+27.03</p>
+</td><td colspan="2"><p>
+28.03</p>
+</td><td colspan="2"><p>
+29.03</p>
+</td><td><p>
+30.03</p>
+</td></tr><tr><td><p>
+28</p>
+</td><td colspan="2"><p>
+23.06</p>
+</td><td colspan="2"><p>
+24.06</p>
+</td><td><p>
+25.06</p>
+</td><td colspan="2"><p>
+26.06</p>
+</td><td colspan="2"><p>
+27.06</p>
+</td><td colspan="2"><p>
+28.06</p>
+</td><td colspan="2"><p>
+29.06</p>
+</td><td><p>
+30.06</p>
+</td></tr><tr><td><p>
+27</p>
+</td><td colspan="2"><p>
+23.09</p>
+</td><td colspan="2"><p>
+24.09</p>
+</td><td><p>
+25.09</p>
+</td><td colspan="2"><p>
+26.09</p>
+</td><td colspan="2"><p>
+27.09</p>
+</td><td colspan="2"><p>
+28.09</p>
+</td><td colspan="2"><p>
+29.09</p>
+</td><td><p>
+30.09</p>
+</td></tr><tr><td><p>
+26</p>
+</td><td colspan="2"><p>
+23.12</p>
+</td><td colspan="2"><p>
+24.12</p>
+</td><td><p>
+25.12</p>
+</td><td colspan="2"><p>
+26.12</p>
+</td><td colspan="2"><p>
+27.12</p>
+</td><td colspan="2"><p>
+28.12</p>
+</td><td colspan="2"><p>
+29.12</p>
+</td><td><p>
+30.12</p>
+</td></tr><tr><td><p>
+25</p>
+</td><td colspan="2"><p>
+23.15</p>
+</td><td colspan="2"><p>
+24.15</p>
+</td><td><p>
+25.15</p>
+</td><td colspan="2"><p>
+26.15</p>
+</td><td colspan="2"><p>
+27.15</p>
+</td><td colspan="2"><p>
+28.15</p>
+</td><td colspan="2"><p>
+29.15</p>
+</td><td><p>
+30.15</p>
+</td></tr><tr><td><p>
+24</p>
+</td><td colspan="2"><p>
+23.18</p>
+</td><td colspan="2"><p>
+24.18</p>
+</td><td><p>
+25.18</p>
+</td><td colspan="2"><p>
+26.18</p>
+</td><td colspan="2"><p>
+27.18</p>
+</td><td colspan="2"><p>
+28.18</p>
+</td><td colspan="2"><p>
+29.18</p>
+</td><td><p>
+30.18</p>
+</td></tr><tr><td><p>
+23</p>
+</td><td colspan="2"><p>
+23.21</p>
+</td><td colspan="2"><p>
+24.21</p>
+</td><td><p>
+25.21</p>
+</td><td colspan="2"><p>
+26.21</p>
+</td><td colspan="2"><p>
+27.21</p>
+</td><td colspan="2"><p>
+28.21</p>
+</td><td colspan="2"><p>
+29.21</p>
+</td><td><p>
+30.21</p>
+</td></tr><tr><td><p>
+22</p>
+</td><td colspan="2"><p>
+23.24</p>
+</td><td colspan="2"><p>
+24.24</p>
+</td><td><p>
+25.24</p>
+</td><td colspan="2"><p>
+26.24</p>
+</td><td colspan="2"><p>
+27.24</p>
+</td><td colspan="2"><p>
+28.24</p>
+</td><td colspan="2"><p>
+29.24</p>
+</td><td><p>
+30.24</p>
+</td></tr><tr><td><p>
+21</p>
+</td><td colspan="2"><p>
+23.27</p>
+</td><td colspan="2"><p>
+24.27</p>
+</td><td><p>
+25.27</p>
+</td><td colspan="2"><p>
+26.27</p>
+</td><td colspan="2"><p>
+27.27</p>
+</td><td colspan="2"><p>
+28.27</p>
+</td><td colspan="2"><p>
+29.27</p>
+</td><td><p>
+30.27</p>
+</td></tr><tr><td><p>
+20</p>
+</td><td colspan="2"><p>
+23.30</p>
+</td><td colspan="2"><p>
+24.30</p>
+</td><td><p>
+27.30</p>
+</td><td colspan="2"><p>
+28.30</p>
+</td><td colspan="2"><p>
+29.30</p>
+</td><td colspan="2"><p>
+28.30</p>
+</td><td colspan="2"><p>
+29.30</p>
+</td><td><p>
+30.30</p>
+</td></tr></tbody><button style="position: absolute; box-shadow: rgb(39, 104, 115) 0px 10px 14px -7px; background: linear-gradient(rgb(89, 155, 179) 5%, rgb(64, 140, 153) 100%) rgb(89, 155, 179); border-radius: 40px; display: inline-block; cursor: pointer; color: rgb(255, 255, 255); font-family: Arial; font-size: 8px; font-weight: bold; padding: 1px 8px; text-decoration: none; text-shadow: rgb(61, 118, 138) 0px 1px 0px;"></button></table></body></html>

@@ -242,7 +242,7 @@ html(lang="en")
 
 const allVedomostTemplate = `
 -
-  const data = {
+  const data2 = {
   allChecked: 40,
   allGreat: 4,
   allGood: 9,
@@ -350,8 +350,8 @@ html(lang="en")
       }
       th, td {
         border: 1px solid #333;
-        padding: 8px;
-        text-align: left;
+        padding: 2px;
+        text-align: center;
       }
       th {
         background-color: #f2f2f2;
@@ -392,8 +392,16 @@ html(lang="en")
             | Әскери
             br
             | бөлім
-          th(colspan='1' rowspan='2' style='text-align: center;') Тізім бойынша
-          th(colspan='1'  rowspan='2' style='text-align: center;') Текстерілгені барлығы
+          th(colspan='1' rowspan='2' style='text-align: center;')  
+            | Тізім
+            br
+            | бойынша
+          th(colspan='1'  rowspan='2' style='text-align: center;')  
+            | Текстер-
+            br
+            | ілгені
+            br
+            | барлығы
           th(colspan='6' style='text-align: center;') Офицерлер
           th(colspan='6' style='text-align: center;') Келісімшарт бойынша әскери қызметшілер
           th(colspan='6' style='text-align: center;') Мерзімді қызмет әскери қызметшілері
@@ -540,6 +548,7 @@ html(lang="en")
     p(style="text-align: left; margin-bottom: 0; margin-top: 0") "қанағаттанарлықсыз" <u><b>#{data.allUnsatisfactory}</b></u> әскери бөлім
     p(style="text-align: left; margin-bottom: 0; margin-top: 0") Жалпы баға <u><b>#{data.allGrade}</b></u>
       
+
 
 
 `
@@ -844,6 +853,7 @@ router.post("/podrtest", async (req, res) => {
 router.post("/allVedomost", async (req, res) => {
   try {
     const compiledFunction = pug.compile(allVedomostTemplate);
+    const data = req.body.data
     // ----- Request body: -----
     // {
     //   id: 2,
@@ -873,7 +883,8 @@ router.post("/allVedomost", async (req, res) => {
 
     // console.log(person)
     // const testPersons = persons[0] ? Array(50).fill(persons[0]) : [];
-    const html = compiledFunction({ data: req.body });
+    // console.log(req.body)
+    const html = compiledFunction({ data: data});
     ipcMain.emit("print-all-vedomost", html);
     res.status(200).json({ message: "Added document to schedule" });
   } catch (error) {

@@ -1,0 +1,427 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>test</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table><tbody><tr><td rowspan="2"><p>
+Баллы свыше 60 - 1 раз 5 баллов</p>
+</td><td colspan="19"><p>
+Военнослужащие - мужчины</p>
+</td><td><p>
+Граждане</p>
+</td></tr><tr><td colspan="2"><p>
+1-я возрастная группа, курсанты 3-го курса и старше</p>
+</td><td colspan="2"><p>
+2- я возрастная группа, курсанты и кадеты 2-го курса</p>
+</td><td colspan="2"><p>
+3- я возрастная группа</p>
+</td><td><p>
+4- я возрастная группа</p>
+</td><td colspan="2"><p>
+5- я возрастная группа</p>
+</td><td colspan="2"><p>
+6- я возрастная группа</p>
+</td><td><p>
+7- я возрастная группа</p>
+</td><td colspan="2"><p>
+8- я возрастная группа</p>
+</td><td colspan="2"><p>
+Курсанты, кадеты и военнослужащие, проходящие воинскую службу по призыву до 6 месяцев службы</p>
+</td><td colspan="2"><p>
+Курсанты, кадеты и военнослужащие, проходящие воинскую службу по призыву после 6 месяцев службы</p>
+</td><td colspan="2"><p>
+Юноши</p>
+</td></tr><tr><td><p>
+60</p>
+</td><td colspan="2"><p>
+22</p>
+</td><td colspan="2"><p>
+20</p>
+</td><td colspan="2"><p>
+18</p>
+</td><td><p>
+16</p>
+</td><td colspan="2"><p>
+13</p>
+</td><td colspan="2"><p>
+12</p>
+</td><td><p>
+11</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td colspan="2"><p>
+17</p>
+</td><td colspan="2"><p>
+18</p>
+</td><td colspan="2"><p>
+16</p>
+</td></tr><tr><td><p>
+55</p>
+</td><td colspan="2"><p>
+21</p>
+</td><td colspan="2"><p>
+19</p>
+</td><td colspan="2"><p>
+17</p>
+</td><td><p>
+15</p>
+</td><td colspan="2"><p>
+12</p>
+</td><td colspan="2"><p>
+11</p>
+</td><td><p>
+10</p>
+</td><td colspan="2"><p>
+9</p>
+</td><td colspan="2"><p>
+16</p>
+</td><td colspan="2"><p>
+17</p>
+</td><td colspan="2"><p>
+15</p>
+</td></tr><tr><td><p>
+50</p>
+</td><td colspan="2"><p>
+20</p>
+</td><td colspan="2"><p>
+18</p>
+</td><td colspan="2"><p>
+16</p>
+</td><td><p>
+14</p>
+</td><td colspan="2"><p>
+11</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td><p>
+9</p>
+</td><td colspan="2"><p>
+8</p>
+</td><td colspan="2"><p>
+15</p>
+</td><td colspan="2"><p>
+16</p>
+</td><td colspan="2"><p>
+14</p>
+</td></tr><tr><td><p>
+45</p>
+</td><td colspan="2"><p>
+19</p>
+</td><td colspan="2"><p>
+17</p>
+</td><td colspan="2"><p>
+15</p>
+</td><td><p>
+13</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td colspan="2"><p>
+9</p>
+</td><td><p>
+8</p>
+</td><td colspan="2"><p>
+7</p>
+</td><td colspan="2"><p>
+14</p>
+</td><td colspan="2"><p>
+15</p>
+</td><td colspan="2"><p>
+13</p>
+</td></tr><tr><td><p>
+40</p>
+</td><td colspan="2"><p>
+18</p>
+</td><td colspan="2"><p>
+16</p>
+</td><td colspan="2"><p>
+14</p>
+</td><td><p>
+12</p>
+</td><td colspan="2"><p>
+9</p>
+</td><td colspan="2"><p>
+8</p>
+</td><td><p>
+7</p>
+</td><td colspan="2"><p>
+6</p>
+</td><td colspan="2"><p>
+13</p>
+</td><td colspan="2"><p>
+14</p>
+</td><td colspan="2"><p>
+12</p>
+</td></tr><tr><td><p>
+35</p>
+</td><td colspan="2"><p>
+17</p>
+</td><td colspan="2"><p>
+15</p>
+</td><td colspan="2"><p>
+13</p>
+</td><td><p>
+11</p>
+</td><td colspan="2"><p>
+8</p>
+</td><td colspan="2"><p>
+7</p>
+</td><td><p>
+6</p>
+</td><td colspan="2"><p>
+5</p>
+</td><td colspan="2"><p>
+12</p>
+</td><td colspan="2"><p>
+13</p>
+</td><td colspan="2"><p>
+11</p>
+</td></tr><tr><td><p>
+30</p>
+</td><td colspan="2"><p>
+16</p>
+</td><td colspan="2"><p>
+14</p>
+</td><td colspan="2"><p>
+12</p>
+</td><td><p>
+10</p>
+</td><td colspan="2"><p>
+7</p>
+</td><td colspan="2"><p>
+6</p>
+</td><td><p>
+5</p>
+</td><td colspan="2"><p>
+4</p>
+</td><td colspan="2"><p>
+11</p>
+</td><td colspan="2"><p>
+12</p>
+</td><td colspan="2"><p>
+10</p>
+</td></tr><tr><td><p>
+25</p>
+</td><td colspan="2"><p>
+15</p>
+</td><td colspan="2"><p>
+13</p>
+</td><td colspan="2"><p>
+11</p>
+</td><td><p>
+9</p>
+</td><td colspan="2"><p>
+6</p>
+</td><td colspan="2"><p>
+5</p>
+</td><td><p>
+4</p>
+</td><td colspan="2"><p>
+3</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td colspan="2"><p>
+11</p>
+</td><td colspan="2"><p>
+9</p>
+</td></tr><tr><td><p>
+20</p>
+</td><td colspan="2"><p>
+14</p>
+</td><td colspan="2"><p>
+12</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td><p>
+8</p>
+</td><td colspan="2"><p>
+5</p>
+</td><td colspan="2"><p>
+4</p>
+</td><td><p>
+3</p>
+</td><td colspan="2"><p>
+2</p>
+</td><td colspan="2"><p>
+9</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td colspan="2"><p>
+8</p>
+</td></tr><tr><td colspan="2" rowspan="2"><p>
+Баллы свыше 60 - 1 раз 5 баллов</p>
+</td><td colspan="19"><p>
+Военнослужащие - специалисты физической подготовки и спорта</p>
+</td></tr><tr><td colspan="2"><p>
+1-я возрастная группа</p>
+</td><td colspan="2"><p>
+2- я возрастная группа</p>
+</td><td colspan="3"><p>
+3- я возрастная группа</p>
+</td><td colspan="2"><p>
+4- я возрастная группа</p>
+</td><td colspan="3"><p>
+5- я возрастная группа</p>
+</td><td colspan="2"><p>
+6- я возрастная группа</p>
+</td><td colspan="2"><p>
+7- я возрастная группа</p>
+</td><td colspan="3"><p>
+8- я возрастная группа</p>
+</td></tr><tr><td colspan="2"><p>
+60</p>
+</td><td colspan="2"><p>
+25</p>
+</td><td colspan="2"><p>
+23</p>
+</td><td colspan="3"><p>
+21</p>
+</td><td colspan="2"><p>
+15</p>
+</td><td colspan="3"><p>
+12</p>
+</td><td colspan="2"><p>
+11</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td colspan="3"><p>
+9</p>
+</td></tr><tr><td colspan="2"><p>
+55</p>
+</td><td colspan="2"><p>
+24</p>
+</td><td colspan="2"><p>
+22</p>
+</td><td colspan="3"><p>
+20</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td></tr><tr><td colspan="2"><p>
+50</p>
+</td><td colspan="2"><p>
+23</p>
+</td><td colspan="2"><p>
+21</p>
+</td><td colspan="3"><p>
+19</p>
+</td><td colspan="2"><p>
+14</p>
+</td><td colspan="3"><p>
+11</p>
+</td><td colspan="2"><p>
+10</p>
+</td><td colspan="2"><p>
+9</p>
+</td><td colspan="3"><p>
+8</p>
+</td></tr><tr><td colspan="2"><p>
+45</p>
+</td><td colspan="2"><p>
+22</p>
+</td><td colspan="2"><p>
+20</p>
+</td><td colspan="3"><p>
+18</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td></tr><tr><td colspan="2"><p>
+40</p>
+</td><td colspan="2"><p>
+21</p>
+</td><td colspan="2"><p>
+19</p>
+</td><td colspan="3"><p>
+17</p>
+</td><td colspan="2"><p>
+13</p>
+</td><td colspan="3"><p>
+10</p>
+</td><td colspan="2"><p>
+9</p>
+</td><td colspan="2"><p>
+8</p>
+</td><td colspan="3"><p>
+7</p>
+</td></tr><tr><td colspan="2"><p>
+35</p>
+</td><td colspan="2"><p>
+20</p>
+</td><td colspan="2"><p>
+18</p>
+</td><td colspan="3"><p>
+16</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td></tr><tr><td colspan="2"><p>
+30</p>
+</td><td colspan="2"><p>
+19</p>
+</td><td colspan="2"><p>
+17</p>
+</td><td colspan="3"><p>
+15</p>
+</td><td colspan="2"><p>
+12</p>
+</td><td colspan="3"><p>
+9</p>
+</td><td colspan="2"><p>
+8</p>
+</td><td colspan="2"><p>
+7</p>
+</td><td colspan="3"><p>
+6</p>
+</td></tr><tr><td colspan="2"><p>
+25</p>
+</td><td colspan="2"><p>
+18</p>
+</td><td colspan="2"><p>
+16</p>
+</td><td colspan="3"><p>
+14</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="2"><p>
+-</p>
+</td><td colspan="3"><p>
+-</p>
+</td></tr><tr><td colspan="2"><p>
+20</p>
+</td><td colspan="2"><p>
+17</p>
+</td><td colspan="2"><p>
+15</p>
+</td><td colspan="3"><p>
+13</p>
+</td><td colspan="2"><p>
+11</p>
+</td><td colspan="3"><p>
+8</p>
+</td><td colspan="2"><p>
+7</p>
+</td><td colspan="2"><p>
+6</p>
+</td><td colspan="3"><p>
+4</p>
+</td></tr></tbody><button style="position: absolute; box-shadow: rgb(39, 104, 115) 0px 10px 14px -7px; background: linear-gradient(rgb(89, 155, 179) 5%, rgb(64, 140, 153) 100%) rgb(89, 155, 179); border-radius: 40px; display: inline-block; cursor: pointer; color: rgb(255, 255, 255); font-family: Arial; font-size: 8px; font-weight: bold; padding: 1px 8px; text-decoration: none; text-shadow: rgb(61, 118, 138) 0px 1px 0px;"></button></table></body></html>
