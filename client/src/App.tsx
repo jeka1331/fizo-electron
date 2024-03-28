@@ -27,6 +27,7 @@ import GroupsIcon from '@mui/icons-material/Groups';// import { authProvider } f
 import { UprazhnenieCreate, UprazhnenieEdit, UprazhnenieIcon, UprazhnenieList } from "./resources/uprazhneniya";
 import { UprazhnenieStandardCreate, UprazhnenieStandardEdit, UprazhnenieStandardIcon, UprazhnenieStandardList } from "./resources/uprazhneniya-standards";
 import { UprazhnenieResultCreate, UprazhnenieResultEdit, UprazhnenieResultIcon, UprazhnenieResultList } from "./resources/uprazhneniya-results";
+import { EfficiencyPreferenceCreate, EfficiencyPreferenceEdit, EfficiencyPreferenceIcon, EfficiencyPreferenceList } from "./resources/efficiencyPreferences";
 
 
 const translations = { ru, kz };
@@ -96,6 +97,14 @@ export const App = () => (
       edit={UprazhnenieEdit}
       create={UprazhnenieCreate}
       icon={UprazhnenieIcon}
+
+    />
+    <Resource
+      name="efficiencyPreferences"
+      list={EfficiencyPreferenceList}
+      edit={EfficiencyPreferenceEdit}
+      create={EfficiencyPreferenceCreate}
+      icon={EfficiencyPreferenceIcon}
 
     />
     <Resource

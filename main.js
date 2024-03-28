@@ -1,17 +1,19 @@
 const express = require("express");
 const path = require("path");
 const { app, BrowserWindow, ipcMain } = require("electron");
-const { sequelize, Person } = require("./server/sequelize"); // Импорт Sequelize и настройки
+const { sequelize, EfficiencyPreference } = require("./server/sequelize"); // Импорт Sequelize и настройки
 const reportsRouter = require("./server/routes/reports");
 const personsRouter = require("./server/routes/persons");
 const zvaniyaRouter = require("./server/routes/zvaniya");
 const uprazhnenieTypesRouter = require("./server/routes/uprazhnenieTypes");
 const podrazdeleniyaRouter = require("./server/routes/podrazdeleniya");
 const categoriesRouter = require("./server/routes/categories");
+const efficiencyPreferencesRouter = require("./server/routes/efficiencyPreferences");
 const upraznenieRouter = require("./server/routes/uprazhneniya");
 const uprazhnenieStandardsRouter = require("./server/routes/uprazhneniyaStandards");
 const uprazhnenieResultsRouter = require("./server/routes/uprazhneniyaResults");
 const cors = require("cors");
+const { fillDefaultsEfficiencyPreferences , fillDefaultsPodrazdeleniya, fillDefaultsPersons, fillDefaultsZvanie} = require("./server/defaults");
 if (require("electron-squirrel-startup")) app.quit();
 const corsOptions = {
   origin: "http://localhost:5173",
@@ -24,6 +26,7 @@ const appExpress = express();
 appExpress.use(cors(corsOptions));
 appExpress.use(express.json());
 
+appExpress.use("/efficiencyPreferences", efficiencyPreferencesRouter);
 appExpress.use("/categories", categoriesRouter);
 appExpress.use("/reports", reportsRouter);
 appExpress.use("/podrazdeleniya", podrazdeleniyaRouter);
@@ -47,11 +50,25 @@ let server;
 // Синхронизация с базой данных и запуск сервера
 sequelize
   .sync()
-  .then(() => {
-    server = appExpress.listen(3333, () => {
-      console.log("Сервер запущен на порту 3333");
-    });
-  })
+  .then(
+    async () => {
+      const efficiencyPreferencesCount = await EfficiencyPreference.count()
+      if (efficiencyPreferencesCount === 0) {
+        fillDefaultsEfficiencyPreferences()
+        fillDefaultsZvanie()
+        fillDefaultsPodrazdeleniya()
+        fillDefaultsPersons()
+
+      }
+      server = appExpress.listen(3333, () => {
+        console.log("Сервер запущен на порту 3333");
+      });
+    },
+    function (err) {
+      // catch error here
+      console.log(err);
+    }
+  )
   .catch(() => {
     console.log("Сервер не запущен");
   });
@@ -59,7 +76,7 @@ sequelize
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
-    show:false,
+    show: false,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -86,7 +103,7 @@ app.on("window-all-closed", () => {
     if (server) {
       server.close();
     }
-    ipcMain.removeListener('print-person-report', printPersonReportHandler);
+    ipcMain.removeListener("print-person-report", printPersonReportHandler);
   }
 });
 
@@ -96,7 +113,7 @@ app.on("before-quit", () => {
   if (server) {
     server.close();
   }
-  ipcMain.removeListener('print-person-report', printPersonReportHandler);
+  ipcMain.removeListener("print-person-report", printPersonReportHandler);
 });
 
 // Функция-обработчик для события 'print-person-report'
@@ -112,31 +129,29 @@ const printPersonReportHandler = (data) => {
   win.webContents.print({
     silent: false,
     printBackground: false,
-    pageSize: 'A4',
+    pageSize: "A4",
     marginsType: 0,
     landscape: false,
     scaleFactor: 1,
     pagesPerSheet: 1,
     collate: false,
     copies: 1,
-    header: 'Header',
+    header: "Header",
     footer: {
-      height: '1cm',
+      height: "1cm",
       margin: {
-        top: '1cm',
-        bottom: '1cm'
+        top: "1cm",
+        bottom: "1cm",
       },
       contents: {
         default: '<div style="text-align:center">{#pageNum}</div>',
-      }
-    }
+      },
+    },
   });
 };
 
 // Регистрация обработчика события 'print-person-report'
 ipcMain.on("print-person-report", printPersonReportHandler);
-
-
 
 // Функция-обработчик для события 'print-person-report'
 const printAllVedomostHandler = (data) => {
@@ -151,7 +166,7 @@ const printAllVedomostHandler = (data) => {
   win.webContents.print({
     silent: false,
     printBackground: false,
-    pageSize: 'A4',
+    pageSize: "A4",
     marginsType: 0,
     landscape: true,
     pagesPerSheet: 1,
@@ -161,4 +176,3 @@ const printAllVedomostHandler = (data) => {
 
 // Регистрация обработчика события 'print-person-report'
 ipcMain.on("print-all-vedomost", printAllVedomostHandler);
-

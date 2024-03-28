@@ -17,7 +17,8 @@ import {
   required,
   NumberField,
   DateInput,
-  DateField
+  DateField,
+  AutocompleteInput
   // BooleanField,
   // ReferenceArrayField,
   
@@ -60,7 +61,7 @@ export const UprazhnenieResultEdit = () => (
         <SelectInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="PersonId" reference="persons" validate={[required()]}>
-        <SelectInput optionText="lName" />
+        <AutocompleteInput optionText="lName" />
       </ReferenceInput>
       <ReferenceInput source="CategoryId" reference="categories" validate={[required()]}>
         <SelectInput optionText="name" />
@@ -73,14 +74,19 @@ export const UprazhnenieResultEdit = () => (
   </Edit>
 );
 
-export const UprazhnenieResultCreate = () => (
+export const UprazhnenieResultCreate = () => {
+  const filterToQuery = searchText => ({ lName: `%${searchText}%` });
+
+  
+  return (
+  
   <Create title="Добавление результата">
     <SimpleForm>
     <ReferenceInput source="UprazhnenieId" reference="uprazhneniya" validate={[required()]}>
         <SelectInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="PersonId" reference="persons" validate={[required()]}>
-        <SelectInput optionText="lName" />
+      <AutocompleteInput optionText="lName" filterToQuery={filterToQuery}/>
       </ReferenceInput>
       <ReferenceInput source="CategoryId" reference="categories" validate={[required()]}>
         <SelectInput optionText="name" />
@@ -89,4 +95,4 @@ export const UprazhnenieResultCreate = () => (
       <DateInput source="date" validate={[required()]} />
     </SimpleForm>
   </Create>
-);
+)};

@@ -33,6 +33,9 @@ export const UprazhnenieList = () => (
       <ReferenceField source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <TextField source="name" />
       </ReferenceField>
+      <ReferenceField source="EfficiencyPreferenceId" reference="efficiencyPreferences">
+        <TextField source="name" />
+      </ReferenceField>
       <NumberField source="step" />
       <NumberField source="valueToAddAfterMaxResult" />
       
@@ -52,6 +55,9 @@ export const UprazhnenieEdit = () => (
       <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <SelectInput optionText="name" />
       </ReferenceInput>
+      <ReferenceInput source="EfficiencyPreferenceId" reference="efficiencyPreferences">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
       <NumberInput source="step" validate={[required()]} />
       <NumberInput source="valueToAddAfterMaxResult" validate={[required()]} />
     </SimpleForm>
@@ -65,6 +71,9 @@ export const UprazhnenieCreate = () => (
       <TextInput source="name" />
       <TextInput source="shortName" />
       <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+      <ReferenceInput source="EfficiencyPreferenceId" reference="efficiencyPreferences">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <NumberInput source="step" validate={[required()]} />

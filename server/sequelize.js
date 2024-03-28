@@ -34,9 +34,6 @@ const Person = sequelize.define("Person", {
   lName: DataTypes.STRING,
   sName: DataTypes.STRING,
   dob: DataTypes.DATE,
-  zvanieId: Zvanie,
-  podrazdelenieId: Podrazdelenie,
-  categoryId: Category,
   comment: DataTypes.STRING,
   num: DataTypes.STRING,
   isMale: DataTypes.BOOLEAN,
@@ -45,6 +42,10 @@ const Person = sequelize.define("Person", {
   isFree: DataTypes.BOOLEAN,
   otpuskFrom: DataTypes.DATE,
   otpuskTo: DataTypes.DATE,
+});
+
+const EfficiencyPreference = sequelize.define("EfficiencyPreference", {
+  name: DataTypes.STRING,
 });
 
 const Uprazhnenie = sequelize.define("Uprazhnenie", {
@@ -56,7 +57,7 @@ const Uprazhnenie = sequelize.define("Uprazhnenie", {
 });
 
 const UprazhnenieStandard = sequelize.define("UprazhnenieStandard", {
-  uprazhnenieId: Uprazhnenie,
+  // uprazhnenieId: Uprazhnenie,
   categoryId: Category,
   value: DataTypes.DOUBLE,
   result: DataTypes.INTEGER,
@@ -75,10 +76,41 @@ const UprazhnenieResult = sequelize.define("UprazhnenieResult", {
 });
 Person.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Person);
+EfficiencyPreference.hasMany(Uprazhnenie);
+Uprazhnenie.belongsTo(EfficiencyPreference);
+Zvanie.hasMany(Person, {
+  foreignKey: "zvanieId",
+});
+Person.belongsTo(Zvanie, {
+  foreignKey: "zvanieId",
+});
+
+Podrazdelenie.hasMany(Person, {
+  foreignKey: "podrazdelenieId",
+});
+Person.belongsTo(Podrazdelenie, {
+  foreignKey: "podrazdelenieId",
+});
+
+Uprazhnenie.hasMany(UprazhnenieStandard, {
+  foreignKey: "uprazhnenieId",
+});
+UprazhnenieStandard.belongsTo(Uprazhnenie, {
+  foreignKey: "uprazhnenieId",
+});
+
+Category.hasMany(Person, {
+  foreignKey: "categoryId",
+});
+Person.belongsTo(Category, {
+  foreignKey: "categoryId",
+});
 Category.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Category);
 Uprazhnenie.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Uprazhnenie);
+
+
 
 module.exports = {
   UprazhnenieResult,
@@ -91,4 +123,5 @@ module.exports = {
   Category,
   Uprazhnenie,
   UprazhnenieRealValuesType,
+  EfficiencyPreference,
 };
