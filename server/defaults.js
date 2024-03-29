@@ -808,30 +808,228 @@ const fillDefaultsUprazhneniya = () => {
     },
     {
       name: "Комплексное силовое упражнение (Военнослужащие - мужчины)",
-      shortName: "16",
+      shortName: "16(м)",
       uprazhnenieRealValuesTypeId: 2,
       step: undefined,
       valueToAddAfterMaxResult: undefined,
       EfficiencyPreferenceId: 1
     },
     {
-      name: "",
-      shortName: "",
+      name: "Комплексное силовое упражнение (Военнослужащие - женщины)",
+      shortName: "16(ж)",
+      uprazhnenieRealValuesTypeId: 2,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: 1
+    },
+    {
+      name: "Комплексное силовое упражнение (Военнослужащие - женщины)",
+      shortName: "16(ж)",
+      uprazhnenieRealValuesTypeId: 2,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: 1
+    },
+    {
+      name: "Упражнение на стационарном колесе",
+      shortName: "19",
       uprazhnenieRealValuesTypeId: undefined,
       step: undefined,
       valueToAddAfterMaxResult: undefined,
       EfficiencyPreferenceId: undefined
     },
     {
-      name: "",
-      shortName: "",
+      name: "Упражнение на лопинге",
+      shortName: "21",
       uprazhnenieRealValuesTypeId: undefined,
       step: undefined,
       valueToAddAfterMaxResult: undefined,
       EfficiencyPreferenceId: undefined
     },
-
-
+    {
+      name: "Общее контрольное упражнение на единой полосе препятствий",
+      shortName: "27",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Специальное контрольное упражнение для военных учебных заведений",
+      shortName: "28",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Специальное контрольное упражнение для личного состава Десантно-штурмовых войск",
+      shortName: "29",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Преодоление единой полосы препятствий в составе подразделения (для военных учебных заведений)",
+      shortName: "30",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Бег с преодолением полосы препятствий в составе подразделения (для военных учебных заведений)",
+      shortName: "31",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Специальное контрольное упражнение для личного состава подразделений, предназначенных для действий в горах",
+      shortName: "32",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Специальное контрольное упражнение для личного состава надводных кораблей",
+      shortName: "33",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Бег на 100 метров",
+      shortName: "34",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Челночный бег 10х10 метров",
+      shortName: "35",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Бег на 400 метров",
+      shortName: "36",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Бег на 1000 метров",
+      shortName: "37",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Бег на 3000 метров",
+      shortName: "38",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Бег на 5000 метров",
+      shortName: "39",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Метание гранаты Ф – 1 (600 грамм) на дальность",
+      shortName: "40",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Марш-бросок на 5 километров",
+      shortName: "42",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Марш-бросок на 10 километров",
+      shortName: "43",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Лыжная гонка на 5 километров",
+      shortName: "44",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Лыжная гонка на 10 километров",
+      shortName: "45",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Марш на лыжах 5 километров в составе подразделения",
+      shortName: "46",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Марш на лыжах 10 километров в составе подразделения",
+      shortName: "47",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Плавание на 100 метров в спортивной форме",
+      shortName: "48",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Плавание в обмундировании с оружием",
+      shortName: "49",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
+    {
+      name: "Ныряние в длину",
+      shortName: "50",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined
+    },
   ]);
 };
 module.exports = {

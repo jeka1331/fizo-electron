@@ -13,7 +13,7 @@ const upraznenieRouter = require("./server/routes/uprazhneniya");
 const uprazhnenieStandardsRouter = require("./server/routes/uprazhneniyaStandards");
 const uprazhnenieResultsRouter = require("./server/routes/uprazhneniyaResults");
 const cors = require("cors");
-const { fillDefaultsEfficiencyPreferences , fillDefaultsPodrazdeleniya, fillDefaultsPersons, fillDefaultsZvanie} = require("./server/defaults");
+const { fillDefaultsEfficiencyPreferences, fillDefaultsPodrazdeleniya, fillDefaultsPersons, fillDefaultsZvanie, fillDefaultsCategories, fillDefaultsUprazhnenieRealValuesTypes, fillDefaultsUprazhneniya } = require("./server/defaults");
 if (require("electron-squirrel-startup")) app.quit();
 const corsOptions = {
   origin: "http://localhost:5173",
@@ -57,7 +57,10 @@ sequelize
         fillDefaultsEfficiencyPreferences()
         fillDefaultsZvanie()
         fillDefaultsPodrazdeleniya()
+        fillDefaultsCategories()
         fillDefaultsPersons()
+        fillDefaultsUprazhnenieRealValuesTypes()
+        fillDefaultsUprazhneniya()
 
       }
       server = appExpress.listen(3333, () => {

@@ -8,7 +8,7 @@
         "cwd": "${workspaceFolder}",
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge",
         "windows": {
-          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge.cmd"
         },
         "args" : ["start"],
         "outputCapture": "std"
