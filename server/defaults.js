@@ -908,12 +908,37 @@ const fillDefaultsCategories = () => {
       id: 53,
       name: "Курсанты и кадеты до 6 месяцев службы (женщины)",
       shortName: "до 6 мес. (ж)",
-    }
+    },
     {
       id: 54,
-      name: "Курсанты и кадеты после 6 месяцев службы",
+      name: "Курсанты и кадеты после 6 месяцев службы (женщины)",
       shortName: "после 6 мес. (ж)",
-    }
+    },
+    {
+      id: 55,
+      name: "Курсанты и кадеты 2-го курса (женщины)",
+      shortName: "КиК 2-го к. (ж)",
+    },
+    {
+      id: 56,
+      name: "Курсанты 3-го курса и старше (женщины)",
+      shortName: "К-ты 3-го к. и старше (ж)",
+    },
+    {
+      id: 57,
+      name: "Курсанты и кадеты после 6 месяцев службы (мужчины)",
+      shortName: "КиК после 6 мес. (м)",
+    },
+    {
+      id: 58,
+      name: "Курсанты и кадеты 2-го курса (мужчины)",
+      shortName: "КиК 2-го к. (м)",
+    },
+    {
+      id: 59,
+      name: "Курсанты 3-го курса и старше (мужчины)",
+      shortName: "КиК 3-го к. и старше (м)",
+    },
     
   ]);
 };
@@ -1083,8 +1108,8 @@ const fillDefaultsUprazhneniya = () => {
     },
     {
       id: 18,
-      name: "Бег с преодолением полосы препятствий в составе подразделения (для военных учебных заведений)",
-      shortName: "31",
+      name: "Бег с преодолением полосы препятствий в составе подразделения (для военных учебных заведений) на 1100 метров",
+      shortName: "31 (1100м)",
       uprazhnenieRealValuesTypeId: undefined,
       step: undefined,
       valueToAddAfterMaxResult: undefined,
@@ -1247,6 +1272,15 @@ const fillDefaultsUprazhneniya = () => {
       id: 36,
       name: "Ныряние в длину",
       shortName: "50",
+      uprazhnenieRealValuesTypeId: undefined,
+      step: undefined,
+      valueToAddAfterMaxResult: undefined,
+      EfficiencyPreferenceId: undefined,
+    },
+    {
+      id: 37,
+      name: "Бег с преодолением полосы препятствий в составе подразделения (для военных учебных заведений) на 3100 метров",
+      shortName: "31 (3100м)",
       uprazhnenieRealValuesTypeId: undefined,
       step: undefined,
       valueToAddAfterMaxResult: undefined,
