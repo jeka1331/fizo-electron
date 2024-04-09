@@ -948,6 +948,7 @@ const fillDefaultsUprazhnenieRealValuesTypes = () => {
     { id: 1, name: "Секунда", shortName: "сек." },
     { id: 2, name: "Количество повторений", shortName: "кол-во повт-й" },
     { id: 3, name: "Цикл", shortName: "цикл(ов)" },
+    { id: 4, name: "Метр", shortName: "м." },
   ]);
 };
 
