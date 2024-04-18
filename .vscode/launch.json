@@ -2,6 +2,23 @@
     "version": "0.2.0",
     "configurations": [
       {
+        "name": "Server Debug",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "server"]
+      },
+      {
+        "name": "Client Debug",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/client",
+        "runtimeExecutable": "yarn",
+        "runtimeArgs": ["dev"]
+      },
+      
+      {
         "name": "Debug Main Process",
         "type": "node",
         "request": "launch",

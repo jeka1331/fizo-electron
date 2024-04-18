@@ -4,7 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "server": "node main.js",
+    "server": "node server.js",
     "start": "electron-forge start",
     "build": "cd client && yarn build && cd .. && electron-builder",
     "buildwin": "cd client && yarn build && cd .. && electron-builder --win",

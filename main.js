@@ -80,7 +80,7 @@ sequelize
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
-    show: false,
+    show: true,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

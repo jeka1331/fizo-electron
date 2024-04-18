@@ -16,7 +16,8 @@ const cors = require("cors");
 const { fillDefaultsUprazhnenieStandards, fillDefaultsEfficiencyPreferences, fillDefaultsPodrazdeleniya, fillDefaultsPersons, fillDefaultsZvanie, fillDefaultsCategories, fillDefaultsUprazhnenieRealValuesTypes, fillDefaultsUprazhneniya } = require("./server/defaults");
 if (require("electron-squirrel-startup")) app.quit();
 const corsOptions = {
-  origin: "http://192.168.0.117:5173",
+  origin: ["http://192.168.0.117:5173", "http://localhost:5173"],
+  
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   allowedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
   exposedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
