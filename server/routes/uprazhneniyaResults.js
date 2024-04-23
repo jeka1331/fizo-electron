@@ -283,25 +283,25 @@ router.get("/vedomost", async (req, res) => {
 router.get("/allVedomost", async (req, res) => {
   try {
     let data = {
-      allChecked: 40,
-      allGreat: 4,
-      allGood: 9,
-      allSatisfactory: 12,
-      allUnsatisfactory: 16,
-      allGrade: 2,
+      allChecked: undefined,
+      allGreat: undefined,
+      allGood: undefined,
+      allSatisfactory: undefined,
+      allUnsatisfactory: undefined,
+      allGrade: undefined,
       allTableData: {
-        personLenght: 40,
-        allPersonsChecked: 12,
-        tpt: 0,
-        totalGrade: 2,
+        personLenght: undefined,
+        allPersonsChecked: undefined,
+        tpt: undefined,
+        totalGrade: undefined,
         resultsData: {
           officers: {
-            checked: 0,
-            great: 0,
-            good: 0,
-            satisfactory: 0,
-            unsatisfactory: 0,
-            grade: 0,
+            checked: undefined,
+            great: undefined,
+            good: undefined,
+            satisfactory: undefined,
+            unsatisfactory: undefined,
+            grade: undefined,
           },
           contracts: {
             checked: undefined,
@@ -331,49 +331,141 @@ router.get("/allVedomost", async (req, res) => {
       },
       tableData: [
         {
-          id: 1,
-          podrazdelenie: "ВНВ",
-          personLenght: 40,
-          allPersonsChecked: 40,
-          tpt: 0,
-          totalGrade: 2,
+          id: undefined,
+          podrazdelenie: undefined,
+          personLenght: undefined,
+          allPersonsChecked: undefined,
+          tpt: undefined,
+          totalGrade: undefined,
           resultsData: {
             officers: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
+              checked: undefined,
+              great: undefined,
+              good: undefined,
+              satisfactory: undefined,
+              unsatisfactory: undefined,
+              grade: undefined,
             },
             contracts: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
+              checked: undefined,
+              great: undefined,
+              good: undefined,
+              satisfactory: undefined,
+              unsatisfactory: undefined,
+              grade: undefined,
             },
             conscripts: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
+              checked: undefined,
+              great: undefined,
+              good: undefined,
+              satisfactory: undefined,
+              unsatisfactory: undefined,
+              grade: undefined,
             },
             women: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
+              checked: undefined,
+              great: undefined,
+              good: undefined,
+              satisfactory: undefined,
+              unsatisfactory: undefined,
+              grade: undefined,
             },
           },
         },
       ],
     };
+    // let data = {
+    //   allChecked: 40,
+    //   allGreat: 4,
+    //   allGood: 9,
+    //   allSatisfactory: 12,
+    //   allUnsatisfactory: 16,
+    //   allGrade: 2,
+    //   allTableData: {
+    //     personLenght: 40,
+    //     allPersonsChecked: 12,
+    //     tpt: 0,
+    //     totalGrade: 2,
+    //     resultsData: {
+    //       officers: {
+    //         checked: 0,
+    //         great: 0,
+    //         good: 0,
+    //         satisfactory: 0,
+    //         unsatisfactory: 0,
+    //         grade: 0,
+    //       },
+    //       contracts: {
+    //         checked: undefined,
+    //         great: undefined,
+    //         good: undefined,
+    //         satisfactory: undefined,
+    //         unsatisfactory: undefined,
+    //         grade: undefined,
+    //       },
+    //       conscripts: {
+    //         checked: undefined,
+    //         great: undefined,
+    //         good: undefined,
+    //         satisfactory: undefined,
+    //         unsatisfactory: undefined,
+    //         grade: undefined,
+    //       },
+    //       women: {
+    //         checked: 0,
+    //         great: 0,
+    //         good: 0,
+    //         satisfactory: 0,
+    //         unsatisfactory: 0,
+    //         grade: 0,
+    //       },
+    //     },
+    //   },
+    //   tableData: [
+    //     {
+    //       id: 1,
+    //       podrazdelenie: "ВНВ",
+    //       personLenght: 40,
+    //       allPersonsChecked: 40,
+    //       tpt: 0,
+    //       totalGrade: 2,
+    //       resultsData: {
+    //         officers: {
+    //           checked: 10,
+    //           great: 1,
+    //           good: 2,
+    //           satisfactory: 3,
+    //           unsatisfactory: 4,
+    //           grade: 2,
+    //         },
+    //         contracts: {
+    //           checked: 10,
+    //           great: 1,
+    //           good: 2,
+    //           satisfactory: 3,
+    //           unsatisfactory: 4,
+    //           grade: 2,
+    //         },
+    //         conscripts: {
+    //           checked: 10,
+    //           great: 1,
+    //           good: 2,
+    //           satisfactory: 3,
+    //           unsatisfactory: 4,
+    //           grade: 2,
+    //         },
+    //         women: {
+    //           checked: 10,
+    //           great: 1,
+    //           good: 2,
+    //           satisfactory: 3,
+    //           unsatisfactory: 4,
+    //           grade: 2,
+    //         },
+    //       },
+    //     },
+    //   ],
+    // };
     if (!req.query.year || !req.query.month) {
       throw new Error("Неверные параметры в get запросе");
     }
@@ -650,16 +742,16 @@ router.get("/allVedomost", async (req, res) => {
       const element = personalResultsP[key].totalOcenka;
       switch (element) {
         case 5:
-          data.allTableData.resultsData.women.great += 1;
+          data.allTableData.resultsData.women.great ? data.allTableData.resultsData.women.great += 1 : data.allTableData.resultsData.women.great = 1;
           break;
         case 4:
-          data.allTableData.resultsData.women.good += 1;
+          data.allTableData.resultsData.women.good ? data.allTableData.resultsData.women.good += 1 : data.allTableData.resultsData.women.good = 1;
           break;
         case 3:
-          data.allTableData.resultsData.women.satisfactory += 1;
+          data.allTableData.resultsData.women.satisfactory ? data.allTableData.resultsData.women.satisfactory += 1 : data.allTableData.resultsData.women.satisfactory = 1;
           break;
         case 2:
-          data.allTableData.resultsData.women.unsatisfactory += 1;
+          data.allTableData.resultsData.women.unsatisfactory ? data.allTableData.resultsData.women.unsatisfactory += 1 : data.allTableData.resultsData.women.unsatisfactory = 1;
           break;
         default:
           break;

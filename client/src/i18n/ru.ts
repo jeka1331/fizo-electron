@@ -228,7 +228,7 @@ export const ru = {
         podrazdelenieId: "Подразделение",
         comment: "Комментарий",
         isMale: "Мужчина",
-        isV: "Статус военнослужащего",
+        isV: "Срочная служба",
         rating: "Рейтинг",
         isFree: "Освобожден",
         otpuskFrom: "Отпуск с",

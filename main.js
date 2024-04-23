@@ -62,11 +62,15 @@ sequelize
         fillDefaultsUprazhnenieRealValuesTypes()
         fillDefaultsUprazhneniya(),
         fillDefaultsUprazhnenieStandards()
-
+        server = appExpress.listen(3333, () => {
+          console.log("Сервер запущен на порту 3333");
+        });
+      } else {
+        server = appExpress.listen(3333, () => {
+          console.log("Сервер запущен на порту 3333");
+        });
       }
-      server = appExpress.listen(3333, () => {
-        console.log("Сервер запущен на порту 3333");
-      });
+      
     },
     function (err) {
       // catch error here

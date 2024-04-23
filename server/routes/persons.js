@@ -32,18 +32,25 @@ router.get("/", async (req, res) => {
     }
 
     if (filter) {
+      
       const where = JSON.parse(filter);
-      options.where = {};
-      if (where.lName) {
         options.where = {
-          lName: {
-            [Op.like]: `${where.lName}`,
-          },
-          ...options.where,
+          [Op.and]: [
+            where.lName ? {
+              lName: {
+                [Op.like]: `%${where.lName}%`,
+              },
+            } : {},
+            where.zvanieId ? {
+              zvanieId: {
+                [Op.eq]: where.zvanieId,
+              },
+            } : {},
+          ],
         };
-      }
+      
     }
-    console.log(options);
+    // console.log(options);
     const persons = await Person.findAll(options);
 
     if (range) {
@@ -59,7 +66,9 @@ router.get("/", async (req, res) => {
 
     res.status(200).json(persons);
   } catch (error) {
-    res.status(500).json({ error: error, message: "Ошибка при чтении записей"});
+    res
+      .status(500)
+      .json({ error: error, message: "Ошибка при чтении записей" });
   }
 });
 

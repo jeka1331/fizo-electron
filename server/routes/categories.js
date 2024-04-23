@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Category } = require('../sequelize'); // Импорт модели Person
+const { Op } = require("sequelize");
 
 // Создание записи (Create)
 router.post('/', async (req, res) => {
@@ -33,7 +34,24 @@ router.get('/', async (req, res) => {
         }
     
         if (filter) {
-          options.where = JSON.parse(filter);
+          const where = JSON.parse(filter);
+          options.where = {};
+          if (where.name) {
+            options.where = {
+              [Op.or]: [
+                {
+                  name: {
+                    [Op.like]: `%${where.name}%`,
+                  },
+                },
+                {
+                  shortName: {
+                    [Op.like]: `%${where.name}%`,
+                  },
+                },
+              ],
+            };
+          }
         }
     
         const zvaniya = await Category.findAll(options);

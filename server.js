@@ -13,11 +13,20 @@ const upraznenieRouter = require("./server/routes/uprazhneniya");
 const uprazhnenieStandardsRouter = require("./server/routes/uprazhneniyaStandards");
 const uprazhnenieResultsRouter = require("./server/routes/uprazhneniyaResults");
 const cors = require("cors");
-const { fillDefaultsUprazhnenieStandards, fillDefaultsEfficiencyPreferences, fillDefaultsPodrazdeleniya, fillDefaultsPersons, fillDefaultsZvanie, fillDefaultsCategories, fillDefaultsUprazhnenieRealValuesTypes, fillDefaultsUprazhneniya } = require("./server/defaults");
+const {
+  fillDefaultsUprazhnenieStandards,
+  fillDefaultsEfficiencyPreferences,
+  fillDefaultsPodrazdeleniya,
+  fillDefaultsPersons,
+  fillDefaultsZvanie,
+  fillDefaultsCategories,
+  fillDefaultsUprazhnenieRealValuesTypes,
+  fillDefaultsUprazhneniya,
+} = require("./server/defaults");
 if (require("electron-squirrel-startup")) app.quit();
 const corsOptions = {
   origin: ["http://192.168.0.117:5173", "http://localhost:5173"],
-  
+
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   allowedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
   exposedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
@@ -52,22 +61,30 @@ let server;
 sequelize
   .sync()
   .then(
-    async () => {
-      const efficiencyPreferencesCount = await EfficiencyPreference.count()
-      if (efficiencyPreferencesCount === 0) {
-        fillDefaultsEfficiencyPreferences()
-        fillDefaultsZvanie()
-        fillDefaultsPodrazdeleniya()
-        fillDefaultsCategories()
-        fillDefaultsPersons()
-        fillDefaultsUprazhnenieRealValuesTypes()
-        fillDefaultsUprazhneniya(),
-        fillDefaultsUprazhnenieStandards()
-
-      }
-      server = appExpress.listen(3333, () => {
-        console.log("Сервер запущен на порту 3333");
-      });
+    () => {
+      let efficiencyPreferencesCount;
+      EfficiencyPreference.count()
+        .then((val) => {
+          efficiencyPreferencesCount = val;
+          console.log(efficiencyPreferencesCount);
+          if (efficiencyPreferencesCount === 0) {
+            fillDefaultsEfficiencyPreferences();
+            fillDefaultsZvanie();
+            fillDefaultsPodrazdeleniya();
+            fillDefaultsCategories();
+            fillDefaultsPersons();
+            fillDefaultsUprazhnenieRealValuesTypes();
+            fillDefaultsUprazhneniya(), fillDefaultsUprazhnenieStandards();
+            server = appExpress.listen(3333, () => {
+              console.log("Сервер запущен на порту 3333");
+            });
+          } else {
+            server = appExpress.listen(3333, () => {
+              console.log("Сервер запущен на порту 3333");
+            });
+          }
+        })
+        .catch((err) => console.log(err));
     },
     function (err) {
       // catch error here
@@ -77,7 +94,5 @@ sequelize
   .catch(() => {
     console.log("Сервер не запущен");
   });
-
-
 
 // Функция-обработчик для события 'print-person-report'

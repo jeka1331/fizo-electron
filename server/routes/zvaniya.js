@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Zvanie } = require('../sequelize'); // Импорт модели Person
+const { Op } = require("sequelize");
 
 // Создание записи (Create)
 router.post('/', async (req, res) => {
@@ -33,8 +34,17 @@ router.get('/', async (req, res) => {
         }
     
         if (filter) {
-          options.where = JSON.parse(filter);
+          const where = JSON.parse(filter);
+          options.where = {};
+          if (where.q) {
+            options.where = {
+              name: {
+                [Op.like]: `%${where.q}%`,
+              },
+            };
+          }
         }
+        console.log(options);
     
         const zvaniya = await Zvanie.findAll(options);
     

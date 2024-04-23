@@ -15,14 +15,27 @@ import {
   ReferenceInput,
   SelectInput,
   BooleanInput,
+  AutocompleteInput,
   // Button,
 } from "react-admin";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
 // import { PersonExportPostButton } from "../components/PersonExportPostButton";
+const categoryFilterToQuery = (searchText) => ({ name: `%${searchText}%` });
+const categoryOptionText = (record) =>
+  `[${record.shortName}] => ${record.name}`;
+
+const personFilters = [
+  // eslint-disable-next-line react/jsx-key
+  <TextInput source="lName" />,
+  // eslint-disable-next-line react/jsx-key
+  <ReferenceInput source="zvanieId" reference="zvaniya">
+    <AutocompleteInput optionText="name" />
+  </ReferenceInput>,
+];
 
 export const PersonList = () => (
-  <List>
+  <List filters={personFilters}>
     <Datagrid>
       <TextField source="id" />
       <TextField source="lName" />
@@ -100,63 +113,73 @@ export const PersonEdit = () => (
   <Edit title={<PersonTitle />}>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
-      <TextInput source="lName" />
-      <TextInput source="fName" />
-      <TextInput source="sName" />
-      <DateInput source="dob" />
+      <TextInput source="lName" fullWidth />
+      <TextInput source="fName" fullWidth />
+      <TextInput source="sName" fullWidth />
+      <DateInput source="dob" fullWidth />
       {/* <ReferenceInput source="zvanieId" reference="zvaniya" /> */}
       <ReferenceInput source="zvanieId" reference="zvaniya">
-        <SelectInput optionText="name" />
+        <SelectInput optionText="name" fullWidth />
       </ReferenceInput>
       <ReferenceInput source="podrazdelenieId" reference="podrazdeleniya">
-        <SelectInput optionText="name" />
+        <SelectInput optionText="name" fullWidth />
       </ReferenceInput>
       <ReferenceInput source="categoryId" reference="categories">
-        <SelectInput optionText="name" />
+        <AutocompleteInput
+          optionText={categoryOptionText}
+          filterToQuery={categoryFilterToQuery}
+            fullWidth
+        />
       </ReferenceInput>
       <BooleanInput
         source="isMale"
         valueLabelTrue={MaleIcon}
         valueLabelFalse={FemaleIcon}
         defaultValue={true}
+        fullWidth
       />
-      <BooleanInput source="isV" label="Военнослужащий" />
-      <BooleanInput source="isFree" label="Освобожден" />
+      <BooleanInput source="isV" />
+      <BooleanInput source="isFree" />
       <DateInput source="otpuskFrom" />
       <DateInput source="otpuskTo" />
-      <TextInput source="comment" options={{ multiline: true }} />
+      <TextInput source="comment" fullWidth options={{ multiline: true }} />
     </SimpleForm>
   </Edit>
 );
 
-export const PersonCreate = () => (
-  <Create>
-    <SimpleForm>
-      {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
-      <TextInput source="lName" required={true} />
-      <TextInput source="fName" required={true} />
-      <TextInput source="sName" />
-      <DateInput source="dob" required={true} />
-      <ReferenceInput source="zvanieId" reference="zvaniya" required={true}>
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-      <ReferenceInput source="podrazdelenieId" reference="podrazdeleniya">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-      <ReferenceInput source="categoryId" reference="categories">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-      <BooleanInput
-        source="isMale"
-        valueLabelTrue={MaleIcon}
-        valueLabelFalse={FemaleIcon}
-        defaultValue={true}
-      />
-      <BooleanInput source="isV" label="Военнослужащий" />
-      <BooleanInput source="isFree" label="Освобожден" />
-      <DateInput source="otpuskFrom" />
-      <DateInput source="otpuskTo" />
-      <TextInput source="comment" options={{ multiline: true }} />
-    </SimpleForm>
-  </Create>
-);
+export const PersonCreate = () => {
+  return (
+    <Create>
+      <SimpleForm>
+        {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
+        <TextInput source="lName" required={true} />
+        <TextInput source="fName" required={true} />
+        <TextInput source="sName" />
+        <DateInput source="dob" required={true} />
+        <ReferenceInput source="zvanieId" reference="zvaniya" required={true}>
+          <SelectInput optionText="name" />
+        </ReferenceInput>
+        <ReferenceInput source="podrazdelenieId" reference="podrazdeleniya">
+          <SelectInput optionText="name" />
+        </ReferenceInput>
+        <ReferenceInput source="categoryId" reference="categories">
+          <AutocompleteInput
+            optionText={categoryOptionText}
+            filterToQuery={categoryFilterToQuery}
+          />
+        </ReferenceInput>
+        <BooleanInput
+          source="isMale"
+          valueLabelTrue={MaleIcon}
+          valueLabelFalse={FemaleIcon}
+          defaultValue={true}
+        />
+        <BooleanInput source="isV" label="Военнослужащий" />
+        <BooleanInput source="isFree" label="Освобожден" />
+        <DateInput source="otpuskFrom" />
+        <DateInput source="otpuskTo" />
+        <TextInput source="comment" options={{ multiline: true }} />
+      </SimpleForm>
+    </Create>
+  );
+};
