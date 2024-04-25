@@ -296,27 +296,27 @@ router.get("/allVedomost", async (req, res) => {
         totalGrade: undefined,
         resultsData: {
           officers: {
-            checked: undefined,
-            great: undefined,
-            good: undefined,
-            satisfactory: undefined,
-            unsatisfactory: undefined,
+            checked: 0,
+            great: 0,
+            good: 0,
+            satisfactory: 0,
+            unsatisfactory: 0,
             grade: undefined,
           },
           contracts: {
-            checked: undefined,
-            great: undefined,
-            good: undefined,
-            satisfactory: undefined,
-            unsatisfactory: undefined,
+            checked: 0,
+            great: 0,
+            good: 0,
+            satisfactory: 0,
+            unsatisfactory: 0,
             grade: undefined,
           },
           conscripts: {
-            checked: undefined,
-            great: undefined,
-            good: undefined,
-            satisfactory: undefined,
-            unsatisfactory: undefined,
+            checked: 0,
+            great: 0,
+            good: 0,
+            satisfactory: 0,
+            unsatisfactory: 0,
             grade: undefined,
           },
           women: {
@@ -325,7 +325,7 @@ router.get("/allVedomost", async (req, res) => {
             good: 0,
             satisfactory: 0,
             unsatisfactory: 0,
-            grade: 0,
+            grade: undefined,
           },
         },
       },
@@ -633,13 +633,11 @@ router.get("/allVedomost", async (req, res) => {
         if (minValue > uprResult.result) {
           const additionalResultCount = minValue - uprResult.result;
           res =
-          minResult.result +
-          uprResult.Uprazhnenie.valueToAddAfterMaxResult *
-            (additionalResultCount / uprResult.Uprazhnenie.step);
+            minResult.result +
+            uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+              (additionalResultCount / uprResult.Uprazhnenie.step);
         } else {
-          
         }
-        
       }
       if (efficiencyPreference === "Больше - лучше") {
         const additionalResultCount = uprResult.result - maxValue;
@@ -742,16 +740,24 @@ router.get("/allVedomost", async (req, res) => {
       const element = personalResultsP[key].totalOcenka;
       switch (element) {
         case 5:
-          data.allTableData.resultsData.women.great ? data.allTableData.resultsData.women.great += 1 : data.allTableData.resultsData.women.great = 1;
+          data.allTableData.resultsData.women.great
+            ? (data.allTableData.resultsData.women.great += 1)
+            : (data.allTableData.resultsData.women.great = 1);
           break;
         case 4:
-          data.allTableData.resultsData.women.good ? data.allTableData.resultsData.women.good += 1 : data.allTableData.resultsData.women.good = 1;
+          data.allTableData.resultsData.women.good
+            ? (data.allTableData.resultsData.women.good += 1)
+            : (data.allTableData.resultsData.women.good = 1);
           break;
         case 3:
-          data.allTableData.resultsData.women.satisfactory ? data.allTableData.resultsData.women.satisfactory += 1 : data.allTableData.resultsData.women.satisfactory = 1;
+          data.allTableData.resultsData.women.satisfactory
+            ? (data.allTableData.resultsData.women.satisfactory += 1)
+            : (data.allTableData.resultsData.women.satisfactory = 1);
           break;
         case 2:
-          data.allTableData.resultsData.women.unsatisfactory ? data.allTableData.resultsData.women.unsatisfactory += 1 : data.allTableData.resultsData.women.unsatisfactory = 1;
+          data.allTableData.resultsData.women.unsatisfactory
+            ? (data.allTableData.resultsData.women.unsatisfactory += 1)
+            : (data.allTableData.resultsData.women.unsatisfactory = 1);
           break;
         default:
           break;
@@ -777,7 +783,8 @@ router.get("/allVedomost", async (req, res) => {
     // -------------------------------------------------------------------------------------
     // ------------------------------------- Офицеры ---------------------------------------
     // -------------------------------------------------------------------------------------
-    const uprResultsOfficers = await UprazhnenieResult.findAll({
+
+    const officerResults = await UprazhnenieResult.findAll({
       attributes: [
         [sequelize.fn("MAX", sequelize.col("date")), "maxDate"],
         "result",
@@ -799,7 +806,6 @@ router.get("/allVedomost", async (req, res) => {
           include: {
             model: Zvanie,
             attributes: ["name"],
-
             where: {
               name: [
                 "Лейтенант",
@@ -839,12 +845,13 @@ router.get("/allVedomost", async (req, res) => {
         },
       ],
     });
+    data.allTableData.resultsData.officers.checked = officerResults.length;
 
-    personalResultsP = {};
-    uprNamesP = [];
+    let personalResultsO = {};
+    let uprNamesO = [];
 
-    for (const uprResult of uprResultsOfficers) {
-      uprNamesP.push(uprResult.Uprazhnenie.shortName);
+    for (const uprResult of officerResults) {
+      uprNamesO.push(uprResult.Uprazhnenie.shortName);
 
       const maxResult = await UprazhnenieStandard.findOne({
         attributes: [
@@ -859,10 +866,62 @@ router.get("/allVedomost", async (req, res) => {
           categoryId: uprResult.Category.id,
         },
         limit: 1,
+        include: [
+          {
+            model: Uprazhnenie,
+            include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+          },
+        ],
       });
-      const maxValue = maxResult.dataValues.maxValue;
 
+      const minResult = await UprazhnenieStandard.findOne({
+        attributes: [
+          [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
+          "id",
+          "uprazhnenieId",
+          "categoryId",
+          "result",
+        ],
+        where: {
+          uprazhnenieId: uprResult.Uprazhnenie.id,
+          categoryId: uprResult.Category.id,
+        },
+        limit: 1,
+        include: [
+          {
+            model: Uprazhnenie,
+            include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+          },
+        ],
+      });
+
+      const efficiencyPreference =
+        maxResult.Uprazhnenie.EfficiencyPreference.name;
+      const maxValue = maxResult.dataValues.maxValue;
+      const minValue = minResult.dataValues.minValue;
+      let res;
       let ball;
+
+      if (efficiencyPreference === "Меньше - лучше") {
+        if (minValue > uprResult.result) {
+          const additionalResultCount = minValue - uprResult.result;
+          res =
+            minResult.result +
+            uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+              (additionalResultCount / uprResult.Uprazhnenie.step);
+        } else {
+          // handle if necessary
+        }
+      }
+      if (efficiencyPreference === "Больше - лучше") {
+        const additionalResultCount = uprResult.result - maxValue;
+
+        res =
+          maxResult.result +
+          uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+            (additionalResultCount / uprResult.Uprazhnenie.step);
+      }
+
       if (!(uprResult.result > maxValue)) {
         ball = await UprazhnenieStandard.findOne({
           where: {
@@ -870,14 +929,16 @@ router.get("/allVedomost", async (req, res) => {
             categoryId: uprResult.Category.id,
             value: uprResult.result,
           },
+          include: [
+            {
+              model: Uprazhnenie,
+              include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+            },
+          ],
         });
       } else {
-        const additionalResultCount = uprResult.result - maxValue;
         ball = {
-          result:
-            maxResult.result +
-            uprResult.Uprazhnenie.valueToAddAfterMaxResult *
-              (additionalResultCount / uprResult.Uprazhnenie.step),
+          result: res ? res : 0,
         };
       }
 
@@ -887,7 +948,7 @@ router.get("/allVedomost", async (req, res) => {
         },
       });
 
-      if (!personalResultsP[uprResult.Person.id]) {
+      if (!personalResultsO[uprResult.Person.id]) {
         const result = {
           personId: uprResult.Person.id,
           zvanie: zvanie.name ? zvanie.name : "Ошибка",
@@ -903,66 +964,75 @@ router.get("/allVedomost", async (req, res) => {
             },
           ],
         };
-        personalResultsP[uprResult.Person.id] = result;
+        personalResultsO[uprResult.Person.id] = result;
       } else {
-        personalResultsP[uprResult.Person.id].results.push({
+        personalResultsO[uprResult.Person.id].results.push({
           uprName: uprResult.Uprazhnenie.shortName,
           score: uprResult.result,
           ball: ball ? ball.result : 0,
         });
       }
     }
-    let maxResultsOfficers = 0;
-    for (const key in personalResultsP) {
-      if (personalResultsP[key].results.length > maxResultsOfficers) {
-        maxResultsOfficers = personalResultsP[key].results.length;
+
+    let maxResultsO = 0;
+    for (const key in personalResultsO) {
+      if (personalResultsO[key].results.length > maxResultsO) {
+        maxResultsO = personalResultsO[key].results.length;
       }
     }
 
-    uprNamesP = [...new Set(uprNamesP)];
-    const sumOfBallsFor5Officers = uprNamesP.length * 60;
-    const sumOfBallsFor4Officers = uprNamesP.length * 40;
-    const sumOfBallsFor3Officers = uprNamesP.length * 20;
+    uprNamesO = [...new Set(uprNamesO)];
+    const sumOfBallsFor5O = uprNamesO.length * 60;
+    const sumOfBallsFor4O = uprNamesO.length * 40;
+    const sumOfBallsFor3O = uprNamesO.length * 20;
 
-    for (const key in personalResultsP) {
-      let sumOfBalls = 0;
-      const element = personalResultsP[key];
+    for (const key in personalResultsO) {
+      let sumOfBallsO = 0;
+      const element = personalResultsO[key];
       for (const result of element.results) {
         if (!result.ball || result.ball == 0) {
-          sumOfBalls = 0;
+          sumOfBallsO = 0;
           break;
         }
-        sumOfBalls = sumOfBalls + result.ball;
+        sumOfBallsO = sumOfBallsO + result.ball;
       }
-      personalResultsP[key].sumOfBalls = sumOfBalls;
-      if (sumOfBalls >= sumOfBallsFor3Officers) {
-        personalResultsP[key].totalOcenka = 3;
+      personalResultsO[key].sumOfBalls = sumOfBallsO;
+      if (sumOfBallsO >= sumOfBallsFor3O) {
+        personalResultsO[key].totalOcenka = 3;
       }
-      if (sumOfBalls >= sumOfBallsFor4Officers) {
-        personalResultsP[key].totalOcenka = 4;
+      if (sumOfBallsO >= sumOfBallsFor4O) {
+        personalResultsO[key].totalOcenka = 4;
       }
-      if (sumOfBalls >= sumOfBallsFor5Officers) {
-        personalResultsP[key].totalOcenka = 5;
+      if (sumOfBallsO >= sumOfBallsFor5O) {
+        personalResultsO[key].totalOcenka = 5;
       }
-      if (!personalResultsP[key].totalOcenka) {
-        personalResultsP[key].totalOcenka = 2;
+      if (!personalResultsO[key].totalOcenka) {
+        personalResultsO[key].totalOcenka = 2;
       }
     }
 
-    for (const key in personalResultsP) {
-      const element = personalResultsP[key].totalOcenka;
+    for (const key in personalResultsO) {
+      const element = personalResultsO[key].totalOcenka;
       switch (element) {
         case 5:
-          data.allTableData.resultsData.officers.great += 1;
+          data.allTableData.resultsData.officers.great
+            ? (data.allTableData.resultsData.officers.great += 1)
+            : (data.allTableData.resultsData.officers.great = 1);
           break;
         case 4:
-          data.allTableData.resultsData.officers.good += 1;
+          data.allTableData.resultsData.officers.good
+            ? (data.allTableData.resultsData.officers.good += 1)
+            : (data.allTableData.resultsData.officers.good = 1);
           break;
         case 3:
-          data.allTableData.resultsData.officers.satisfactory += 1;
+          data.allTableData.resultsData.officers.satisfactory
+            ? (data.allTableData.resultsData.officers.satisfactory += 1)
+            : (data.allTableData.resultsData.officers.satisfactory = 1);
           break;
         case 2:
-          data.allTableData.resultsData.officers.unsatisfactory += 1;
+          data.allTableData.resultsData.officers.unsatisfactory
+            ? (data.allTableData.resultsData.officers.unsatisfactory += 1)
+            : (data.allTableData.resultsData.officers.unsatisfactory = 1);
           break;
         default:
           break;
@@ -984,6 +1054,548 @@ router.get("/allVedomost", async (req, res) => {
     // -------------------------------------------------------------------------------------
     // ------------------------------------- Офицеры ---------------------------------------
     // -------------------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------------------
+    // ---------------------------------- Контрактники -------------------------------------
+    // -------------------------------------------------------------------------------------
+
+    const contractorResults = await UprazhnenieResult.findAll({
+      attributes: [
+        [sequelize.fn("MAX", sequelize.col("date")), "maxDate"],
+        "result",
+        "PersonId",
+      ], // Выбираем атрибуты и находим максимальную дату
+      where: {
+        date: {
+          [Op.between]: [new Date(minDate), new Date(maxDate)], // Фильтруем по дате
+        },
+      },
+      group: ["personId"], // Группируем по personId и uprazhnenieId
+      include: [
+        {
+          model: Person,
+          attributes: ["id", "isMale", "zvanieId", "isV"],
+          where: {
+            isMale: { [Op.or]: [{ [Op.eq]: true }] },
+            isV: {
+              [Op.or]: [{ [Op.eq]: false }, { [Op.eq]: 0 }, { [Op.eq]: null }],
+            },
+          },
+          include: {
+            model: Zvanie,
+            attributes: ["name"],
+            where: {
+              name: [
+                "Рядовой",
+                "Ефрейтор",
+                "Младший сержант",
+                "Сержант",
+                "Старший сержант",
+                "Сержант третьего класса",
+                "Сержант второго класса",
+                "Сержант первого класса",
+                "Штаб-сержант",
+                "Мастер-сержант",
+                "Матрос",
+                "Старший матрос",
+                "Старшина второй статьи",
+                "Старшина первой статьи",
+                "Главный старшина",
+                "Старшина третьего класса",
+                "Старшина второго класса",
+                "Старшина первого класса",
+                "Штаб-старшина",
+                "Мастер-старшина",
+                "Старшина",
+              ],
+            },
+          },
+        },
+        {
+          model: Category,
+          attributes: ["id", "name", "shortName"], // Выбираем только необходимые атрибуты из модели Person
+        },
+        {
+          model: Uprazhnenie,
+          attributes: [
+            "id",
+            "name",
+            "step",
+            "valueToAddAfterMaxResult",
+            "shortName",
+          ], // Выбираем только необходимые атрибуты из модели Person
+        },
+      ],
+    });
+    data.allTableData.resultsData.contracts.checked = contractorResults.length;
+
+    let personalResultsC = {};
+    let uprNamesC = [];
+
+    for (const uprResult of contractorResults) {
+      uprNamesC.push(uprResult.Uprazhnenie.shortName);
+
+      const maxResult = await UprazhnenieStandard.findOne({
+        attributes: [
+          [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
+          "id",
+          "uprazhnenieId",
+          "categoryId",
+          "result",
+        ],
+        where: {
+          uprazhnenieId: uprResult.Uprazhnenie.id,
+          categoryId: uprResult.Category.id,
+        },
+        limit: 1,
+        include: [
+          {
+            model: Uprazhnenie,
+            include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+          },
+        ],
+      });
+
+      const minResult = await UprazhnenieStandard.findOne({
+        attributes: [
+          [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
+          "id",
+          "uprazhnenieId",
+          "categoryId",
+          "result",
+        ],
+        where: {
+          uprazhnenieId: uprResult.Uprazhnenie.id,
+          categoryId: uprResult.Category.id,
+        },
+        limit: 1,
+        include: [
+          {
+            model: Uprazhnenie,
+            include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+          },
+        ],
+      });
+
+      const efficiencyPreference =
+        maxResult.Uprazhnenie.EfficiencyPreference.name;
+      const maxValue = maxResult.dataValues.maxValue;
+      const minValue = minResult.dataValues.minValue;
+      let res;
+      let ball;
+
+      if (efficiencyPreference === "Меньше - лучше") {
+        if (minValue > uprResult.result) {
+          const additionalResultCount = minValue - uprResult.result;
+          res =
+            minResult.result +
+            uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+              (additionalResultCount / uprResult.Uprazhnenie.step);
+        } else {
+          // handle if necessary
+        }
+      }
+      if (efficiencyPreference === "Больше - лучше") {
+        const additionalResultCount = uprResult.result - maxValue;
+
+        res =
+          maxResult.result +
+          uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+            (additionalResultCount / uprResult.Uprazhnenie.step);
+      }
+
+      if (!(uprResult.result > maxValue)) {
+        ball = await UprazhnenieStandard.findOne({
+          where: {
+            uprazhnenieId: uprResult.Uprazhnenie.id,
+            categoryId: uprResult.Category.id,
+            value: uprResult.result,
+          },
+          include: [
+            {
+              model: Uprazhnenie,
+              include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+            },
+          ],
+        });
+      } else {
+        ball = {
+          result: res ? res : 0,
+        };
+      }
+
+      const zvanie = await Zvanie.findOne({
+        where: {
+          id: uprResult.Person.zvanieId,
+        },
+      });
+
+      if (!personalResultsC[uprResult.Person.id]) {
+        const result = {
+          personId: uprResult.Person.id,
+          zvanie: zvanie.name ? zvanie.name : "Ошибка",
+          person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
+          category: uprResult.Category.shortName
+            ? uprResult.Category.shortName
+            : "Ошибка",
+          results: [
+            {
+              uprName: uprResult.Uprazhnenie.shortName,
+              score: uprResult.result,
+              ball: ball ? ball.result : 0,
+            },
+          ],
+        };
+        personalResultsC[uprResult.Person.id] = result;
+      } else {
+        personalResultsC[uprResult.Person.id].results.push({
+          uprName: uprResult.Uprazhnenie.shortName,
+          score: uprResult.result,
+          ball: ball ? ball.result : 0,
+        });
+      }
+    }
+
+    let maxResultsC = 0;
+    for (const key in personalResultsC) {
+      if (personalResultsC[key].results.length > maxResultsC) {
+        maxResultsC = personalResultsC[key].results.length;
+      }
+    }
+
+    uprNamesC = [...new Set(uprNamesC)];
+    const sumOfBallsFor5C = uprNamesC.length * 60;
+    const sumOfBallsFor4C = uprNamesC.length * 40;
+    const sumOfBallsFor3C = uprNamesC.length * 20;
+
+    for (const key in personalResultsC) {
+      let sumOfBallsC = 0;
+      const element = personalResultsC[key];
+      for (const result of element.results) {
+        if (!result.ball || result.ball == 0) {
+          sumOfBallsC = 0;
+          break;
+        }
+        sumOfBallsC = sumOfBallsC + result.ball;
+      }
+      personalResultsC[key].sumOfBalls = sumOfBallsC;
+      if (sumOfBallsC >= sumOfBallsFor3C) {
+        personalResultsC[key].totalOcenka = 3;
+      }
+      if (sumOfBallsC >= sumOfBallsFor4C) {
+        personalResultsC[key].totalOcenka = 4;
+      }
+      if (sumOfBallsC >= sumOfBallsFor5C) {
+        personalResultsC[key].totalOcenka = 5;
+      }
+      if (!personalResultsC[key].totalOcenka) {
+        personalResultsC[key].totalOcenka = 2;
+      }
+    }
+
+    for (const key in personalResultsC) {
+      const element = personalResultsC[key].totalOcenka;
+      switch (element) {
+        case 5:
+          data.allTableData.resultsData.contracts.great
+            ? (data.allTableData.resultsData.contracts.great += 1)
+            : (data.allTableData.resultsData.contracts.great = 1);
+          break;
+        case 4:
+          data.allTableData.resultsData.contracts.good
+            ? (data.allTableData.resultsData.contracts.good += 1)
+            : (data.allTableData.resultsData.contracts.good = 1);
+          break;
+        case 3:
+          data.allTableData.resultsData.contracts.satisfactory
+            ? (data.allTableData.resultsData.contracts.satisfactory += 1)
+            : (data.allTableData.resultsData.contracts.satisfactory = 1);
+          break;
+        case 2:
+          data.allTableData.resultsData.contracts.unsatisfactory
+            ? (data.allTableData.resultsData.contracts.unsatisfactory += 1)
+            : (data.allTableData.resultsData.contracts.unsatisfactory = 1);
+          break;
+        default:
+          break;
+      }
+    }
+    if (data.allTableData.resultsData.contracts.great > 0) {
+      data.allTableData.resultsData.contracts.grade = 5;
+    }
+    if (data.allTableData.resultsData.contracts.good > 0) {
+      data.allTableData.resultsData.contracts.grade = 4;
+    }
+    if (data.allTableData.resultsData.contracts.satisfactory > 0) {
+      data.allTableData.resultsData.contracts.grade = 3;
+    }
+    if (data.allTableData.resultsData.contracts.unsatisfactory > 0) {
+      data.allTableData.resultsData.contracts.grade = 2;
+    }
+
+    // -------------------------------------------------------------------------------------
+    // ---------------------------------- Контрактники -------------------------------------
+    // -------------------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------------------
+    // ---------------------------------- Срочники -----------------------------------------
+    // -------------------------------------------------------------------------------------
+
+    const consResults = await UprazhnenieResult.findAll({
+      attributes: [
+        [sequelize.fn("MAX", sequelize.col("date")), "maxDate"],
+        "result",
+        "PersonId",
+      ],
+      where: {
+        date: {
+          [Op.between]: [new Date(minDate), new Date(maxDate)],
+        },
+      },
+      group: ["personId"],
+      include: [
+        {
+          model: Person,
+          attributes: ["id", "isMale", "zvanieId", "isV"],
+          where: {
+            isMale: { [Op.or]: [{ [Op.eq]: true }] },
+            isV: { [Op.or]: [{ [Op.eq]: true }, { [Op.eq]: 1 }] },
+          },
+        },
+        {
+          model: Category,
+          attributes: ["id", "name", "shortName"],
+        },
+        {
+          model: Uprazhnenie,
+          attributes: [
+            "id",
+            "name",
+            "step",
+            "valueToAddAfterMaxResult",
+            "shortName",
+          ],
+        },
+      ],
+    });
+    data.allTableData.resultsData.conscripts.checked = consResults.length;
+
+    let personalResultsS = {};
+    let uprNamesS = [];
+
+    for (const uprResult of consResults) {
+      uprNamesS.push(uprResult.Uprazhnenie.shortName);
+
+      const maxResult = await UprazhnenieStandard.findOne({
+        attributes: [
+          [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
+          "id",
+          "uprazhnenieId",
+          "categoryId",
+          "result",
+        ],
+        where: {
+          uprazhnenieId: uprResult.Uprazhnenie.id,
+          categoryId: uprResult.Category.id,
+        },
+        limit: 1,
+        include: [
+          {
+            model: Uprazhnenie,
+            include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+          },
+        ],
+      });
+
+      const minResult = await UprazhnenieStandard.findOne({
+        attributes: [
+          [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
+          "id",
+          "uprazhnenieId",
+          "categoryId",
+          "result",
+        ],
+        where: {
+          uprazhnenieId: uprResult.Uprazhnenie.id,
+          categoryId: uprResult.Category.id,
+        },
+        limit: 1,
+        include: [
+          {
+            model: Uprazhnenie,
+            include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+          },
+        ],
+      });
+
+      const efficiencyPreference =
+        maxResult.Uprazhnenie.EfficiencyPreference.name;
+      const maxValue = maxResult.dataValues.maxValue;
+      const minValue = minResult.dataValues.minValue;
+      let res;
+      let ball;
+
+      if (efficiencyPreference === "Меньше - лучше") {
+        if (minValue > uprResult.result) {
+          const additionalResultCount = minValue - uprResult.result;
+          res =
+            minResult.result +
+            uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+              (additionalResultCount / uprResult.Uprazhnenie.step);
+        } else {
+          // Handle other cases if needed
+        }
+      }
+
+      if (efficiencyPreference === "Больше - лучше") {
+        const additionalResultCount = uprResult.result - maxValue;
+
+        res =
+          maxResult.result +
+          uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+            (additionalResultCount / uprResult.Uprazhnenie.step);
+      }
+
+      if (!(uprResult.result > maxValue)) {
+        ball = await UprazhnenieStandard.findOne({
+          where: {
+            uprazhnenieId: uprResult.Uprazhnenie.id,
+            categoryId: uprResult.Category.id,
+            value: uprResult.result,
+          },
+          include: [
+            {
+              model: Uprazhnenie,
+              include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+            },
+          ],
+        });
+      } else {
+        ball = {
+          result: res ? res : 0,
+        };
+      }
+
+      const zvanie = await Zvanie.findOne({
+        where: {
+          id: uprResult.Person.zvanieId,
+        },
+      });
+
+      if (!personalResultsS[uprResult.Person.id]) {
+        const result = {
+          personId: uprResult.Person.id,
+          zvanie: zvanie.name ? zvanie.name : "Ошибка",
+          person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
+          category: uprResult.Category.shortName
+            ? uprResult.Category.shortName
+            : "Ошибка",
+          results: [
+            {
+              uprName: uprResult.Uprazhnenie.shortName,
+              score: uprResult.result,
+              ball: ball ? ball.result : 0,
+            },
+          ],
+        };
+        personalResultsS[uprResult.Person.id] = result;
+      } else {
+        personalResultsS[uprResult.Person.id].results.push({
+          uprName: uprResult.Uprazhnenie.shortName,
+          score: uprResult.result,
+          ball: ball ? ball.result : 0,
+        });
+      }
+    }
+
+    let maxResultsS = 0;
+    for (const key in personalResultsS) {
+      if (personalResultsS[key].results.length > maxResultsS) {
+        maxResultsS = personalResultsS[key].results.length;
+      }
+    }
+
+    uprNamesS = [...new Set(uprNamesS)];
+    const sumOfBallsFor5S = uprNamesS.length * 60;
+    const sumOfBallsFor4S = uprNamesS.length * 40;
+    const sumOfBallsFor3S = uprNamesS.length * 20;
+
+    for (const key in personalResultsS) {
+      let sumOfBallsS = 0;
+      const element = personalResultsS[key];
+      for (const result of element.results) {
+        if (!result.ball || result.ball == 0) {
+          sumOfBallsS = 0;
+          break;
+        }
+        sumOfBallsS = sumOfBallsS + result.ball;
+      }
+      personalResultsS[key].sumOfBalls = sumOfBallsS;
+      if (sumOfBallsS >= sumOfBallsFor3S) {
+        personalResultsS[key].totalOcenka = 3;
+      }
+      if (sumOfBallsS >= sumOfBallsFor4S) {
+        personalResultsS[key].totalOcenka = 4;
+      }
+      if (sumOfBallsS >= sumOfBallsFor5S) {
+        personalResultsS[key].totalOcenka = 5;
+      }
+      if (!personalResultsS[key].totalOcenka) {
+        personalResultsS[key].totalOcenka = 2;
+      }
+    }
+
+    for (const key in personalResultsS) {
+      const element = personalResultsS[key].totalOcenka;
+      switch (element) {
+        case 5:
+          data.allTableData.resultsData.conscripts.great
+            ? (data.allTableData.resultsData.conscripts.great += 1)
+            : (data.allTableData.resultsData.conscripts.great = 1);
+          break;
+        case 4:
+          data.allTableData.resultsData.conscripts.good
+            ? (data.allTableData.resultsData.conscripts.good += 1)
+            : (data.allTableData.resultsData.conscripts.good = 1);
+          break;
+        case 3:
+          data.allTableData.resultsData.conscripts.satisfactory
+            ? (data.allTableData.resultsData.conscripts.satisfactory += 1)
+            : (data.allTableData.resultsData.conscripts.satisfactory = 1);
+          break;
+        case 2:
+          data.allTableData.resultsData.conscripts.unsatisfactory
+            ? (data.allTableData.resultsData.conscripts.unsatisfactory += 1)
+            : (data.allTableData.resultsData.conscripts.unsatisfactory = 1);
+          break;
+        default:
+          break;
+      }
+    }
+    if (data.allTableData.resultsData.conscripts.great > 0) {
+      data.allTableData.resultsData.conscripts.grade = 5;
+    }
+    if (data.allTableData.resultsData.conscripts.good > 0) {
+      data.allTableData.resultsData.conscripts.grade = 4;
+    }
+    if (data.allTableData.resultsData.conscripts.satisfactory > 0) {
+      data.allTableData.resultsData.conscripts.grade = 3;
+    }
+    if (data.allTableData.resultsData.conscripts.unsatisfactory > 0) {
+      data.allTableData.resultsData.conscripts.grade = 2;
+    }
+
+    // -------------------------------------------------------------------------------------
+    // ---------------------------------- Срочники -----------------------------------------
+    // -------------------------------------------------------------------------------------
+
+    data.allGrade = Math.min(...[
+      data.allTableData.resultsData.officers.grade,
+      data.allTableData.resultsData.women.grade,
+      data.allTableData.resultsData.conscripts.grade,
+      data.allTableData.resultsData.contracts.grade
+    ].filter( Number ));
+    data.allTableData.totalGrade = data.allGrade
 
     res.status(200).json({ data: data });
   } catch (error) {
