@@ -2596,6 +2596,12 @@ router.get("/allVedomost", async (req, res) => {
       });
     }
     data.allChecked = data.tableData.length;
+    data.allTableData.personLenght = 0
+
+    for (const _podr of data.tableData) {
+      _podr
+      data.allTableData.personLenght += _podr.personLenght
+    }
 
     res.status(200).json({ data: data });
   } catch (error) {
