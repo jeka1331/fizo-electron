@@ -285,11 +285,11 @@ router.get("/allVedomost", async (req, res) => {
   try {
     let data = {
       allChecked: undefined,
-      allGreat: undefined,
-      allGood: undefined,
-      allSatisfactory: undefined,
-      allUnsatisfactory: undefined,
-      allGrade: undefined,
+      allGreat: 0,
+      allGood: 0,
+      allSatisfactory: 0,
+      allUnsatisfactory: 0,
+      allGrade: 0,
       allTableData: {
         personLenght: undefined,
         allPersonsChecked: undefined,
@@ -330,92 +330,7 @@ router.get("/allVedomost", async (req, res) => {
           },
         },
       },
-      tableData: [
-        {
-          id: 1,
-          podrazdelenie: "ВНВ",
-          personLenght: 40,
-          allPersonsChecked: 40,
-          tpt: 0,
-          totalGrade: 2,
-          resultsData: {
-            officers: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
-            },
-            contracts: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
-            },
-            conscripts: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
-            },
-            women: {
-              checked: 10,
-              great: 1,
-              good: 2,
-              satisfactory: 3,
-              unsatisfactory: 4,
-              grade: 2,
-            },
-          },
-        },
-        {
-          id: undefined,
-          podrazdelenie: undefined,
-          personLenght: undefined,
-          allPersonsChecked: undefined,
-          tpt: undefined,
-          totalGrade: undefined,
-          resultsData: {
-            officers: {
-              checked: undefined,
-              great: undefined,
-              good: undefined,
-              satisfactory: undefined,
-              unsatisfactory: undefined,
-              grade: undefined,
-            },
-            contracts: {
-              checked: undefined,
-              great: undefined,
-              good: undefined,
-              satisfactory: undefined,
-              unsatisfactory: undefined,
-              grade: undefined,
-            },
-            conscripts: {
-              checked: undefined,
-              great: undefined,
-              good: undefined,
-              satisfactory: undefined,
-              unsatisfactory: undefined,
-              grade: undefined,
-            },
-            women: {
-              checked: undefined,
-              great: undefined,
-              good: undefined,
-              satisfactory: undefined,
-              unsatisfactory: undefined,
-              grade: undefined,
-            },
-          },
-        },
-      ],
+      tableData: [],
     };
 
     // let data = {
@@ -1934,11 +1849,11 @@ router.get("/allVedomost", async (req, res) => {
 
       /* #endregion */
 
-      /* #region  contracts podr section */
+      /* #region  contracts  podr section */
 
       const contractorResults = separatedResults[podr]["contracts"];
-      data.allTableData.resultsData.contracts.checked =
-        contractorResults.length;
+      // data.allTableData.resultsData.contracts.checked =
+      //   contractorResults.length;
 
       let personalResultsC = {};
       let uprNamesC = [];
@@ -2152,28 +2067,506 @@ router.get("/allVedomost", async (req, res) => {
 
       /* #endregion */
 
+      /* #region  officers   podr section */
 
+      const officerResults = separatedResults[podr]["officers"];
+      // data.allTableData.resultsData.officers.checked = officerResults.length;
 
+      let personalResultsO = {};
+      let uprNamesO = [];
+
+      for (const uprResult of officerResults) {
+        uprNamesO.push(uprResult.Uprazhnenie.shortName);
+
+        const maxResult = await UprazhnenieStandard.findOne({
+          attributes: [
+            [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
+            "id",
+            "uprazhnenieId",
+            "categoryId",
+            "result",
+          ],
+          where: {
+            uprazhnenieId: uprResult.Uprazhnenie.id,
+            categoryId: uprResult.Category.id,
+          },
+          limit: 1,
+          include: [
+            {
+              model: Uprazhnenie,
+              include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+            },
+          ],
+        });
+
+        const minResult = await UprazhnenieStandard.findOne({
+          attributes: [
+            [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
+            "id",
+            "uprazhnenieId",
+            "categoryId",
+            "result",
+          ],
+          where: {
+            uprazhnenieId: uprResult.Uprazhnenie.id,
+            categoryId: uprResult.Category.id,
+          },
+          limit: 1,
+          include: [
+            {
+              model: Uprazhnenie,
+              include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+            },
+          ],
+        });
+
+        const efficiencyPreference =
+          maxResult.Uprazhnenie.EfficiencyPreference.name;
+        const maxValue = maxResult.dataValues.maxValue;
+        const minValue = minResult.dataValues.minValue;
+        let res;
+        let ball;
+
+        if (efficiencyPreference === "Меньше - лучше") {
+          if (minValue > uprResult.result) {
+            const additionalResultCount = minValue - uprResult.result;
+            res =
+              minResult.result +
+              uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+                (additionalResultCount / uprResult.Uprazhnenie.step);
+          } else {
+            // handle if necessary
+          }
+        }
+        if (efficiencyPreference === "Больше - лучше") {
+          const additionalResultCount = uprResult.result - maxValue;
+
+          res =
+            maxResult.result +
+            uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+              (additionalResultCount / uprResult.Uprazhnenie.step);
+        }
+
+        if (!(uprResult.result > maxValue)) {
+          ball = await UprazhnenieStandard.findOne({
+            where: {
+              uprazhnenieId: uprResult.Uprazhnenie.id,
+              categoryId: uprResult.Category.id,
+              value: uprResult.result,
+            },
+            include: [
+              {
+                model: Uprazhnenie,
+                include: [
+                  { model: EfficiencyPreference, attributes: ["name"] },
+                ],
+              },
+            ],
+          });
+        } else {
+          ball = {
+            result: res ? res : 0,
+          };
+        }
+
+        const zvanie = await Zvanie.findOne({
+          where: {
+            id: uprResult.Person.zvanieId,
+          },
+        });
+
+        if (!personalResultsO[uprResult.Person.id]) {
+          const result = {
+            personId: uprResult.Person.id,
+            zvanie: zvanie.name ? zvanie.name : "Ошибка",
+            person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
+            category: uprResult.Category.shortName
+              ? uprResult.Category.shortName
+              : "Ошибка",
+            results: [
+              {
+                uprName: uprResult.Uprazhnenie.shortName,
+                score: uprResult.result,
+                ball: ball ? ball.result : 0,
+              },
+            ],
+          };
+          personalResultsO[uprResult.Person.id] = result;
+        } else {
+          personalResultsO[uprResult.Person.id].results.push({
+            uprName: uprResult.Uprazhnenie.shortName,
+            score: uprResult.result,
+            ball: ball ? ball.result : 0,
+          });
+        }
+      }
+
+      let maxResultsO = 0;
+      for (const key in personalResultsO) {
+        if (personalResultsO[key].results.length > maxResultsO) {
+          maxResultsO = personalResultsO[key].results.length;
+        }
+      }
+
+      uprNamesO = [...new Set(uprNamesO)];
+      const sumOfBallsFor5O = uprNamesO.length * 60;
+      const sumOfBallsFor4O = uprNamesO.length * 40;
+      const sumOfBallsFor3O = uprNamesO.length * 20;
+
+      for (const key in personalResultsO) {
+        let sumOfBallsO = 0;
+        const element = personalResultsO[key];
+        for (const result of element.results) {
+          if (!result.ball || result.ball == 0) {
+            sumOfBallsO = 0;
+            break;
+          }
+          sumOfBallsO = sumOfBallsO + result.ball;
+        }
+        personalResultsO[key].sumOfBalls = sumOfBallsO;
+        if (sumOfBallsO >= sumOfBallsFor3O) {
+          personalResultsO[key].totalOcenka = 3;
+        }
+        if (sumOfBallsO >= sumOfBallsFor4O) {
+          personalResultsO[key].totalOcenka = 4;
+        }
+        if (sumOfBallsO >= sumOfBallsFor5O) {
+          personalResultsO[key].totalOcenka = 5;
+        }
+        if (!personalResultsO[key].totalOcenka) {
+          personalResultsO[key].totalOcenka = 2;
+        }
+      }
+      let dataAllTableDataResultsDataOfficersGreat = 0;
+      let dataAllTableDataResultsDataOfficersGood = 0;
+      let dataAllTableDataResultsDataOfficersSatisfactory = 0;
+      let dataAllTableDataResultsDataOfficersUnsatisfactory = 0;
+      let dataAllTableDataResultsDataOfficersGrade = "-";
+      for (const key in personalResultsO) {
+        const element = personalResultsO[key].totalOcenka;
+        switch (element) {
+          case 5:
+            dataAllTableDataResultsDataOfficersGreat
+              ? (dataAllTableDataResultsDataOfficersGreat += 1)
+              : (dataAllTableDataResultsDataOfficersGreat = 1);
+            break;
+          case 4:
+            dataAllTableDataResultsDataOfficersGood
+              ? (dataAllTableDataResultsDataOfficersGood += 1)
+              : (dataAllTableDataResultsDataOfficersGood = 1);
+            break;
+          case 3:
+            dataAllTableDataResultsDataOfficersSatisfactory
+              ? (dataAllTableDataResultsDataOfficersSatisfactory += 1)
+              : (dataAllTableDataResultsDataOfficersSatisfactory = 1);
+            break;
+          case 2:
+            dataAllTableDataResultsDataOfficersUnsatisfactory
+              ? (dataAllTableDataResultsDataOfficersUnsatisfactory += 1)
+              : (dataAllTableDataResultsDataOfficersUnsatisfactory = 1);
+            break;
+          default:
+            break;
+        }
+      }
+
+      if (dataAllTableDataResultsDataOfficersGreat > 0) {
+        dataAllTableDataResultsDataOfficersGrade = 5;
+      }
+      if (dataAllTableDataResultsDataOfficersGood > 0) {
+        dataAllTableDataResultsDataOfficersGrade = 4;
+      }
+      if (dataAllTableDataResultsDataOfficersSatisfactory > 0) {
+        dataAllTableDataResultsDataOfficersGrade = 3;
+      }
+      if (dataAllTableDataResultsDataOfficersUnsatisfactory > 0) {
+        dataAllTableDataResultsDataOfficersGrade = 2;
+      }
+
+      /* #endregion */
+
+      /* #region  women      podr section */
+
+      const uprResults = separatedResults[podr]["women"];
+
+      let personalResultsP = {};
+      let uprNamesP = [];
+
+      for (const uprResult of uprResults) {
+        uprNamesP.push(uprResult.Uprazhnenie.shortName);
+
+        const maxResult = await UprazhnenieStandard.findOne({
+          attributes: [
+            [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
+            "id",
+            "uprazhnenieId",
+            "categoryId",
+            "result",
+          ],
+          where: {
+            uprazhnenieId: uprResult.Uprazhnenie.id,
+            categoryId: uprResult.Category.id,
+          },
+          limit: 1,
+          include: [
+            {
+              model: Uprazhnenie,
+              include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+            },
+          ],
+        });
+
+        const minResult = await UprazhnenieStandard.findOne({
+          attributes: [
+            [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
+            "id",
+            "uprazhnenieId",
+            "categoryId",
+            "result",
+          ],
+          where: {
+            uprazhnenieId: uprResult.Uprazhnenie.id,
+            categoryId: uprResult.Category.id,
+          },
+          limit: 1,
+          include: [
+            {
+              model: Uprazhnenie,
+              include: [{ model: EfficiencyPreference, attributes: ["name"] }],
+            },
+          ],
+        });
+        const efficiencyPreference =
+          maxResult.Uprazhnenie.EfficiencyPreference.name;
+        const maxValue = maxResult.dataValues.maxValue;
+        const minValue = minResult.dataValues.minValue;
+        let res;
+        let ball;
+
+        if (efficiencyPreference === "Меньше - лучше") {
+          if (minValue > uprResult.result) {
+            const additionalResultCount = minValue - uprResult.result;
+            res =
+              minResult.result +
+              uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+                (additionalResultCount / uprResult.Uprazhnenie.step);
+          } else {
+          }
+        }
+        if (efficiencyPreference === "Больше - лучше") {
+          const additionalResultCount = uprResult.result - maxValue;
+
+          res =
+            maxResult.result +
+            uprResult.Uprazhnenie.valueToAddAfterMaxResult *
+              (additionalResultCount / uprResult.Uprazhnenie.step);
+        }
+
+        if (!(uprResult.result > maxValue)) {
+          ball = await UprazhnenieStandard.findOne({
+            where: {
+              uprazhnenieId: uprResult.Uprazhnenie.id,
+              categoryId: uprResult.Category.id,
+              value: uprResult.result,
+            },
+            include: [
+              {
+                model: Uprazhnenie,
+                include: [
+                  { model: EfficiencyPreference, attributes: ["name"] },
+                ],
+              },
+            ],
+          });
+        } else {
+          ball = {
+            result: res ? res : 0,
+          };
+        }
+
+        const zvanie = await Zvanie.findOne({
+          where: {
+            id: uprResult.Person.zvanieId,
+          },
+        });
+
+        if (!personalResultsP[uprResult.Person.id]) {
+          const result = {
+            personId: uprResult.Person.id,
+            zvanie: zvanie.name ? zvanie.name : "Ошибка",
+            person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
+            category: uprResult.Category.shortName
+              ? uprResult.Category.shortName
+              : "Ошибка",
+            results: [
+              {
+                uprName: uprResult.Uprazhnenie.shortName,
+                score: uprResult.result,
+                ball: ball ? ball.result : 0,
+              },
+            ],
+          };
+          personalResultsP[uprResult.Person.id] = result;
+        } else {
+          personalResultsP[uprResult.Person.id].results.push({
+            uprName: uprResult.Uprazhnenie.shortName,
+            score: uprResult.result,
+            ball: ball ? ball.result : 0,
+          });
+        }
+      }
+      let maxResults = 0;
+      for (const key in personalResultsP) {
+        if (personalResultsP[key].results.length > maxResults) {
+          maxResults = personalResultsP[key].results.length;
+        }
+      }
+
+      uprNamesP = [...new Set(uprNamesP)];
+      const sumOfBallsFor5 = uprNamesP.length * 60;
+      const sumOfBallsFor4 = uprNamesP.length * 40;
+      const sumOfBallsFor3 = uprNamesP.length * 20;
+
+      for (const key in personalResultsP) {
+        let sumOfBalls = 0;
+        const element = personalResultsP[key];
+        for (const result of element.results) {
+          if (!result.ball || result.ball == 0) {
+            sumOfBalls = 0;
+            break;
+          }
+          sumOfBalls = sumOfBalls + result.ball;
+        }
+        personalResultsP[key].sumOfBalls = sumOfBalls;
+        if (sumOfBalls >= sumOfBallsFor3) {
+          personalResultsP[key].totalOcenka = 3;
+        }
+        if (sumOfBalls >= sumOfBallsFor4) {
+          personalResultsP[key].totalOcenka = 4;
+        }
+        if (sumOfBalls >= sumOfBallsFor5) {
+          personalResultsP[key].totalOcenka = 5;
+        }
+        if (!personalResultsP[key].totalOcenka) {
+          personalResultsP[key].totalOcenka = 2;
+        }
+      }
+
+      let dataAllTableDataResultsDataWomenGreat = 0;
+      let dataAllTableDataResultsDataWomenGood = 0;
+      let dataAllTableDataResultsDataWomenSatisfactory = 0;
+      let dataAllTableDataResultsDataWomenUnsatisfactory = 0;
+      let dataAllTableDataResultsDataWomenGrade = "-";
+
+      for (const key in personalResultsP) {
+        const element = personalResultsP[key].totalOcenka;
+        switch (element) {
+          case 5:
+            dataAllTableDataResultsDataWomenGreat
+              ? (dataAllTableDataResultsDataWomenGreat += 1)
+              : (dataAllTableDataResultsDataWomenGreat = 1);
+            break;
+          case 4:
+            dataAllTableDataResultsDataWomenGood
+              ? (dataAllTableDataResultsDataWomenGood += 1)
+              : (dataAllTableDataResultsDataWomenGood = 1);
+            break;
+          case 3:
+            dataAllTableDataResultsDataWomenSatisfactory
+              ? (dataAllTableDataResultsDataWomenSatisfactory += 1)
+              : (dataAllTableDataResultsDataWomenSatisfactory = 1);
+            break;
+          case 2:
+            dataAllTableDataResultsDataWomenUnsatisfactory
+              ? (dataAllTableDataResultsDataWomenUnsatisfactory += 1)
+              : (dataAllTableDataResultsDataWomenUnsatisfactory = 1);
+            break;
+          default:
+            break;
+        }
+      }
+
+      data.allTableData.resultsData.women.grade = "-";
+      if (dataAllTableDataResultsDataWomenGreat > 0) {
+        dataAllTableDataResultsDataWomenGrade = 5;
+      }
+      if (dataAllTableDataResultsDataWomenGood > 0) {
+        dataAllTableDataResultsDataWomenGrade = 4;
+      }
+      if (dataAllTableDataResultsDataWomenSatisfactory > 0) {
+        dataAllTableDataResultsDataWomenGrade = 3;
+      }
+      if (dataAllTableDataResultsDataWomenUnsatisfactory > 0) {
+        dataAllTableDataResultsDataWomenGrade = 2;
+      }
+
+      /* #endregion */
+
+      dataAllGrade = Math.min(
+        ...[
+          dataAllTableDataResultsDataOfficersGrade,
+          dataAllTableDataResultsDataWomenGrade,
+          dataAllTableDataResultsDataConscriptsGrade,
+          dataAllTableDataResultsDataConscriptsGrade,
+        ].filter(Number)
+      );
+      switch (dataAllGrade) {
+        case 5:
+          data.allGreat += 1;
+          break;
+        case 4:
+          data.allGood += 1;
+          break;
+        case 3:
+          data.allSatisfactory += 1;
+          break;
+        case 2:
+          data.allUnsatisfactory += 1;
+          break;
+
+        default:
+          break;
+      }
+
+      const podrIds = (
+        await Podrazdelenie.findAll({
+          where: {
+            name: {
+              [Op.like]: `%${podr}%`,
+            },
+          },
+          raw: true,
+        })
+      ).map(({ id }) => id);
+
+      const personsCountPodr = await Person.count({
+        where: {
+          podrazdelenieId: {
+            [Op.or]: podrIds,
+          },
+        },
+      });
 
       data.tableData.push({
-        id: undefined,
+        id:
+          data.tableData.length > 0 ? data.tableData.slice(-1)[0]["id"] + 1 : 1,
         podrazdelenie: podr,
-        personLenght: undefined,
+        personLenght: personsCountPodr,
         allPersonsChecked:
           separatedResults[podr]["women"].length +
           separatedResults[podr]["contracts"].length +
           separatedResults[podr]["conscripts"].length +
           separatedResults[podr]["officers"].length,
         tpt: undefined,
-        totalGrade: undefined,
+        totalGrade: dataAllGrade,
         resultsData: {
           officers: {
             checked: separatedResults[podr]["officers"].length,
-            great: undefined,
-            good: undefined,
-            satisfactory: undefined,
-            unsatisfactory: undefined,
-            grade: undefined,
+            great: dataAllTableDataResultsDataOfficersGreat,
+            good: dataAllTableDataResultsDataOfficersGood,
+            satisfactory: dataAllTableDataResultsDataOfficersSatisfactory,
+            unsatisfactory: dataAllTableDataResultsDataOfficersUnsatisfactory,
+            grade: dataAllTableDataResultsDataOfficersGrade,
           },
           contracts: {
             checked: separatedResults[podr]["contracts"].length,
@@ -2193,15 +2586,16 @@ router.get("/allVedomost", async (req, res) => {
           },
           women: {
             checked: separatedResults[podr]["women"].length,
-            great: undefined,
-            good: undefined,
-            satisfactory: undefined,
-            unsatisfactory: undefined,
-            grade: undefined,
+            great: dataAllTableDataResultsDataWomenGreat,
+            good: dataAllTableDataResultsDataWomenGood,
+            satisfactory: dataAllTableDataResultsDataWomenSatisfactory,
+            unsatisfactory: dataAllTableDataResultsDataWomenUnsatisfactory,
+            grade: dataAllTableDataResultsDataWomenGrade,
           },
         },
       });
     }
+    data.allChecked = data.tableData.length;
 
     res.status(200).json({ data: data });
   } catch (error) {
