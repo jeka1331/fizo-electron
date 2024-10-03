@@ -74,6 +74,25 @@ const UprazhnenieResult = sequelize.define("UprazhnenieResult", {
   result: DataTypes.INTEGER,
   date: DataTypes.DATE,
 });
+
+const FixedUpr = sequelize.define("FixedUpr", {
+  date: DataTypes.DATE,
+});
+
+Uprazhnenie.hasMany(FixedUpr, {
+  foreignKey: "UprazhnenieId",
+});
+FixedUpr.belongsTo(Uprazhnenie, {
+  foreignKey: "UprazhnenieId",
+});
+
+Category.hasMany(FixedUpr, {
+  foreignKey: "CategoryId",
+});
+FixedUpr.belongsTo(Category, {
+  foreignKey: "CategoryId",
+});
+
 Person.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Person);
 EfficiencyPreference.hasMany(Uprazhnenie);
@@ -124,4 +143,5 @@ module.exports = {
   Uprazhnenie,
   UprazhnenieRealValuesType,
   EfficiencyPreference,
+  FixedUpr
 };

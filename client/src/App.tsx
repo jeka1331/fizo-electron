@@ -28,6 +28,7 @@ import { UprazhnenieCreate, UprazhnenieEdit, UprazhnenieIcon, UprazhnenieList } 
 import { UprazhnenieStandardCreate, UprazhnenieStandardEdit, UprazhnenieStandardIcon, UprazhnenieStandardList } from "./resources/uprazhneniya-standards";
 import { UprazhnenieResultCreate, UprazhnenieResultEdit, UprazhnenieResultIcon, UprazhnenieResultList } from "./resources/uprazhneniya-results";
 import { EfficiencyPreferenceCreate, EfficiencyPreferenceEdit, EfficiencyPreferenceIcon, EfficiencyPreferenceList } from "./resources/efficiencyPreferences";
+import { FixedUprCreate, FixedUprEdit, FixedUprIcon, FixedUprList } from "./resources/fixed-uprs";
 
 
 const translations = { ru, kz };
@@ -52,7 +53,7 @@ export const App = () => (
       create={PersonCreate}
 
       icon={PersonIcon}
-      // show={ShowGuesser}
+    // show={ShowGuesser}
     />
     <Resource
       name="uprazhnenieRealValuesTypes"
@@ -61,8 +62,8 @@ export const App = () => (
       create={UprazhnenieTypeCreate}
 
 
-      // icon={bookI}
-      // show={ShowGuesser}
+    // icon={bookI}
+    // show={ShowGuesser}
     />
     <Resource
       name="podrazdeleniya"
@@ -78,10 +79,10 @@ export const App = () => (
       list={ZvanieList}
       create={ZvanieCreate}
       edit={ZvanieEdit}
-      
+
       icon={StarIcon}
-      // edit={PersonEdit}
-      // show={ShowGuesser}
+    // edit={PersonEdit}
+    // show={ShowGuesser}
     />
     <Resource
       name="categories"
@@ -116,12 +117,19 @@ export const App = () => (
 
     />
     <Resource
-      name="uprazhnenieResults"
-      list={UprazhnenieResultList}
-      edit={UprazhnenieResultEdit}
-      create={UprazhnenieResultCreate}
-      icon={UprazhnenieResultIcon}
+      name="uprazhnenieResults" 
+      list={UprazhnenieResultList} 
+      edit={UprazhnenieResultEdit} 
+      create={UprazhnenieResultCreate} 
+      icon={UprazhnenieResultIcon} 
+    />
 
+    <Resource 
+      name="fixedUpr" 
+      list={FixedUprList} 
+      edit={FixedUprEdit} 
+      create={FixedUprCreate} 
+      icon={FixedUprIcon} 
     />
 
     <Resource
