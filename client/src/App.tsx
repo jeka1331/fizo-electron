@@ -29,6 +29,7 @@ import { UprazhnenieStandardCreate, UprazhnenieStandardEdit, UprazhnenieStandard
 import { UprazhnenieResultCreate, UprazhnenieResultEdit, UprazhnenieResultIcon, UprazhnenieResultList } from "./resources/uprazhneniya-results";
 import { EfficiencyPreferenceCreate, EfficiencyPreferenceEdit, EfficiencyPreferenceIcon, EfficiencyPreferenceList } from "./resources/efficiencyPreferences";
 import { FixedUprCreate, FixedUprEdit, FixedUprIcon, FixedUprList } from "./resources/fixed-uprs";
+import { passingInMonthList, passingInMonthIcon } from "./resources/passingInMonth";
 
 
 const translations = { ru, kz };
@@ -131,6 +132,13 @@ export const App = () => (
       create={FixedUprCreate} 
       icon={FixedUprIcon} 
     />
+    
+    <Resource
+      name="passingInMonth"
+      list={passingInMonthList}
+      icon={passingInMonthIcon}
+
+    />
 
     <Resource
       name="Documents"
@@ -138,6 +146,7 @@ export const App = () => (
       icon={DocumentsIcon}
 
     />
+    
     {/* <LanguagePicker /> */}
   </Admin>
 );
