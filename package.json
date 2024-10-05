@@ -10,7 +10,7 @@
     "buildwin": "cd client && yarn build && cd .. && electron-builder --win",
     "package": "cd client && yarn install --frozen-lockfile && yarn build && cd .. && npm ci && electron-forge package",
     "make": "cd client && yarn install --frozen-lockfile && yarn build && cd .. && npm ci && electron-forge make"
-},
+  },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
@@ -71,6 +71,7 @@
     "@electron-forge/maker-deb": "^7.2.0",
     "@electron-forge/maker-squirrel": "^7.2.0",
     "@electron-forge/maker-zip": "^7.2.0",
+    "@types/cors": "^2.8.17",
     "electron": "^28.1.4"
   },
   "config": {
