@@ -1629,7 +1629,7 @@ router.get("/allVedomost", async (req, res) => {
     }
 
     for (const podr of Object.keys(separatedResults)) {
-      console.log(podr, separatedResults[podr]);
+      // console.log(podr, separatedResults[podr]);
 
       /* #region  conscripts podr section */
       const consResults = separatedResults[podr]["conscripts"];

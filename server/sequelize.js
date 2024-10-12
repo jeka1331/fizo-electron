@@ -1,12 +1,13 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const database_init = (dialect, storage) => {
+const database_init = (dialect, storage, logs) => {
   const sequelize = new Sequelize({
     dialect: dialect, // Выбор диалекта
     storage: storage, // Путь к файлу базы данных SQLite
     define: {
       timestamps: false, // Отключить создание полей createdAt и updatedAt
     },
+    logging: logs,
   });
   // Определение модели "Person"
   const Zvanie = sequelize.define("Zvanie", {
@@ -125,8 +126,12 @@ const database_init = (dialect, storage) => {
     EfficiencyPreference: EfficiencyPreference,
   }
 };
-
-const dbDefinition = database_init("sqlite", "mydatabase.db");
+let dbPath = 'mydatabase.db'
+const node_env = process.env.NODE_ENV;
+if (node_env == 'test') {
+  dbPath = 'test.db'
+}
+const dbDefinition = database_init("sqlite", dbPath, false);
 
 
 const UprazhnenieResult = dbDefinition.UprazhnenieResult
@@ -154,4 +159,6 @@ module.exports = {
   Uprazhnenie,
   UprazhnenieRealValuesType,
   EfficiencyPreference,
+
+  dbPath
 };

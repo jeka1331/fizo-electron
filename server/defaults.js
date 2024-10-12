@@ -9,15 +9,15 @@ const {
   UprazhnenieStandard,
 } = require("./sequelize");
 
-const fillDefaultsEfficiencyPreferences = () => {
-  EfficiencyPreference.bulkCreate([
+const fillDefaultsEfficiencyPreferences = (model) => {
+  model.bulkCreate([
     { id: 1, name: "Больше - лучше" },
     { id: 2, name: "Меньше - лучше" },
-  ]);
+  ], {ignoreDuplicates: true});
 };
 
-const fillDefaultsPodrazdeleniya = () => {
-  Podrazdelenie.bulkCreate([
+const fillDefaultsPodrazdeleniya = (model) => {
+  model.bulkCreate([
     { id: 1, name: "НФ, НК || Начальники факультетов || ФВО" },
     { id: 2, name: "НФ, НК || Начальники факультетов || ФСВ" },
     { id: 3, name: "НФ, НК || Начальники факультетов || ФНГ" },
@@ -112,8 +112,8 @@ const fillDefaultsPodrazdeleniya = () => {
   ]);
 };
 
-const fillDefaultsPersons = () => {
-  Person.bulkCreate([
+const fillDefaultsPersons = (model) => {
+  model.bulkCreate([
     {
       zvanieId: 16,
       isMale: true,
@@ -2166,8 +2166,8 @@ const fillDefaultsPersons = () => {
   ]);
 };
 
-const fillDefaultsZvanie = () => {
-  Zvanie.bulkCreate([
+const fillDefaultsZvanie = (model) => {
+  model.bulkCreate([
     { id: 1, name: "Рядовой" },
     { id: 2, name: "Ефрейтор" },
     { id: 3, name: "Младший сержант" },
@@ -2213,8 +2213,8 @@ const fillDefaultsZvanie = () => {
   ]);
 };
 
-const fillDefaultsCategories = () => {
-  Category.bulkCreate([
+const fillDefaultsCategories = (model) => {
+  model.bulkCreate([
     { id: 1, name: "Первая среди мужчин", shortName: "1(м)" },
     { id: 2, name: "Вторая среди мужчин", shortName: "2(м)" },
     { id: 3, name: "Третья среди мужчин", shortName: "3(м)" },
@@ -2453,8 +2453,8 @@ const fillDefaultsCategories = () => {
   ]);
 };
 
-const fillDefaultsUprazhnenieRealValuesTypes = () => {
-  UprazhnenieRealValuesType.bulkCreate([
+const fillDefaultsUprazhnenieRealValuesTypes = (model) => {
+  model.bulkCreate([
     { id: 1, name: "Секунда", shortName: "сек." },
     { id: 2, name: "Количество повторений", shortName: "кол-во повт-й" },
     { id: 3, name: "Цикл", shortName: "цикл(ов)" },
@@ -2462,8 +2462,8 @@ const fillDefaultsUprazhnenieRealValuesTypes = () => {
   ]);
 };
 
-const fillDefaultsUprazhneniya = () => {
-  Uprazhnenie.bulkCreate([
+const fillDefaultsUprazhneniya = (model) => {
+  model.bulkCreate([
     {
       id: 1,
       name: "Подтягивание на перекладине",
@@ -2800,8 +2800,8 @@ const fillDefaultsUprazhneniya = () => {
   ]);
 };
 
-const fillDefaultsUprazhnenieStandards = () => {
-  UprazhnenieStandard.bulkCreate([
+const fillDefaultsUprazhnenieStandards = (model) => {
+  model.bulkCreate([
     {
       uprazhnenieId: 5,
       categoryId: 1,

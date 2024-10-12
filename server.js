@@ -74,7 +74,8 @@ sequelize
             fillDefaultsCategories();
             fillDefaultsPersons();
             fillDefaultsUprazhnenieRealValuesTypes();
-            fillDefaultsUprazhneniya(), fillDefaultsUprazhnenieStandards();
+            fillDefaultsUprazhneniya() 
+            fillDefaultsUprazhnenieStandards();
             server = appExpress.listen(3333, () => {
               console.log("Сервер запущен на порту 3333");
             });
