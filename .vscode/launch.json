@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+      
       {
         "name": "Server Debug",
         "type": "node",
@@ -8,6 +9,15 @@
         "cwd": "${workspaceFolder}",
         "runtimeExecutable": "npm",
         "runtimeArgs": ["run", "server"]
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Server Debug Nodemon",
+        "runtimeExecutable": "nodemon",
+        "program": "${workspaceFolder}/server.js", // Replace with your entry file
+        "restart": false,
+        "skipFiles": ["<node_internals>/**"]
       },
       {
         "name": "Client Debug",
