@@ -27,7 +27,7 @@ const {
 } = require("./server/defaults");
 if (require("electron-squirrel-startup")) app.quit();
 const corsOptions = {
-  origin: ["http://192.168.0.117:5173", "http://localhost:5173"],
+  origin: ["http://192.168.0.117:5173", "http://localhost:5173", "https://literate-space-capybara-4wv5jp5vrxj37vw6-5175.app.github.dev"],
 
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   allowedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
@@ -63,7 +63,9 @@ let server;
 
 // Синхронизация с базой данных и запуск сервера
 sequelize
-  .sync()
+  .sync(
+    // {force: true}
+  )
   .then(
     () => {
       let efficiencyPreferencesCount;
