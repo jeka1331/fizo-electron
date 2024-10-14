@@ -29,7 +29,7 @@ const personFilters = [
   // eslint-disable-next-line react/jsx-key
   <TextInput source="lName" />,
   // eslint-disable-next-line react/jsx-key
-  <ReferenceInput source="zvanieId" reference="zvaniya">
+  <ReferenceInput source="ZvanieId" reference="zvaniya">
     <AutocompleteInput optionText="name" />
   </ReferenceInput>,
 ];
@@ -42,18 +42,18 @@ export const PersonList = () => (
       <TextField source="fName" />
       <TextField source="sName" />
       {/* <DateField source="dob" /> */}
-      {/* <ReferenceField source="zvanieId"  reference="zvaniya"/> */}
+      {/* <ReferenceField source="ZvanieId"  reference="zvaniya"/> */}
       <ReferenceField
-        source="zvanieId"
+        source="ZvanieId"
         reference="zvaniya"
         emptyText="Служащий ВС РК"
       >
         <TextField source="name" />
       </ReferenceField>
-      <ReferenceField source="podrazdelenieId" reference="podrazdeleniya">
+      <ReferenceField source="PodrazdelenieId" reference="podrazdeleniya">
         <TextField source="name" />
       </ReferenceField>
-      <ReferenceField source="categoryId" reference="categories">
+      <ReferenceField source="CategoryId" reference="categories">
         <TextField source="name" />
       </ReferenceField>
       <BooleanField
@@ -117,14 +117,14 @@ export const PersonEdit = () => (
       <TextInput source="fName" fullWidth />
       <TextInput source="sName" fullWidth />
       <DateInput source="dob" fullWidth />
-      {/* <ReferenceInput source="zvanieId" reference="zvaniya" /> */}
-      <ReferenceInput source="zvanieId" reference="zvaniya">
+      {/* <ReferenceInput source="ZvanieId" reference="zvaniya" /> */}
+      <ReferenceInput source="ZvanieId" reference="zvaniya">
         <SelectInput optionText="name" fullWidth />
       </ReferenceInput>
-      <ReferenceInput source="podrazdelenieId" reference="podrazdeleniya">
+      <ReferenceInput source="PodrazdelenieId" reference="podrazdeleniya">
         <SelectInput optionText="name" fullWidth />
       </ReferenceInput>
-      <ReferenceInput source="categoryId" reference="categories">
+      <ReferenceInput source="CategoryId" reference="categories">
         <AutocompleteInput
           optionText={categoryOptionText}
           filterToQuery={categoryFilterToQuery}
@@ -156,13 +156,13 @@ export const PersonCreate = () => {
         <TextInput source="fName" required={true} />
         <TextInput source="sName" />
         <DateInput source="dob" required={true} />
-        <ReferenceInput source="zvanieId" reference="zvaniya" required={true}>
+        <ReferenceInput source="ZvanieId" reference="zvaniya" required={true}>
           <SelectInput optionText="name" />
         </ReferenceInput>
-        <ReferenceInput source="podrazdelenieId" reference="podrazdeleniya">
+        <ReferenceInput source="PodrazdelenieId" reference="podrazdeleniya">
           <SelectInput optionText="name" />
         </ReferenceInput>
-        <ReferenceInput source="categoryId" reference="categories">
+        <ReferenceInput source="CategoryId" reference="categories">
           <AutocompleteInput
             optionText={categoryOptionText}
             filterToQuery={categoryFilterToQuery}

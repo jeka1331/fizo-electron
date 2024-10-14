@@ -703,13 +703,13 @@ router.post("/person", async (req, res) => {
     //   updatedAt: '2024-03-01T05:22:58.741Z'
     // }
     let person = req.body;
-    const zvanie = await Zvanie.findByPk(person["zvanieId"]);
+    const zvanie = await Zvanie.findByPk(person["ZvanieId"]);
     person["zvanie"] = zvanie.name ? zvanie.name : "";
     const podrazdelenie = await Podrazdelenie.findByPk(
-      person["podrazdelenieId"]
+      person["PodrazdelenieId"]
     );
     person["podrazdelenie"] = podrazdelenie.name ? podrazdelenie.name : "";
-    const category = await Category.findByPk(person["categoryId"]);
+    const category = await Category.findByPk(person["CategoryId"]);
     person["category"] = category.name ? category.name : "";
     person.fioWithInitials = `${person.lName} ${person.fName[0]}.${person.sName[0]}.`;
 
@@ -773,13 +773,13 @@ router.post("/podrazdelenie", async (req, res) => {
     });
     // console.log(persons)
     for (const element of persons) {
-      const zvanie = await Zvanie.findByPk(element["zvanieId"]);
+      const zvanie = await Zvanie.findByPk(element["ZvanieId"]);
       element["zvanie"] = zvanie.name ? zvanie.name : "";
       const podrazdelenie = await Podrazdelenie.findByPk(
-        element["podrazdelenieId"]
+        element["PodrazdelenieId"]
       );
       element["podrazdelenie"] = podrazdelenie.name ? podrazdelenie.name : "";
-      const category = await Category.findByPk(element["categoryId"]);
+      const category = await Category.findByPk(element["CategoryId"]);
       element["category"] = category.name ? category.name : "";
       element.fioWithInitials = `${element.lName} ${element.fName[0]}.${element.sName[0]}.`;
     }

@@ -41,9 +41,9 @@ router.get("/", async (req, res) => {
       //         [Op.like]: `%${where.lName}%`,
       //       },
       //     } : {},
-      //     where.zvanieId ? {
+      //     where.ZvanieId ? {
       //       zvanieId: {
-      //         [Op.eq]: where.zvanieId,
+      //         [Op.eq]: where.ZvanieId,
       //       },
       //     } : {},
       //   ],

@@ -31,7 +31,7 @@ export const passingInMonthList = () => (
   <List>
     <Datagrid>
       <TextField source="id" />
-      <ReferenceField source="podrazdelenieId" reference="podrazdeleniya">
+      <ReferenceField source="PodrazdelenieId" reference="podrazdeleniya">
         <TextField source="name" />
       </ReferenceField>
       <ReferenceField source="PersonId" reference="persons">

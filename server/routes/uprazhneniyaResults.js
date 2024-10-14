@@ -110,20 +110,20 @@ router.get("/vedomost", async (req, res) => {
       attributes: [
         [sequelize.fn("MAX", sequelize.col("date")), "maxDate"],
         "result",
-        "personId",
+        "PersonId",
       ], // Выбираем атрибуты и находим максимальную дату
       where: {
         date: {
           [Op.between]: [minDate, maxDate], // Фильтруем по дате
         },
       },
-      group: ["personId", "uprazhnenieId"], // Группируем по personId и uprazhnenieId
+      group: ["PersonId", "UprazhnenieId"], // Группируем по personId и uprazhnenieId
       include: [
         {
           model: Person,
-          attributes: ["id", "fName", "lName", "zvanieId"], // Выбираем только необходимые атрибуты из модели Person
+          attributes: ["id", "fName", "lName", "ZvanieId"], // Выбираем только необходимые атрибуты из модели Person
           where: {
-            podrazdelenieId: req.query.podrId,
+            PodrazdelenieId: req.query.podrId,
           },
         },
         {
@@ -154,13 +154,13 @@ router.get("/vedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
       });
@@ -170,8 +170,8 @@ router.get("/vedomost", async (req, res) => {
       if (!(uprResult.result > maxValue)) {
         ball = await UprazhnenieStandard.findOne({
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
             value: uprResult.result,
           },
         });
@@ -187,13 +187,13 @@ router.get("/vedomost", async (req, res) => {
 
       const zvanie = await Zvanie.findOne({
         where: {
-          id: uprResult.Person.zvanieId,
+          id: uprResult.Person.ZvanieId,
         },
       });
 
       if (!personalResultsP[uprResult.Person.id]) {
         const result = {
-          personId: uprResult.Person.id,
+          PersonId: uprResult.Person.id,
           zvanie: zvanie.name ? zvanie.name : "Ошибка",
           person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
           category: uprResult.Category.shortName
@@ -449,21 +449,21 @@ router.get("/allVedomost", async (req, res) => {
       await UprazhnenieResult.findAll({
         attributes: [
           [sequelize.fn("MAX", sequelize.col("date")), "maxDate"],
-          "personId",
+          "PersonId",
         ], // Выбираем атрибуты и находим максимальную дату
         where: {
           date: {
             [Op.between]: [minDate, maxDate], // Фильтруем по дате
           },
         },
-        group: ["personId"], // Группируем по personId и uprazhnenieId
+        group: ["PersonId"], // Группируем по personId и uprazhnenieId
       })
     ).length;
 
     data.allTableData.personLenght = await Person.findOne({
       attributes: [[sequelize.fn("COUNT", sequelize.col("id")), "personL"]], // Выбираем атрибуты и находим максимальную дату
       where: {
-        podrazdelenieId: {
+        PodrazdelenieId: {
           [sequelize.Op.not]: null,
         },
       },
@@ -482,7 +482,7 @@ router.get("/allVedomost", async (req, res) => {
             [Op.between]: [minDate, maxDate], // Фильтруем по дате
           },
         },
-        group: ["personId", "uprazhnenieId"], // Группируем по personId и uprazhnenieId
+        group: ["PersonId", "UprazhnenieId"], // Группируем по personId и uprazhnenieId
         include: [
           {
             model: Person,
@@ -510,11 +510,11 @@ router.get("/allVedomost", async (req, res) => {
           [Op.between]: [minDate, maxDate], // Фильтруем по дате
         },
       },
-      group: ["personId"], // Группируем по personId и uprazhnenieId
+      group: ["PersonId"], // Группируем по personId и uprazhnenieId
       include: [
         {
           model: Person,
-          attributes: ["id", "isMale", "zvanieId"],
+          attributes: ["id", "isMale", "ZvanieId"],
           where: {
             isMale: false,
           },
@@ -547,13 +547,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -568,13 +568,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -613,8 +613,8 @@ router.get("/allVedomost", async (req, res) => {
       if (!(uprResult.result > maxValue)) {
         ball = await UprazhnenieStandard.findOne({
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
             value: uprResult.result,
           },
           include: [
@@ -632,13 +632,13 @@ router.get("/allVedomost", async (req, res) => {
 
       const zvanie = await Zvanie.findOne({
         where: {
-          id: uprResult.Person.zvanieId,
+          id: uprResult.Person.ZvanieId,
         },
       });
 
       if (!personalResultsP[uprResult.Person.id]) {
         const result = {
-          personId: uprResult.Person.id,
+          PersonId: uprResult.Person.id,
           zvanie: zvanie.name ? zvanie.name : "Ошибка",
           person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
           category: uprResult.Category.shortName
@@ -759,11 +759,11 @@ router.get("/allVedomost", async (req, res) => {
           [Op.between]: [minDate, maxDate], // Фильтруем по дате
         },
       },
-      group: ["personId"], // Группируем по personId и uprazhnenieId
+      group: ["PersonId"], // Группируем по personId и uprazhnenieId
       include: [
         {
           model: Person,
-          attributes: ["id", "isMale", "zvanieId"],
+          attributes: ["id", "isMale", "ZvanieId"],
           where: {
             isMale: true,
           },
@@ -825,13 +825,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -846,13 +846,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -893,8 +893,8 @@ router.get("/allVedomost", async (req, res) => {
       if (!(uprResult.result > maxValue)) {
         ball = await UprazhnenieStandard.findOne({
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
             value: uprResult.result,
           },
           include: [
@@ -912,13 +912,13 @@ router.get("/allVedomost", async (req, res) => {
 
       const zvanie = await Zvanie.findOne({
         where: {
-          id: uprResult.Person.zvanieId,
+          id: uprResult.Person.ZvanieId,
         },
       });
 
       if (!personalResultsO[uprResult.Person.id]) {
         const result = {
-          personId: uprResult.Person.id,
+          PersonId: uprResult.Person.id,
           zvanie: zvanie.name ? zvanie.name : "Ошибка",
           person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
           category: uprResult.Category.shortName
@@ -1040,11 +1040,11 @@ router.get("/allVedomost", async (req, res) => {
           [Op.between]: [new Date(minDate), new Date(maxDate)], // Фильтруем по дате
         },
       },
-      group: ["personId"], // Группируем по personId и uprazhnenieId
+      group: ["PersonId"], // Группируем по personId и uprazhnenieId
       include: [
         {
           model: Person,
-          attributes: ["id", "isMale", "zvanieId", "isV"],
+          attributes: ["id", "isMale", "ZvanieId", "isV"],
           where: {
             isMale: { [Op.or]: [{ [Op.eq]: true }] },
             isV: {
@@ -1112,13 +1112,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -1133,13 +1133,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -1180,8 +1180,8 @@ router.get("/allVedomost", async (req, res) => {
       if (!(uprResult.result > maxValue)) {
         ball = await UprazhnenieStandard.findOne({
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
             value: uprResult.result,
           },
           include: [
@@ -1199,13 +1199,13 @@ router.get("/allVedomost", async (req, res) => {
 
       const zvanie = await Zvanie.findOne({
         where: {
-          id: uprResult.Person.zvanieId,
+          id: uprResult.Person.ZvanieId,
         },
       });
 
       if (!personalResultsC[uprResult.Person.id]) {
         const result = {
-          personId: uprResult.Person.id,
+          PersonId: uprResult.Person.id,
           zvanie: zvanie.name ? zvanie.name : "Ошибка",
           person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
           category: uprResult.Category.shortName
@@ -1326,11 +1326,11 @@ router.get("/allVedomost", async (req, res) => {
           [Op.between]: [new Date(minDate), new Date(maxDate)],
         },
       },
-      group: ["personId"],
+      group: ["PersonId"],
       include: [
         {
           model: Person,
-          attributes: ["id", "isMale", "zvanieId", "isV"],
+          attributes: ["id", "isMale", "ZvanieId", "isV"],
           where: {
             isMale: { [Op.or]: [{ [Op.eq]: true }] },
             isV: { [Op.or]: [{ [Op.eq]: true }, { [Op.eq]: 1 }] },
@@ -1365,13 +1365,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -1386,13 +1386,13 @@ router.get("/allVedomost", async (req, res) => {
         attributes: [
           [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
           "id",
-          "uprazhnenieId",
-          "categoryId",
+          "UprazhnenieId",
+          "CategoryId",
           "result",
         ],
         where: {
-          uprazhnenieId: uprResult.Uprazhnenie.id,
-          categoryId: uprResult.Category.id,
+          UprazhnenieId: uprResult.Uprazhnenie.id,
+          CategoryId: uprResult.Category.id,
         },
         limit: 1,
         include: [
@@ -1434,8 +1434,8 @@ router.get("/allVedomost", async (req, res) => {
       if (!(uprResult.result > maxValue)) {
         ball = await UprazhnenieStandard.findOne({
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
             value: uprResult.result,
           },
           include: [
@@ -1453,13 +1453,13 @@ router.get("/allVedomost", async (req, res) => {
 
       const zvanie = await Zvanie.findOne({
         where: {
-          id: uprResult.Person.zvanieId,
+          id: uprResult.Person.ZvanieId,
         },
       });
 
       if (!personalResultsS[uprResult.Person.id]) {
         const result = {
-          personId: uprResult.Person.id,
+          PersonId: uprResult.Person.id,
           zvanie: zvanie.name ? zvanie.name : "Ошибка",
           person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
           category: uprResult.Category.shortName
@@ -1644,13 +1644,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -1665,13 +1665,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -1713,8 +1713,8 @@ router.get("/allVedomost", async (req, res) => {
         if (!(uprResult.result > maxValue)) {
           ball = await UprazhnenieStandard.findOne({
             where: {
-              uprazhnenieId: uprResult.Uprazhnenie.id,
-              categoryId: uprResult.Category.id,
+              UprazhnenieId: uprResult.Uprazhnenie.id,
+              CategoryId: uprResult.Category.id,
               value: uprResult.result,
             },
             include: [
@@ -1734,13 +1734,13 @@ router.get("/allVedomost", async (req, res) => {
 
         const zvanie = await Zvanie.findOne({
           where: {
-            id: uprResult.Person.zvanieId,
+            id: uprResult.Person.ZvanieId,
           },
         });
 
         if (!personalResultsS[uprResult.Person.id]) {
           const result = {
-            personId: uprResult.Person.id,
+            PersonId: uprResult.Person.id,
             zvanie: zvanie.name ? zvanie.name : "Ошибка",
             person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
             category: uprResult.Category.shortName
@@ -1865,13 +1865,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -1886,13 +1886,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -1933,8 +1933,8 @@ router.get("/allVedomost", async (req, res) => {
         if (!(uprResult.result > maxValue)) {
           ball = await UprazhnenieStandard.findOne({
             where: {
-              uprazhnenieId: uprResult.Uprazhnenie.id,
-              categoryId: uprResult.Category.id,
+              UprazhnenieId: uprResult.Uprazhnenie.id,
+              CategoryId: uprResult.Category.id,
               value: uprResult.result,
             },
             include: [
@@ -1954,13 +1954,13 @@ router.get("/allVedomost", async (req, res) => {
 
         const zvanie = await Zvanie.findOne({
           where: {
-            id: uprResult.Person.zvanieId,
+            id: uprResult.Person.ZvanieId,
           },
         });
 
         if (!personalResultsC[uprResult.Person.id]) {
           const result = {
-            personId: uprResult.Person.id,
+            PersonId: uprResult.Person.id,
             zvanie: zvanie.name ? zvanie.name : "Ошибка",
             person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
             category: uprResult.Category.shortName
@@ -2082,13 +2082,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -2103,13 +2103,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -2150,8 +2150,8 @@ router.get("/allVedomost", async (req, res) => {
         if (!(uprResult.result > maxValue)) {
           ball = await UprazhnenieStandard.findOne({
             where: {
-              uprazhnenieId: uprResult.Uprazhnenie.id,
-              categoryId: uprResult.Category.id,
+              UprazhnenieId: uprResult.Uprazhnenie.id,
+              CategoryId: uprResult.Category.id,
               value: uprResult.result,
             },
             include: [
@@ -2171,13 +2171,13 @@ router.get("/allVedomost", async (req, res) => {
 
         const zvanie = await Zvanie.findOne({
           where: {
-            id: uprResult.Person.zvanieId,
+            id: uprResult.Person.ZvanieId,
           },
         });
 
         if (!personalResultsO[uprResult.Person.id]) {
           const result = {
-            personId: uprResult.Person.id,
+            PersonId: uprResult.Person.id,
             zvanie: zvanie.name ? zvanie.name : "Ошибка",
             person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
             category: uprResult.Category.shortName
@@ -2299,13 +2299,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MAX", sequelize.col("value")), "maxValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -2320,13 +2320,13 @@ router.get("/allVedomost", async (req, res) => {
           attributes: [
             [sequelize.fn("MIN", sequelize.col("value")), "minValue"],
             "id",
-            "uprazhnenieId",
-            "categoryId",
+            "UprazhnenieId",
+            "CategoryId",
             "result",
           ],
           where: {
-            uprazhnenieId: uprResult.Uprazhnenie.id,
-            categoryId: uprResult.Category.id,
+            UprazhnenieId: uprResult.Uprazhnenie.id,
+            CategoryId: uprResult.Category.id,
           },
           limit: 1,
           include: [
@@ -2365,8 +2365,8 @@ router.get("/allVedomost", async (req, res) => {
         if (!(uprResult.result > maxValue)) {
           ball = await UprazhnenieStandard.findOne({
             where: {
-              uprazhnenieId: uprResult.Uprazhnenie.id,
-              categoryId: uprResult.Category.id,
+              UprazhnenieId: uprResult.Uprazhnenie.id,
+              CategoryId: uprResult.Category.id,
               value: uprResult.result,
             },
             include: [
@@ -2386,13 +2386,13 @@ router.get("/allVedomost", async (req, res) => {
 
         const zvanie = await Zvanie.findOne({
           where: {
-            id: uprResult.Person.zvanieId,
+            id: uprResult.Person.ZvanieId,
           },
         });
 
         if (!personalResultsP[uprResult.Person.id]) {
           const result = {
-            personId: uprResult.Person.id,
+            PersonId: uprResult.Person.id,
             zvanie: zvanie.name ? zvanie.name : "Ошибка",
             person: uprResult.Person.lName ? uprResult.Person.lName : "Ошибка",
             category: uprResult.Category.shortName
@@ -2541,7 +2541,7 @@ router.get("/allVedomost", async (req, res) => {
 
       const personsCountPodr = await Person.count({
         where: {
-          podrazdelenieId: {
+          PodrazdelenieId: {
             [Op.or]: podrIds,
           },
         },

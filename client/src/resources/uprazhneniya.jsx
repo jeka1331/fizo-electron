@@ -30,7 +30,7 @@ export const UprazhnenieList = () => (
       <TextField source="name" />
       <TextField source="shortName" />
 
-      <ReferenceField source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
+      <ReferenceField source="UprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <TextField source="name" />
       </ReferenceField>
       <ReferenceField source="EfficiencyPreferenceId" reference="efficiencyPreferences">
@@ -52,7 +52,7 @@ export const UprazhnenieEdit = () => (
       <TextInput source="id" InputProps={{ disabled: true }} />
       <TextInput source="name" />
       <TextInput source="shortName" />
-      <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
+      <ReferenceInput source="UprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="EfficiencyPreferenceId" reference="efficiencyPreferences">
@@ -70,7 +70,7 @@ export const UprazhnenieCreate = () => (
       {/* <TextInput source="id" InputProps={{ disabled: true }} /> */}
       <TextInput source="name" />
       <TextInput source="shortName" />
-      <ReferenceInput source="uprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
+      <ReferenceInput source="UprazhnenieRealValuesTypeId" reference="uprazhnenieRealValuesTypes">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="EfficiencyPreferenceId" reference="efficiencyPreferences">

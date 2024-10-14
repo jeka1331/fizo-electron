@@ -20,6 +20,7 @@ const Category = sequelize.define("Category", {
   name: DataTypes.STRING,
   shortName: DataTypes.STRING,
 });
+
 const UprazhnenieRealValuesType = sequelize.define(
   "UprazhnenieRealValuesType",
   {
@@ -28,7 +29,6 @@ const UprazhnenieRealValuesType = sequelize.define(
   }
 );
 
-// Определение модели "Person"
 const Person = sequelize.define("Person", {
   fName: DataTypes.STRING,
   lName: DataTypes.STRING,
@@ -51,23 +51,13 @@ const EfficiencyPreference = sequelize.define("EfficiencyPreference", {
 const Uprazhnenie = sequelize.define("Uprazhnenie", {
   name: DataTypes.STRING,
   shortName: DataTypes.STRING,
-  uprazhnenieRealValuesTypeId: UprazhnenieRealValuesType,
   step: DataTypes.DOUBLE,
   valueToAddAfterMaxResult: DataTypes.INTEGER,
 });
 
 const UprazhnenieStandard = sequelize.define("UprazhnenieStandard", {
-  // uprazhnenieId: Uprazhnenie,
-  categoryId: Category,
   value: DataTypes.DOUBLE,
   result: DataTypes.INTEGER,
-});
-
-const UprazhnenieSchedule = sequelize.define("UprazhnenieSchedule", {
-  uprazhnenieId: Uprazhnenie,
-  name: Category,
-  personId: Person,
-  date: DataTypes.DATE,
 });
 
 const UprazhnenieResult = sequelize.define("UprazhnenieResult", {
@@ -79,61 +69,54 @@ const FixedUpr = sequelize.define("FixedUpr", {
   date: DataTypes.DATE,
 });
 
-Uprazhnenie.hasMany(FixedUpr, {
-  foreignKey: "UprazhnenieId",
-});
-FixedUpr.belongsTo(Uprazhnenie, {
-  foreignKey: "UprazhnenieId",
-});
+// FixedUpr
 
-Category.hasMany(FixedUpr, {
-  foreignKey: "CategoryId",
-});
-FixedUpr.belongsTo(Category, {
-  foreignKey: "CategoryId",
-});
+Uprazhnenie.hasMany(FixedUpr);
+FixedUpr.belongsTo(Uprazhnenie);
+
+Category.hasMany(FixedUpr);
+FixedUpr.belongsTo(Category);
+
+// UprazhnenieResult
 
 Person.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Person);
-EfficiencyPreference.hasMany(Uprazhnenie);
-Uprazhnenie.belongsTo(EfficiencyPreference);
-Zvanie.hasMany(Person, {
-  foreignKey: "zvanieId",
-});
-Person.belongsTo(Zvanie, {
-  foreignKey: "zvanieId",
-});
 
-Podrazdelenie.hasMany(Person, {
-  foreignKey: "podrazdelenieId",
-});
-Person.belongsTo(Podrazdelenie, {
-  foreignKey: "podrazdelenieId",
-});
-
-Uprazhnenie.hasMany(UprazhnenieStandard, {
-  foreignKey: "uprazhnenieId",
-});
-UprazhnenieStandard.belongsTo(Uprazhnenie, {
-  foreignKey: "uprazhnenieId",
-});
-
-Category.hasMany(Person, {
-  foreignKey: "categoryId",
-});
-Person.belongsTo(Category, {
-  foreignKey: "categoryId",
-});
 Category.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Category);
+
 Uprazhnenie.hasMany(UprazhnenieResult);
 UprazhnenieResult.belongsTo(Uprazhnenie);
+
+// Uprazhnenie
+
+EfficiencyPreference.hasMany(Uprazhnenie);
+Uprazhnenie.belongsTo(EfficiencyPreference);
+
+UprazhnenieRealValuesType.hasMany(Uprazhnenie);
+Uprazhnenie.belongsTo(UprazhnenieRealValuesType);
+
+Zvanie.hasMany(Person);
+Person.belongsTo(Zvanie);
+
+Podrazdelenie.hasMany(Person);
+Person.belongsTo(Podrazdelenie);
+
+Uprazhnenie.hasMany(UprazhnenieStandard);
+UprazhnenieStandard.belongsTo(Uprazhnenie);
+
+Category.hasMany(UprazhnenieStandard);
+UprazhnenieStandard.belongsTo(Category);
+
+Category.hasMany(Person);
+Person.belongsTo(Category);
+
+
 
 
 
 module.exports = {
   UprazhnenieResult,
-  UprazhnenieSchedule,
   sequelize,
   UprazhnenieStandard,
   Person,

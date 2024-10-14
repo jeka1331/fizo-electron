@@ -107,7 +107,7 @@ export const UprazhnenieResultCreate = () => {
   const categoryOptionText = (record) => `[${record.shortName}] => ${record.name}`;
 
   const personOptionText = (record) => {
-    const zvanie = zvanieOptions.find((zv) => zv.id === record.zvanieId);
+    const zvanie = zvanieOptions.find((zv) => zv.id === record.ZvanieId);
     return `${zvanie ? zvanie.name : ""} ${record.lName} ${record.fName} ${
       record.sName
     }`;

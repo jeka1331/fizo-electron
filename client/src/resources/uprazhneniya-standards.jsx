@@ -28,10 +28,10 @@ export const UprazhnenieStandardList = () => (
     <Datagrid>
       <TextField source="id" />
       
-      <ReferenceField source="uprazhnenieId" reference="uprazhneniya">
+      <ReferenceField source="UprazhnenieId" reference="uprazhneniya">
         <TextField source="name" />
       </ReferenceField>
-      <ReferenceField source="categoryId" reference="categories">
+      <ReferenceField source="CategoryId" reference="categories">
         <TextField source="name" />
       </ReferenceField>
       <NumberField source="value" />
@@ -48,10 +48,10 @@ export const UprazhnenieStandardEdit = () => (
   <Edit>
     <SimpleForm>
       <TextInput source="id" InputProps={{ disabled: true }} />
-      <ReferenceInput source="uprazhnenieId" reference="uprazhneniya">
+      <ReferenceInput source="UprazhnenieId" reference="uprazhneniya">
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="categoryId" reference="categories">
+      <ReferenceInput source="CategoryId" reference="categories">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <NumberInput source="value" validate={[required()]} />
@@ -63,10 +63,10 @@ export const UprazhnenieStandardEdit = () => (
 export const UprazhnenieStandardCreate = () => (
   <Create>
     <SimpleForm>
-      <ReferenceInput source="uprazhnenieId" reference="uprazhneniya">
+      <ReferenceInput source="UprazhnenieId" reference="uprazhneniya">
         <SelectInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="categoryId" reference="categories">
+      <ReferenceInput source="CategoryId" reference="categories">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <NumberInput source="value" validate={[required()]} />
