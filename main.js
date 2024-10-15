@@ -7,6 +7,7 @@ const personsRouter = require("./server/routes/persons");
 const zvaniyaRouter = require("./server/routes/zvaniya");
 const uprazhnenieTypesRouter = require("./server/routes/uprazhnenieTypes");
 const fixedUprRouter = require("./server/routes/fixedUprs");
+const passingInMonthRouter = require("./server/routes/passingInMonth");
 const podrazdeleniyaRouter = require("./server/routes/podrazdeleniya");
 const categoriesRouter = require("./server/routes/categories");
 const efficiencyPreferencesRouter = require("./server/routes/efficiencyPreferences");
@@ -14,10 +15,25 @@ const upraznenieRouter = require("./server/routes/uprazhneniya");
 const uprazhnenieStandardsRouter = require("./server/routes/uprazhneniyaStandards");
 const uprazhnenieResultsRouter = require("./server/routes/uprazhneniyaResults");
 const cors = require("cors");
-const { fillDefaultsUprazhnenieStandards, fillDefaultsEfficiencyPreferences, fillDefaultsPodrazdeleniya, fillDefaultsPersons, fillDefaultsZvanie, fillDefaultsCategories, fillDefaultsUprazhnenieRealValuesTypes, fillDefaultsUprazhneniya } = require("./server/defaults");
+const {
+  fillDefaultsUprazhnenieStandards,
+  fillDefaultsEfficiencyPreferences,
+  fillDefaultsPodrazdeleniya,
+  fillDefaultsPersons,
+  fillDefaultsZvanie,
+  fillDefaultsCategories,
+  fillDefaultsUprazhnenieRealValuesTypes,
+  fillDefaultsUprazhneniya,
+} = require("./server/defaults");
 if (require("electron-squirrel-startup")) app.quit();
+
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: [
+    "http://192.168.0.117:5173",
+    "http://localhost:5173",
+    "https://literate-space-capybara-4wv5jp5vrxj37vw6-5175.app.github.dev",
+  ],
+
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   allowedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
   exposedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
@@ -32,6 +48,7 @@ appExpress.use("/categories", categoriesRouter);
 appExpress.use("/reports", reportsRouter);
 appExpress.use("/podrazdeleniya", podrazdeleniyaRouter);
 appExpress.use("/fixedUpr", fixedUprRouter);
+appExpress.use("/passingInMonth", passingInMonthRouter);
 appExpress.use("/uprazhnenieRealValuesTypes", uprazhnenieTypesRouter);
 appExpress.use("/persons", personsRouter);
 appExpress.use("/zvaniya", zvaniyaRouter);
@@ -54,16 +71,15 @@ sequelize
   .sync()
   .then(
     async () => {
-      const efficiencyPreferencesCount = await EfficiencyPreference.count()
+      const efficiencyPreferencesCount = await EfficiencyPreference.count();
       if (efficiencyPreferencesCount === 0) {
-        fillDefaultsEfficiencyPreferences()
-        fillDefaultsZvanie()
-        fillDefaultsPodrazdeleniya()
-        fillDefaultsCategories()
-        fillDefaultsPersons()
-        fillDefaultsUprazhnenieRealValuesTypes()
-        fillDefaultsUprazhneniya(),
-        fillDefaultsUprazhnenieStandards()
+        fillDefaultsEfficiencyPreferences();
+        fillDefaultsZvanie();
+        fillDefaultsPodrazdeleniya();
+        fillDefaultsCategories();
+        fillDefaultsPersons();
+        fillDefaultsUprazhnenieRealValuesTypes();
+        fillDefaultsUprazhneniya(), fillDefaultsUprazhnenieStandards();
         server = appExpress.listen(3333, () => {
           console.log("Сервер запущен на порту 3333");
         });
@@ -72,7 +88,6 @@ sequelize
           console.log("Сервер запущен на порту 3333");
         });
       }
-      
     },
     function (err) {
       // catch error here
