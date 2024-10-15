@@ -74,7 +74,7 @@ router.get("/", async (req, res) => {
 
   // Привязываем результаты к людям
   const formattedData = fixedUprs.map(fu => {
-    const relatedPersons = fu.Category.Persons || [];
+    const relatedPersons = fu.Category.People || [];
     return {
       ...fu.get(),
       Persons: relatedPersons.map(person => {
@@ -101,6 +101,8 @@ router.get("/", async (req, res) => {
           PersonId: person.id,
           PodrazdelenieId: person.PodrazdelenieId,
           UprazhnenieId: element.UprazhnenieId,
+          UprazhnenieResultDate: element.Persons.b_Date || null,
+          UprazhnenieResultResult: element.Persons.b_Result || null
         })
         count++
       })
