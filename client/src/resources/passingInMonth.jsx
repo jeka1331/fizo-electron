@@ -55,7 +55,7 @@
 //   </List>
 // );
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   List,
   Datagrid,
@@ -67,19 +67,26 @@ import {
   useRefresh,
   useRedirect,
   ReferenceField,
-  useRecordContext
-} from 'react-admin';
-
+  useRecordContext,
+  FunctionField,
+  DateField,
+} from "react-admin";
+import DoNotStepIcon from "@mui/icons-material/DoNotStep";
+import { PassingInMonthAddOrChangeResultButton } from "../components/PassingInMonthAddOrChangeResultButton";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 export const passingInMonthIcon = DoneAllIcon;
+import TextFieldMUI from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import Input from "@mui/material/Input";
+import { dataProvider } from "../dataProvider";
 
 export const passingInMonthList = (props) => {
-  const record = useRecordContext()
+  const [shouldRefresh, setShouldRefresh] = useState(false);
+  const refresh = useRefresh();
+  const record = useRecordContext();
   const [editingId, setEditingId] = useState(null);
   const notify = useNotify();
-  const refresh = useRefresh();
   const redirect = useRedirect();
-
   const handleEdit = (id) => {
     setEditingId(id);
   };
@@ -87,11 +94,14 @@ export const passingInMonthList = (props) => {
   const handleSave = async (data) => {
     // Ваш код для сохранения данных, например:
     // await dataProvider.update('your-resource', { id: editingId, data });
-    notify('Запись обновлена');
+    notify("Запись обновлена");
     setEditingId(null);
     refresh();
   };
 
+  const createResult = async (data) => {
+    console.log(record);
+  };
   return (
     <List {...props}>
       <Datagrid>
@@ -111,14 +121,72 @@ export const passingInMonthList = (props) => {
         <ReferenceField source="UprazhnenieId" reference="uprazhneniya">
           <TextField source="name" />
         </ReferenceField>
-        <EditButton onClick={() => handleEdit(record.id)} />
-        <TextField resource='uprazhnenieResults' r/>
+        <FunctionField
+          source="UprazhnenieResultDate"
+          render={(record) => {
+            return <DateField source="UprazhnenieResultDate" />;
+          }}
+        />
+        <FunctionField
+          source="UprazhnenieResultResult"
+          render={(record) => {
+            return (
+              <Input
+                id="standard-adornment-weight"
+                endAdornment={
+                  <InputAdornment position="end">
+                    {record.resultType}
+                  </InputAdornment>
+                }
+                onChange={async (e) => {
+                  const isNew = record.UprazhnenieResultResult ? false : true;
+                  console.log({
+                    ...record,
+                    result: e.target.value,
+                  });
+                  if (isNew) {
+                    const result = await dataProvider.create(
+                      "uprazhnenieResults",
+                      {
+                        data: {
+                          UprazhnenieId: record.UprazhnenieId,
+                          PersonId: record.PersonId,
+                          CategoryId: record.CategoryId,
+                          result: parseFloat(e.target.value),
+                          date: new Date().toISOString().split("T")[0],
+                        },
+                      }
+                    );
+                    refresh();
+                  } else {
+                    // await dataProvider.update("uprazhnenieResults", {
+                    //   ...record,
+                    //   result: e.target.value,
+                    // });
+                    if (record && record.UprazhnenieResultId) {
+                      dataProvider.update("uprazhnenieResults", {
+                        id: record.UprazhnenieResultId,
+                        data: {
+                          result: parseFloat(e.target.value),
+                          date: new Date().toISOString().split("T")[0],
+                        },
+                        previousData: { id: record.UprazhnenieResultId },
+                      });
+                    }
+                  }
+
+                  // refresh();
+                }}
+                type="number"
+                aria-describedby="standard-weight-helper-text"
+                placeholder={parseFloat(record.UprazhnenieResultResult) || null}
+              />
+            );
+          }}
+        />
+
+        {/* <PassingInMonthAddOrChangeResultButton data={record} /> */}
       </Datagrid>
-      
     </List>
   );
 };
-
-
-
-
