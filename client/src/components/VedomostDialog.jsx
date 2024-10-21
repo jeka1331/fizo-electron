@@ -1,5 +1,5 @@
 // ReportModal.js
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -8,9 +8,9 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { SelectInput ,useTranslate} from "react-admin";
+import { useTranslate } from "react-admin";
 
-const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
+const ReportModal = ({ isOpen, handleClose, handleSubmit, podr }) => {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const translate = useTranslate(); // returns the i18nProvider.translate() method
@@ -43,12 +43,23 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
             body: rjson,
           }
         );
+        return (await repResponce.text());
       }
     } catch (error) {
       console.error("Error:", error);
       throw error;
     }
   };
+
+  const handlePrint = async () => {
+    const htmlContent = await exportFunction({ year: year, month: month, ...podr });
+    const newTab = window.open();
+    newTab.document.body.innerHTML = htmlContent;
+
+    newTab.print()
+    newTab.close();
+  };
+
 
   return (
     <Dialog open={isOpen} onClose={handleClose}>
@@ -73,11 +84,11 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="secondary">
-        {translate('ra.action.cancel')}
+          {translate('ra.action.cancel')}
         </Button>
         <Button
-          onClick={() => {
-            exportFunction({ year: year, month: month, ...podr});
+          onClick={async () => {
+            await handlePrint()
           }}
           color="primary"
         >
@@ -88,12 +99,18 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr}) => {
   );
 };
 
-const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit}) => {
+const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit }) => {
   const [year, setYear] = useState(((new Date()).getFullYear()));
   const [month, setMonth] = useState(((new Date()).getMonth() + 1));
   const translate = useTranslate(); // returns the i18nProvider.translate() method
+  const handlePrint = async () => {
+    const htmlContent = await exportFunction({ year: year, month: month });
+    const newTab = window.open();
+    newTab.document.body.innerHTML = htmlContent;
 
-  // console.log(podr)
+    newTab.print()
+    newTab.close();
+  };
   const exportFunction = async (data) => {
     try {
 
@@ -119,6 +136,8 @@ const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit}) => {
             body: rjson,
           }
         );
+        return (await repResponce.text());
+
       }
     } catch (error) {
       console.error("Error:", error);
@@ -149,11 +168,11 @@ const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit}) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="secondary">
-        {translate('ra.action.cancel')}
+          {translate('ra.action.cancel')}
         </Button>
         <Button
-          onClick={() => {
-            exportFunction({ year: year, month: month});
+          onClick={async () => {
+            await handlePrint()
           }}
           color="primary"
         >
@@ -164,6 +183,6 @@ const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit}) => {
   );
 };
 
-export {AllVedomostReportModal}
+export { AllVedomostReportModal }
 
 export default ReportModal;
