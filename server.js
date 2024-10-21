@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+var morgan = require('morgan')
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { sequelize, EfficiencyPreference } = require("./server/sequelize"); // Импорт Sequelize и настройки
 const reportsRouter = require("./server/routes/reports");
@@ -27,8 +28,8 @@ const {
 } = require("./server/defaults");
 if (require("electron-squirrel-startup")) app.quit();
 const corsOptions = {
-  origin: ["http://192.168.0.117:5173", "http://localhost:5173", "https://literate-space-capybara-4wv5jp5vrxj37vw6-5175.app.github.dev"],
-
+  origin: ["http://192.168.0.117:5173", "http://localhost:5173", "http://tauri.localhost", "https://literate-space-capybara-4wv5jp5vrxj37vw6-5175.app.github.dev"], 
+  
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   allowedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
   exposedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
@@ -37,6 +38,7 @@ const corsOptions = {
 const appExpress = express();
 appExpress.use(cors(corsOptions));
 appExpress.use(express.json());
+// appExpress.use(morgan('dev'))
 
 appExpress.use("/efficiencyPreferences", efficiencyPreferencesRouter);
 appExpress.use("/categories", categoriesRouter);
