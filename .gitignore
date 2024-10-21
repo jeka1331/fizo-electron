@@ -2,3 +2,4 @@ node_modules
 dist
 *.db
 .venv
+server-rust/target
