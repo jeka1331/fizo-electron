@@ -838,9 +838,9 @@ router.post("/podrtest", async (req, res) => {
 
     // console.log(person)
     // const testPersons = persons[0] ? Array(50).fill(persons[0]) : [];
-    const html = compiledFunction({ data: req.body });
-    ipcMain.emit("print-person-report", html);
-    res.status(200).json({ message: "Added document to schedule" });
+    const html = compiledFunction({ data: req.body })
+    // ipcMain.emit("print-person-report", html);
+    res.status(200).send(html);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Ошибка при отправке на печать" });
@@ -885,8 +885,7 @@ router.post("/allVedomost", async (req, res) => {
     // const testPersons = persons[0] ? Array(50).fill(persons[0]) : [];
     // console.log(req.body)
     const html = compiledFunction({ data: data});
-    ipcMain.emit("print-all-vedomost", html);
-    res.status(200).json({ message: "Added document to schedule" });
+    res.status(200).send(html);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Ошибка при отправке на печать" });
