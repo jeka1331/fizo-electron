@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 var morgan = require('morgan')
-const { app, BrowserWindow, ipcMain } = require("electron");
 const { sequelize, EfficiencyPreference } = require("./server/sequelize"); // Импорт Sequelize и настройки
 const reportsRouter = require("./server/routes/reports");
 const personsRouter = require("./server/routes/persons");
@@ -26,39 +25,39 @@ const {
   fillDefaultsUprazhnenieRealValuesTypes,
   fillDefaultsUprazhneniya,
 } = require("./server/defaults");
-if (require("electron-squirrel-startup")) app.quit();
+
 const corsOptions = {
-  origin: ["http://192.168.0.117:5173", "http://localhost:5173", "http://tauri.localhost", "https://literate-space-capybara-4wv5jp5vrxj37vw6-5175.app.github.dev"], 
+  origin: ["http://192.168.0.117:5173", "http://localhost:5173", "http://tauri.localhost", "https://literate-space-capybara-4wv5jp5vrxj37vw6-5175.app.github.dev", "tauri://localhost"], 
   
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   allowedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
   exposedHeaders: ["Content-Type", "Authorization", "Content-Range", "Range"],
 };
 
-const appExpress = express();
-appExpress.use(cors(corsOptions));
-appExpress.use(express.json());
-// appExpress.use(morgan('dev'))
+const app = express();
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(morgan('combined'))
 
-appExpress.use("/efficiencyPreferences", efficiencyPreferencesRouter);
-appExpress.use("/categories", categoriesRouter);
-appExpress.use("/reports", reportsRouter);
-appExpress.use("/podrazdeleniya", podrazdeleniyaRouter);
-appExpress.use("/uprazhnenieRealValuesTypes", uprazhnenieTypesRouter);
-appExpress.use("/fixedUpr", fixedUprRouter);
-appExpress.use("/passingInMonth", passingInMonthRouter);
-appExpress.use("/persons", personsRouter);
-appExpress.use("/zvaniya", zvaniyaRouter);
-appExpress.use("/uprazhneniya", upraznenieRouter);
-appExpress.use("/uprazhnenieStandards", uprazhnenieStandardsRouter);
-appExpress.use("/uprazhnenieResults", uprazhnenieResultsRouter);
+app.use("/efficiencyPreferences", efficiencyPreferencesRouter);
+app.use("/categories", categoriesRouter);
+app.use("/reports", reportsRouter);
+app.use("/podrazdeleniya", podrazdeleniyaRouter);
+app.use("/uprazhnenieRealValuesTypes", uprazhnenieTypesRouter);
+app.use("/fixedUpr", fixedUprRouter);
+app.use("/passingInMonth", passingInMonthRouter);
+app.use("/persons", personsRouter);
+app.use("/zvaniya", zvaniyaRouter);
+app.use("/uprazhneniya", upraznenieRouter);
+app.use("/uprazhnenieStandards", uprazhnenieStandardsRouter);
+app.use("/uprazhnenieResults", uprazhnenieResultsRouter);
 
-// appExpress.use(crud('/persons', sequelizeCrud(Person)))
+// app.use(crud('/persons', sequelizeCrud(Person)))
 
 // Устанавливаем middleware и маршруты Express.js здесь
-// appExpress.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-appExpress.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello Express!");
 });
 let server;
@@ -83,11 +82,11 @@ sequelize
             fillDefaultsPersons();
             fillDefaultsUprazhnenieRealValuesTypes();
             fillDefaultsUprazhneniya(), fillDefaultsUprazhnenieStandards();
-            server = appExpress.listen(3333, () => {
+            server = app.listen(3333, () => {
               console.log("Сервер запущен на порту 3333");
             });
           } else {
-            server = appExpress.listen(3333, () => {
+            server = app.listen(3333, () => {
               console.log("Сервер запущен на порту 3333");
             });
           }
