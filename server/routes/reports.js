@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const pdf = require("html-pdf");
 const pug = require("pug");
-const PDFDocument = require("pdfkit");
-const { ipcMain } = require("electron");
 const { Zvanie, Podrazdelenie, Category, Person } = require("../sequelize");
 
 const personTemplate = `
