@@ -1,4 +1,5 @@
 import { Button, useRecordContext } from 'react-admin';
+import { backendUrl } from '../dataProvider';
 
 export const PassingInMonthAddOrChangeResultButton = (props) => {
   const record = useRecordContext();
@@ -29,7 +30,7 @@ export const PassingInMonthAddOrChangeResultButton = (props) => {
 
   const setResultsFunction = async (data) => {
     try {
-      const uprazhnenieResult = await fetch('http://localhost:3333/uprazhnenieResult', {
+      const uprazhnenieResult = await fetch(`${backendUrl}/uprazhnenieResult`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

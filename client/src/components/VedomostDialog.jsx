@@ -9,6 +9,9 @@ import {
   TextField,
 } from "@mui/material";
 import { useTranslate } from "react-admin";
+import { backendUrl } from "../dataProvider";
+
+
 
 const ReportModal = ({ isOpen, handleClose, handleSubmit, podr }) => {
   const [year, setYear] = useState("");
@@ -26,7 +29,7 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr }) => {
         throw new Error("Неправильные параметры");
       }
       const response = await fetch(
-        `http://localhost:3333/uprazhnenieResults/vedomost?year=${data.year}&month=${data.month}&podrId=${podr.id}`
+        `${backendUrl}/uprazhnenieResults/vedomost?year=${data.year}&month=${data.month}&podrId=${podr.id}`
       );
 
       if (response.ok) {
@@ -34,7 +37,7 @@ const ReportModal = ({ isOpen, handleClose, handleSubmit, podr }) => {
         let rjson = await response.json()
         rjson = JSON.stringify(rjson)
         const repResponce = await fetch(
-          "http://localhost:3333/reports/podrtest",
+          `${backendUrl}/reports/podrtest`,
           {
             method: "POST",
             headers: {
@@ -119,7 +122,7 @@ const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit }) => {
         throw new Error("Неправильные параметры");
       }
       const response = await fetch(
-        `http://localhost:3333/uprazhnenieResults/allVedomost?year=${data.year}&month=${data.month}`
+        `${backendUrl}/uprazhnenieResults/allVedomost?year=${data.year}&month=${data.month}`
       );
 
       if (response.ok) {
@@ -127,7 +130,7 @@ const AllVedomostReportModal = ({ isOpen, handleClose, handleSubmit }) => {
         let rjson = await response.json()
         rjson = JSON.stringify(rjson)
         const repResponce = await fetch(
-          "http://localhost:3333/reports/allVedomost",
+          `${backendUrl}/reports/allVedomost`,
           {
             method: "POST",
             headers: {

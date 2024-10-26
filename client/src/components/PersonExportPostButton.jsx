@@ -1,10 +1,11 @@
 import { Button, useRecordContext } from 'react-admin';
+import { backendUrl } from '../dataProvider';
 
 export const PersonExportPostButton = (props) => {
    const record = useRecordContext();
    const exportFunction = (data) => {
     try {
-      const response = fetch('http://localhost:3333/reports/person', {
+      const response = fetch(`${backendUrl}/reports/person`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

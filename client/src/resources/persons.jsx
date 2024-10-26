@@ -74,7 +74,7 @@ export const PersonList = () => (
       {/* <Button
         label="Ведомость"
         onClick={() => {
-          fetch("http://localhost:3333/reports/person")
+          fetch(`>${backendUrl}/reports/person`)
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Network response was not ok");
