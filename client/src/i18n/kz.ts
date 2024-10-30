@@ -209,9 +209,33 @@ const kazakhMessages: TranslationMessages = {
   },
 };
 
+const passingInMonth =  {
+  name: "Айдың нәтижесі |||| Айдың нәтижелері",
+  fields:{
+    id: "№",
+    PodrazdelenieId: "Бөлімше",
+    PersonId: "Тапсырушы",
+    CategoryId: "Санат",
+    UprazhnenieId: "Жаттығу",
+    UprazhnenieResultDate: "Нәтиже күні",
+    UprazhnenieResultResult: "Нәтиже"
+  }
+}
+const fixedupr =  {
+  name: "Нәтижені өзгеруі |||| Нәтижелерді өзгеруі",
+  fields: {
+    id: "№",
+    UprazhnenieId: "Жаттығу",
+    CategoryId: "Санат",
+    date: "Күні"
+  }
+}
+
 export const kz = {
   ...kazakhMessages,
   resources: {
+    passingInMonth: passingInMonth,
+    fixedUpr: fixedupr,
     persons: {
       name: "Қызметкер |||| Қызметкерлер",
       fields: {
@@ -300,6 +324,9 @@ export const kz = {
         result: "Нәтиже",
       },
     },
+    Documents: {
+      name: "Құжатт |||| Құжаттар",
+    }
   },
   dialogs: {
     exportPodrazdelenie: {
@@ -309,6 +336,7 @@ export const kz = {
     },
   },
   documents: {
+    name: "Құжатт |||| Құжаттар",
     allVedomost: {
       print: "Басып шығару",
       name: "Жалпы тізім",
@@ -317,6 +345,9 @@ export const kz = {
         "Барлық әскерлерді категориялар бойынша және жалпы салынған жалпы тізім",
     },
   },
+  passingInMonth: {
+    name: "айдың нәтижелері |||| Құжаттар"
+  }
 };
 
 export default kazakhMessages;

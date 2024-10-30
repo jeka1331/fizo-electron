@@ -13,18 +13,16 @@ import {
   ReferenceField,
   ReferenceInput,
   SelectInput,
-  NumberInput,
   required,
-  NumberField,
   DateInput,
   DateField,
   AutocompleteInput,
   // BooleanField,
   // ReferenceArrayField,
 } from "react-admin";
-import DoneAllIcon from "@mui/icons-material/DoneAll";
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import { backendUrl } from "../dataProvider";
-export const FixedUprIcon = DoneAllIcon;
+export const FixedUprIcon = EditCalendarIcon;
 import { useState, useEffect } from "react";
 
 export const FixedUprList = () => (

@@ -27,7 +27,7 @@ import GroupsIcon from '@mui/icons-material/Groups';// import { authProvider } f
 import { UprazhnenieCreate, UprazhnenieEdit, UprazhnenieIcon, UprazhnenieList } from "./resources/uprazhneniya";
 import { UprazhnenieStandardCreate, UprazhnenieStandardEdit, UprazhnenieStandardIcon, UprazhnenieStandardList } from "./resources/uprazhneniya-standards";
 import { UprazhnenieResultCreate, UprazhnenieResultEdit, UprazhnenieResultIcon, UprazhnenieResultList } from "./resources/uprazhneniya-results";
-import { EfficiencyPreferenceCreate, EfficiencyPreferenceEdit, EfficiencyPreferenceIcon, EfficiencyPreferenceList } from "./resources/efficiencyPreferences";
+// import { EfficiencyPreferenceCreate, EfficiencyPreferenceEdit, EfficiencyPreferenceIcon, EfficiencyPreferenceList } from "./resources/efficiencyPreferences";
 import { FixedUprCreate, FixedUprEdit, FixedUprIcon, FixedUprList } from "./resources/fixed-uprs";
 import { passingInMonthList, passingInMonthIcon } from "./resources/passingInMonth";
 
@@ -101,6 +101,7 @@ export const App = () => (
       icon={UprazhnenieIcon}
 
     />
+    {/* 
     <Resource
       name="efficiencyPreferences"
       list={EfficiencyPreferenceList}
@@ -108,7 +109,8 @@ export const App = () => (
       create={EfficiencyPreferenceCreate}
       icon={EfficiencyPreferenceIcon}
 
-    />
+    /> 
+    */}
     <Resource
       name="uprazhnenieStandards"
       list={UprazhnenieStandardList}
@@ -118,21 +120,21 @@ export const App = () => (
 
     />
     <Resource
-      name="uprazhnenieResults" 
-      list={UprazhnenieResultList} 
-      edit={UprazhnenieResultEdit} 
-      create={UprazhnenieResultCreate} 
-      icon={UprazhnenieResultIcon} 
+      name="uprazhnenieResults"
+      list={UprazhnenieResultList}
+      edit={UprazhnenieResultEdit}
+      create={UprazhnenieResultCreate}
+      icon={UprazhnenieResultIcon}
     />
 
-    <Resource 
-      name="fixedUpr" 
-      list={FixedUprList} 
-      edit={FixedUprEdit} 
-      create={FixedUprCreate} 
-      icon={FixedUprIcon} 
+    <Resource
+      name="fixedUpr"
+      list={FixedUprList}
+      edit={FixedUprEdit}
+      create={FixedUprCreate}
+      icon={FixedUprIcon}
     />
-    
+
     <Resource
       name="passingInMonth"
       list={passingInMonthList}
@@ -146,7 +148,7 @@ export const App = () => (
       icon={DocumentsIcon}
 
     />
-    
+
     {/* <LanguagePicker /> */}
   </Admin>
 );

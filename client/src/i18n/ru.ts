@@ -210,9 +210,33 @@ const russianMessages: TranslationMessages = {
   },
 };
 
+const passingInMonth = {
+  name: "Сдающий |||| Сдающие",
+  fields: {
+    id: "№",
+    PodrazdelenieId: "Подразделение",
+    PersonId: "Сдающий",
+    CategoryId: "Категория",
+    UprazhnenieId: "Упражнения",
+    UprazhnenieResultDate: "Дата сдачи",
+    UprazhnenieResultResult: "Результат"
+  }
+}
+const fixedupr = {
+  name: "Изменение результата |||| Изменение результатов",
+  fields: {
+    id: "№",
+    UprazhnenieId: "Упражнения",
+    CategoryId: "Категория",
+    date: "Дата"
+  }
+}
+
 export const ru = {
   ...russianMessages,
   resources: {
+    passingInMonth: passingInMonth,
+    fixedUpr: fixedupr,
     persons: {
       name: "Сотрудник |||| Сотрудники",
       fields: {
@@ -301,6 +325,13 @@ export const ru = {
         result: "Результат",
       },
     },
+    Documents: {
+      name: "Результат |||| Результаты",
+    }
+    ,
+    efficiencyPreferences: {
+      name: " |||| ",
+    }
   },
   dialogs: {
     exportPodrazdelenie: {
@@ -310,6 +341,7 @@ export const ru = {
     },
   },
   documents: {
+    name: "Результат |||| Результаты",
     allVedomost: {
       print: "Печать",
       name: "Сводная ведомость",

@@ -60,9 +60,6 @@ import {
   List,
   Datagrid,
   TextField,
-  EditButton,
-  TextInput,
-  SimpleForm,
   useNotify,
   useRefresh,
   useRedirect,
@@ -71,14 +68,13 @@ import {
   FunctionField,
   DateField,
 } from "react-admin";
-import DoNotStepIcon from "@mui/icons-material/DoNotStep";
-import { PassingInMonthAddOrChangeResultButton } from "../components/PassingInMonthAddOrChangeResultButton";
-import DoneAllIcon from "@mui/icons-material/DoneAll";
-export const passingInMonthIcon = DoneAllIcon;
-import TextFieldMUI from "@mui/material/TextField";
+// import { PassingInMonthAddOrChangeResultButton } from "../components/PassingInMonthAddOrChangeResultButton";
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+export const passingInMonthIcon = AccessAlarmIcon;
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
 import { dataProvider } from "../dataProvider";
+
 
 export const passingInMonthList = (props) => {
   const [shouldRefresh, setShouldRefresh] = useState(false);
