@@ -6,7 +6,8 @@
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
 	"features": {
 		"ghcr.io/devcontainers/features/node:1": {},
-		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {}
+		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {},
+		"ghcr.io/michidk/devcontainers-features/bun:1": {}
 	},
 	"portsAttributes": {
 		"3333": {
