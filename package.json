@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "server": "bun run index.js",
-    "build": "bun build index.js"
+    "bundle-server": "bun build ./index.js --compile --outfile sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ')",
+    "build-app": "rm -rf node_modules/ && bun install && bun bundle-server && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
+    "build-dirt-app": "bun bundle-server && cd client  && npx tauri build"
   },
   "repository": "https://github.com/jeka1331/fizo-electron",
 

@@ -14,8 +14,8 @@
       {
         "title": "FIZO",
         "label": "main",
-        "width": 800,
-        "height": 600,
+        "width": 1024,
+        "height": 768,
         "resizable": true,
         "fullscreen": false
       }
@@ -25,8 +25,13 @@
     }
   },
   "bundle": {
+    "externalBin": [
+
+      "../../sidecars/server"
+
+    ],
     "active": true,
-    "targets": "all",
+    "targets": ["app"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
