@@ -2502,7 +2502,7 @@ router.get("/allVedomost", async (req, res) => {
 
       /* #endregion */
 
-      dataAllGrade = Math.min(
+      let dataAllGrade = Math.min(
         ...[
           dataAllTableDataResultsDataOfficersGrade,
           dataAllTableDataResultsDataWomenGrade,
