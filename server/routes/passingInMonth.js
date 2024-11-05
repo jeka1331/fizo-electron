@@ -19,6 +19,8 @@ router.get("/", async (req, res) => {
   if (range) {
     const [start, end] = JSON.parse(range);
     options.offset = start;
+    options.start = start;
+    options.end = end;
     options.limit = end - start + 1;
   }
 
@@ -124,7 +126,7 @@ router.get("/", async (req, res) => {
       }/${total}`
     );
   }
-  res.status(200).json(result);
+  res.status(200).json(result.slice(options.start , options.end + 1));
 });
 
 // Чтение одной записи по ID (Read)
