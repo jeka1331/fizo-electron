@@ -30,6 +30,11 @@
       "../../sidecars/server"
 
     ],
+    "resources": {
+      "../../node_modules/bindings/**/*": "node_modules/bindings/",
+      "../../node_modules/file-uri-to-path/**/*": "node_modules/file-uri-to-path/",
+      "../../node_modules/sqlite3/**/*": "node_modules/sqlite3/"
+    },
     "active": true,
     "targets": ["app", "msi", "nsis"],
     "icon": [
