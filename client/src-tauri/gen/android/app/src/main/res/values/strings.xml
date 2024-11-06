@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">fizo-electron</string>
+    <string name="main_activity_title">fizo-electron</string>
+</resources>
