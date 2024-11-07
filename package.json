@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "description": "Application for passing the physics exam",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "server": "bun run index.js",
-    "bundle-server": "bun build ./index.js --compile --outfile sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ')",
-    "build-app": "rm -rf node_modules/ && bun install && bun bundle-server && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
+    "bundle-server-bun": "bun build ./index.js --compile --outfile sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ')",
+    "bundle-server": "pkg --targets node18-linux --no-bytecode --output sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ') .",
+    "build-app": "rm -rf node_modules/ && npm ci && npm run bundle-server && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
     "build-dirt-app": "bun bundle-server && cd client  && npx tauri build"
   },
   "repository": "https://github.com/jeka1331/fizo-electron",
-
   "author": "Evgeniy Olkhin",
   "license": "MIT",
-
   "dependencies": {
     "cors": "^2.8.5",
     "express": "5.0.1",
@@ -26,8 +26,12 @@
     "@types/bun": "latest",
     "pg-hstore": "^2.3.4"
   },
-  
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "pkg": {
+    "assets": [
+      "node_modules/sqlite3/lib/binding/**/*"
+    ]
   }
 }
