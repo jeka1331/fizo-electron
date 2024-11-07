@@ -7,8 +7,11 @@
   "scripts": {
     "server": "bun run index.js",
     "bundle-server-bun": "bun build ./index.js --compile --outfile sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ')",
-    "bundle-server": "pkg --targets node18-linux --no-bytecode --output sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ') .",
-    "build-app": "rm -rf node_modules/ && npm ci && npm run bundle-server && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
+    "bundle-server-linux": "pkg --targets node18-linux --no-bytecode --output sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ') .",
+    "bundle-server-win": "pkg --targets node18-win --no-bytecode --output sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ') .",
+    "build-app-linux": "rm -rf node_modules/ && npm ci && npm install sqlite3 --build-from-source && npm run bundle-server-linux && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
+    "build-app-win": "rm -rf node_modules/ && npm ci && npm install sqlite3 --build-from-source && npm run bundle-server-win && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
+    "build-dirt-app-win": "bun bundle-server-win && cd client  && npx tauri build",
     "build-dirt-app": "bun bundle-server && cd client  && npx tauri build"
   },
   "repository": "https://github.com/jeka1331/fizo-electron",
@@ -31,7 +34,7 @@
   },
   "pkg": {
     "assets": [
-      "node_modules/sqlite3/lib/binding/**/*"
+      "node_modules/sqlite3/"
     ]
   }
 }
