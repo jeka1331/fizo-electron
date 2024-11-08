@@ -7,6 +7,7 @@ import {
   ReferenceField,
   FunctionField,
   DateField,
+  NumberField,
 } from "react-admin";
 // import { PassingInMonthAddOrChangeResultButton } from "../components/PassingInMonthAddOrChangeResultButton";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
@@ -27,16 +28,25 @@ export const passingInMonthList = (props) => {
           <TextField source="name" />
         </ReferenceField>
         <ReferenceField source="PersonId" reference="persons">
-          <TextField source="lName" />
+          {/* <TextField source="lName" />
 
-          <TextField source="fName" />
-          <TextField source="sName" />
+          <TextField source="fName" />  
+          <TextField source="sName" /> */}
+          <FunctionField
+          source="fio"
+          render={(record) => {
+            return `${record.lName} ${record.fName} ${record.sName}`;
+          }}
+        />
         </ReferenceField>
+
+        
+        
         <ReferenceField source="CategoryId" reference="categories">
-          <TextField source="name" />
+          <TextField source="shortName" />
         </ReferenceField>
-        <ReferenceField source="UprazhnenieId" reference="uprazhneniya">
-          <TextField source="name" />
+        <ReferenceField source="UprazhnenieId" reference="uprazhneniya" textAlign="center">
+          <TextField source="shortName" />
         </ReferenceField>
         <FunctionField
           source="UprazhnenieResultDate"
@@ -50,18 +60,17 @@ export const passingInMonthList = (props) => {
             return (
               <Input
                 id="standard-adornment-weight"
+                
                 endAdornment={
                   <InputAdornment position="end">
                     {record.resultType}
                   </InputAdornment>
                 }
-
+                autoComplete="off"
                 onBlur={async (e) => {
-                  const isNew = record.UprazhnenieResultResult ? false : true;
-                  console.log({
-                    ...record,
-                    result: e.target.value,
-                  });
+                  const isNew = record.UprazhnenieResultDate ? false : true;
+                  console.log("isNew", isNew);
+                  console.log("record", record);
                   if (isNew) {
                     await dataProvider.create(
                       "uprazhnenieResults",
@@ -99,6 +108,8 @@ export const passingInMonthList = (props) => {
             );
           }}
         />
+        <NumberField source="UprazhnenieResultBallClassic" emptyText="-" textAlign="center"/>
+        <NumberField source="UprazhnenieResultBallBolon" emptyText="-" textAlign="center"/>
 
         {/* <PassingInMonthAddOrChangeResultButton data={record} /> */}
       </Datagrid>

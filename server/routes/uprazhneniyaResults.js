@@ -12,6 +12,8 @@ const {
 } = require("../sequelize"); // Импорт модели Person
 const sequelize = require("sequelize");
 const { Op } = require("sequelize");
+const { calculateBall } = require("../lib");
+
 
 // Создание записи (Create)
 router.post("/", async (req, res) => {
@@ -47,24 +49,33 @@ router.get("/", async (req, res) => {
       options.where = JSON.parse(filter);
     }
 
-    const zvaniya = await UprazhnenieResult.findAll(options);
+    let uprazhnenieResults = await UprazhnenieResult.findAll(options);
+    const addBallsFields = async (ur) => {
+      let res = [];
+      for (const element of ur) {
+        res.push(await calculateBall(element.dataValues));
+      }
+      return res;
+    };
+    uprazhnenieResults = await addBallsFields(uprazhnenieResults);
 
     if (range) {
       const total = await UprazhnenieResult.count();
       // Устанавливаем заголовок Content-Range
       res.header(
         "Content-Range",
-        `zvaniya ${options.offset}-${
-          options.offset + zvaniya.length - 1
+        `uprazhnenieResults ${options.offset}-${
+          options.offset + uprazhnenieResults.length - 1
         }/${total}`
       );
     }
 
-    res.status(200).json(zvaniya);
+    res.status(200).json(uprazhnenieResults);
   } catch (error) {
     res.status(500).json({ error: "Ошибка при чтении записей" });
   }
 });
+
 // Чтение всех записей (Read)
 router.get("/vedomost", async (req, res) => {
   try {
@@ -2596,11 +2607,11 @@ router.get("/allVedomost", async (req, res) => {
       });
     }
     data.allChecked = data.tableData.length;
-    data.allTableData.personLenght = 0
+    data.allTableData.personLenght = 0;
 
     for (const _podr of data.tableData) {
-      _podr
-      data.allTableData.personLenght += _podr.personLenght
+      _podr;
+      data.allTableData.personLenght += _podr.personLenght;
     }
 
     res.status(200).json({ data: data });

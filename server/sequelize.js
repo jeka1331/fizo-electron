@@ -61,8 +61,8 @@ const UprazhnenieStandard = sequelize.define("UprazhnenieStandard", {
 });
 
 const UprazhnenieResult = sequelize.define("UprazhnenieResult", {
-  result: DataTypes.INTEGER,
-  date: DataTypes.DATE,
+  result: { type: DataTypes.INTEGER, allowNull: false },
+  date: { type: DataTypes.DATE, allowNull: false },
 });
 
 const FixedUpr = sequelize.define("FixedUpr", {
@@ -111,10 +111,6 @@ UprazhnenieStandard.belongsTo(Category);
 Category.hasMany(Person);
 Person.belongsTo(Category);
 
-
-
-
-
 module.exports = {
   UprazhnenieResult,
   sequelize,
@@ -126,5 +122,5 @@ module.exports = {
   Uprazhnenie,
   UprazhnenieRealValuesType,
   EfficiencyPreference,
-  FixedUpr
+  FixedUpr,
 };

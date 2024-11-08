@@ -219,7 +219,9 @@ const passingInMonth = {
     CategoryId: "Категория",
     UprazhnenieId: "Упражнения",
     UprazhnenieResultDate: "Дата сдачи",
-    UprazhnenieResultResult: "Результат"
+    UprazhnenieResultResult: "Результат",
+    UprazhnenieResultBallClassic: "Баллы",
+    UprazhnenieResultBallBolon: "Баллы (болонская система)"
   }
 }
 const fixedupr = {

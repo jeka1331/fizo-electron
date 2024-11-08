@@ -10,6 +10,7 @@ const {
 } = require("../sequelize"); // Импорт модели PassingInMonth
 const { Op, fn, col } = require("sequelize");
 const sequelize = require("sequelize");
+const { calculateBall } = require("../lib");
 
 // Чтение всех записей (Read)
 router.get("/", async (req, res) => {
@@ -62,13 +63,21 @@ router.get("/", async (req, res) => {
   });
 
   // Получаем последние результаты UprazhnenieResult для каждого человека
-  const results = await UprazhnenieResult.findAll({
+  let results = await UprazhnenieResult.findAll({
 
     attributes: {
       include: [[fn("MAX", col("date")), "b_Date"], "result", "id"],
     },
     group: ["PersonId", "UprazhnenieId"], // Группировка по PersonId
   });
+  const addBallsFields = async (ur) => {
+    let res = [];
+    for (const element of ur) {
+      res.push(await calculateBall(element.dataValues));
+    }
+    return res;
+  };
+  results = await addBallsFields(results);
 
   // Привязываем результаты к людям
   const formattedData = fixedUprs.map((fu) => {
@@ -85,6 +94,7 @@ router.get("/", async (req, res) => {
           b_Id: personResult ? personResult.id : null,
           b_Date: personResult ? personResult.date : null,
           b_Result: personResult ? personResult.result : null,
+          b_Ball: personResult ? personResult.ball : null,
           resultType: uprTypeShortName ? uprTypeShortName : null,
         };
       }),
@@ -105,6 +115,8 @@ router.get("/", async (req, res) => {
           UprazhnenieResultId: person.b_Id || null,
           UprazhnenieResultDate: person.b_Date || null,
           UprazhnenieResultResult: person.b_Result || null,
+          UprazhnenieResultBallClassic: person.b_Ball ,
+          UprazhnenieResultBallBolon: null,
           resultType: person.resultType || null,
         });
         count++;
