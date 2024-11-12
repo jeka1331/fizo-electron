@@ -10,7 +10,7 @@
     "bundle-server-linux": "pkg --targets node18-linux --no-bytecode --output sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ') .",
     "bundle-server-win": "pkg --targets node18-win --no-bytecode --output sidecars/server-$(rustc -Vv | grep host | cut -f2 -d' ') .",
     "build-app-linux": "rm -rf node_modules/ && npm ci && npm install sqlite3 --build-from-source && npm run bundle-server-linux && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
-    "build-app-win": "rm -rf node_modules/ && npm ci && npm install sqlite3 --build-from-source && npm run bundle-server-win && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
+    "build-app-win": "rm -rf node_modules/ && npm install && npm install sqlite3 --build-from-source && npm run bundle-server-win && cd client && rm -rf node_modules/ && yarn install && npx tauri build",
     "build-dirt-app-win": "bun bundle-server-win && cd client  && npx tauri build",
     "build-dirt-app": "bun bundle-server && cd client  && npx tauri build"
   },
@@ -23,12 +23,13 @@
     "morgan": "^1.10.0",
     "pug": "^3.0.2",
     "sequelize": "^6.35.2",
-    "sqlite3": "^5.1.7"  
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "nodemon": "^3.1.7",
-    "pg-hstore": "^2.3.4"
+    "pg-hstore": "^2.3.4",
+    "pkg": "^5.8.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -39,7 +40,10 @@
     ]
   },
   "nodemonConfig": {
-    "ignore": ["client/**", "node_modules/**"],
+    "ignore": [
+      "client/**",
+      "node_modules/**"
+    ],
     "delay": 2500
   }
 }

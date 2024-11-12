@@ -17,6 +17,7 @@ import Input from "@mui/material/Input";
 import { dataProvider } from "../dataProvider";
 
 
+
 export const passingInMonthList = (props) => {
   const refresh = useRefresh();
 
@@ -69,8 +70,7 @@ export const passingInMonthList = (props) => {
                 autoComplete="off"
                 onBlur={async (e) => {
                   const isNew = record.UprazhnenieResultDate ? false : true;
-                  console.log("isNew", isNew);
-                  console.log("record", record);
+            
                   if (isNew) {
                     await dataProvider.create(
                       "uprazhnenieResults",
@@ -109,7 +109,58 @@ export const passingInMonthList = (props) => {
           }}
         />
         <NumberField source="UprazhnenieResultBallClassic" emptyText="-" textAlign="center"/>
-        <NumberField source="UprazhnenieResultBallBolon" emptyText="-" textAlign="center"/>
+        {/* <NumberField source="UprazhnenieResultBallBolon" emptyText="-" textAlign="center"/> */}
+        <FunctionField
+          source="UprazhnenieResultBallBolon_UprazhnenieResultBallBolonRating"
+          render={(record) => {
+            return `${record.UprazhnenieResultBallBolon} (${record.UprazhnenieResultBallBolonRating})`;
+          }}
+
+        />
+        <FunctionField
+          source="UprazhnenieResultBallBolonRatingLetter"
+          render={(record) => {
+            if (record.UprazhnenieResultBallBolonRating == 4) {
+              return 'A'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 3.67) {
+              return 'A-'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 3.33) {
+              return 'B+'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 3) {
+              return 'B'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 2.67) {
+              return 'B-'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 2.33) {
+              return 'C+'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 2) {
+              return 'C'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 1.67) {
+              return 'C-'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 1.33) {
+              return 'D+'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 1) {
+              return 'D'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 0.5) {
+              return 'FX'
+            }
+            if (record.UprazhnenieResultBallBolonRating == 0) {
+              return 'F'
+            }
+            return null
+          }}
+
+        />
+        
 
         {/* <PassingInMonthAddOrChangeResultButton data={record} /> */}
       </Datagrid>

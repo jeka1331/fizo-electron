@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { Podrazdelenie } = require('../sequelize'); // Импорт модели Person
+const { Op } = require("sequelize");
+const { sequelize, EfficiencyPreference } = require("../sequelize"); // Импорт Sequelize и настройки
 
 // Создание записи (Create)
 router.post('/', async (req, res) => {
   try {
-    
+
     const newPodrazdelenie = req.body;
     // console.log(newPodrazdelenie)
     const createdPodrazdelenie = await Podrazdelenie.create(newPodrazdelenie);
@@ -17,37 +19,42 @@ router.post('/', async (req, res) => {
 
 // Чтение всех записей (Read)
 router.get('/', async (req, res) => {
-    try {
-        const { range, sort, filter } = req.query;
-        let options = {};
-    
-        if (range) {
-          const [start, end] = JSON.parse(range);
-          options.offset = start;
-          options.limit = end - start + 1;
-        }
-    
-        if (sort) {
-          const [field, order] = JSON.parse(sort);
-          options.order = [[field, order]];
-        }
-    
-        if (filter) {
-          options.where = JSON.parse(filter);
-        }
-    
-        const zvaniya = await Podrazdelenie.findAll(options);
-    
-        if (range) {
-          const total = await Podrazdelenie.count();
-          // Устанавливаем заголовок Content-Range
-          res.header('Content-Range', `zvaniya ${options.offset}-${options.offset + zvaniya.length - 1}/${total}`);
-        }
-    
-        res.status(200).json(zvaniya);
-      } catch (error) {
-        res.status(500).json({ error: 'Ошибка при чтении записей' });
-      }
+  try {
+    const { range, sort, filter } = req.query;
+    let options = {};
+
+    if (range) {
+      const [start, end] = JSON.parse(range);
+      options.offset = start;
+      options.limit = end - start + 1;
+    }
+
+    if (sort) {
+      const [field, order] = JSON.parse(sort);
+      options.order = [[field, order]];
+    }
+
+    if (filter) {
+      const where = JSON.parse(filter);
+      const nameFilter = where.name ? { name: sequelize.where(sequelize.fn('UPPER', sequelize.col('name')), 'LIKE', '%' + where.name.toUpperCase()) + '%'} : {}
+      options.where = {
+
+        ...nameFilter
+      };
+    }
+
+    const zvaniya = await Podrazdelenie.findAll(options);
+
+    if (range) {
+      const total = await Podrazdelenie.count();
+      // Устанавливаем заголовок Content-Range
+      res.header('Content-Range', `zvaniya ${options.offset}-${options.offset + zvaniya.length - 1}/${total}`);
+    }
+
+    res.status(200).json(zvaniya);
+  } catch (error) {
+    res.status(500).json({ error: 'Ошибка при чтении записей' });
+  }
 });
 
 // Чтение одной записи по ID (Read)

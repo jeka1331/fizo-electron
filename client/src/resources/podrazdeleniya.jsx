@@ -21,9 +21,16 @@ import { GeneratePodrReportButton } from "../components/GeneratePodrReportButton
 
 
 export const PodrazdelenieList = () => {
+  const filters = [
+    // eslint-disable-next-line react/jsx-key
+    <TextInput source="name" />,
 
+  ];
+  const filter = () => {
+    
+  }
   return (
-  <List>
+  <List filters={filters}>
     <Datagrid>
       <TextField source="id" />
       <TextField source="name" />
